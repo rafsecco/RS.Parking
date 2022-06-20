@@ -1,10 +1,16 @@
-﻿namespace RS.Parking.API.Configurations;
+﻿using Microsoft.EntityFrameworkCore;
+using RS.Parking.API.Data;
+
+namespace RS.Parking.API.Configurations;
 
 public static class ApiConfigs
 {
-
 	public static IServiceCollection AddApiConfigureServices(this IServiceCollection services, IConfiguration configurations)
 	{
+		services.AddDbContext<DataContext>(context => 
+			context.UseSqlite(configurations.GetConnectionString("Default"))
+		);
+
 		services.AddControllers();
 
 		return services;

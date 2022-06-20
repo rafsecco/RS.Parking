@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RS.Parking.API.Data;
 using RS.Parking.API.Models;
 
 namespace RS.Parking.API.Controllers;
@@ -19,37 +20,24 @@ public class VehicleTypeController : ControllerBase
 	//{
 	//	return Ok();
 	//}
-	
-	public IEnumerable<VehicleType> _vehicleTypes = new VehicleType[]
+
+	private readonly DataContext _context;
+
+	public VehicleTypeController(DataContext context)
 	{
-		new VehicleType
-		{
-			Id = 1,
-			Active = true,
-			DateCreated = DateTime.Now,
-			Cost = 300.5m,
-			Description = "Exemplo de Get 1"
-		},
-		new VehicleType
-		{
-			Id = 2,
-			Active = true,
-			DateCreated = DateTime.Now,
-			Cost = 310.5m,
-			Description = "Exemplo de Get 2"
-		}
-	};
+		_context = context;
+	}
 
 	[HttpGet]
 	public IEnumerable<VehicleType> Get()
 	{
-		return _vehicleTypes;
+		return _context.VehicleTypes;
 	}
 
 	[HttpGet("{id}")]
-	public IEnumerable<VehicleType> Get(ulong id)
+	public VehicleType Get(ulong id)
 	{
-		return _vehicleTypes.Where(v => v.Id == id);
+		return _context.VehicleTypes.FirstOrDefault(v => v.Id == id);
 	}
 
 	[HttpPost]
