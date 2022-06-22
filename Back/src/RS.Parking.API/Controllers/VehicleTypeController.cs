@@ -6,11 +6,11 @@ namespace RS.Parking.API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class VehicleTypeController : ControllerBase
+public class VehicleTypesController : ControllerBase
 {
-	//private readonly ILogger<VehicleTypeController> _logger;
+	//private readonly ILogger<VehicleTypesController> _logger;
 
-	//public VehicleTypeController(ILogger<VehicleTypeController> logger)
+	//public VehicleTypesController(ILogger<VehicleTypesController> logger)
 	//{
 	//	_logger = logger;
 	//}
@@ -23,7 +23,7 @@ public class VehicleTypeController : ControllerBase
 
 	private readonly DataContext _context;
 
-	public VehicleTypeController(DataContext context)
+	public VehicleTypesController(DataContext context)
 	{
 		_context = context;
 	}

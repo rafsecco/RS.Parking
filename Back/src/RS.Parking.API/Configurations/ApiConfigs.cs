@@ -12,6 +12,7 @@ public static class ApiConfigs
 		);
 
 		services.AddControllers();
+		services.AddCors();
 
 		return services;
 	}
@@ -32,6 +33,12 @@ public static class ApiConfigs
 		//}
 
 		app.UseAuthorization();
+
+		app.UseCors(x => x.AllowAnyHeader()
+			.AllowAnyMethod()
+			.AllowAnyOrigin()
+		);
+
 		app.MapControllers();
 		//app.UseEndpoints(endpoints =>
 		//{
