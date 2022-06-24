@@ -6,19 +6,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { VehicletypesComponent } from './vehicletypes/vehicletypes.component';
 import { AccordtypesComponent } from './accordtypes/accordtypes.component';
+import { NavegationComponent } from './navegation/navegation.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    VehicletypesComponent,
-    AccordtypesComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		VehicletypesComponent,
+		AccordtypesComponent,
+		NavegationComponent,
+	],
+	imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+	providers: [],
+	bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
