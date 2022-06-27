@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
 	<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.1" />
 	<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.6" />
@@ -22,6 +23,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RS.Parking.Application\RS.Parking.Application.csproj" />
   </ItemGroup>
 
 </Project>

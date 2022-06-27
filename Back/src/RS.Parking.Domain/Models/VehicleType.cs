@@ -1,4 +1,7 @@
-﻿namespace RS.Parking.API.Models;
+﻿
+
+namespace RS.Parking.Domain.Models;
+
 public class VehicleType
 {
 	#region Properties

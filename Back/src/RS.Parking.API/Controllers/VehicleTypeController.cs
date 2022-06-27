@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RS.Parking.API.Data;
-using RS.Parking.API.Models;
+using RS.Parking.Domain.Models;
+using RS.Parking.Application.Contracts;
 
 namespace RS.Parking.API.Controllers;
 
@@ -21,41 +21,86 @@ public class VehicleTypesController : ControllerBase
 	//	return Ok();
 	//}
 
-	private readonly DataContext _context;
+	private readonly IVehicleTypeService _vehicleTypeService;
 
-	public VehicleTypesController(DataContext context)
+	public VehicleTypesController(IVehicleTypeService vehicleTypeService)
 	{
-		_context = context;
+		_vehicleTypeService = vehicleTypeService;
 	}
 
 	[HttpGet]
-	public IEnumerable<VehicleType> Get()
+	public async Task<IActionResult> Get()
 	{
-		return _context.VehicleTypes;
+		try
+		{
+			var vehicleTypes = await _vehicleTypeService.GetAllVehicleTypesAsync();
+			if (vehicleTypes == null) return NotFound("No vehicleType was found!");
+			return Ok(vehicleTypes);
+		}
+		catch (Exception ex)
+		{
+			return this.StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+		}
 	}
 
 	[HttpGet("{id}")]
-	public VehicleType Get(ulong id)
+	public async Task<IActionResult> Get(ulong id)
 	{
-		return _context.VehicleTypes.FirstOrDefault(v => v.Id == id);
+		try
+		{
+			var vehicleType = await _vehicleTypeService.GetVehicleTypesByIdAsync(id);
+			if (vehicleType == null) return NotFound("No vehicleType was found!");
+			return Ok(vehicleType);
+		}
+		catch (Exception ex)
+		{
+			return this.StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+		}
 	}
 
 	[HttpPost]
-	public string Post()
+	public async Task<IActionResult> Post(VehicleType model)
 	{
-		return "Exemplo de Post";
+		try
+		{
+			var vehicleType = await _vehicleTypeService.AddVehicleType(model);
+			if (vehicleType == null) return BadRequest("Error to add vehicleType!");
+			return Ok(vehicleType);
+		}
+		catch (Exception ex)
+		{
+			return this.StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+		}
 	}
 
 	[HttpPut("{id}")]
-	public string Put(int id)
+	public async Task<IActionResult> Put(ulong id, VehicleType model)
 	{
-		return $"Exemplo de Put com id = {id}";
+		try
+		{
+			var vehicleType = await _vehicleTypeService.UpdateVehicleType(id, model);
+			if (vehicleType == null) return BadRequest("Error to update vehicleType!");
+			return Ok(vehicleType);
+		}
+		catch (Exception ex)
+		{
+			return this.StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+		}
 	}
 
 	[HttpDelete("{id}")]
-	public string Delete(int id)
+	public async Task<IActionResult> Delete(ulong id)
 	{
-		return $"Exemplo de Delete com id = {id}";
+		try
+		{
+			return await _vehicleTypeService.DeleteVehicleType(id) 
+				? Ok("Deleted") 
+				: BadRequest("");
+		}
+		catch (Exception ex)
+		{
+			return this.StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+		}
 	}
 
 }

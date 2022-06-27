@@ -1,0 +1,6 @@
+EntityFrameWorkCore
+	Migrations
+	Ir para a pasta C:\@BackUp\@Program\Projects\RS.Parking\Back\src\
+		dotnet ef migrations add Initial -v -p .\RS.Parking.Infrastructure\ -s .\RS.Parking.API\
+		dotnet ef database update -s .\RS.Parking.API\
+		dotnet ef migrations script -v -i -p RS.Parking.Infrastructure -o ..\..\Docker\DataBase\FirstMigration.sql
