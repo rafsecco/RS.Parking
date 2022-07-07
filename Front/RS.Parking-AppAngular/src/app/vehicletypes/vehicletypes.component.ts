@@ -21,7 +21,7 @@ export class VehicletypesComponent implements OnInit {
 	ngOnInit(): void {
 		this.getVehicleTypes();
 		/** spinner starts on init */
-		// this.spinner.show();
+		this.spinner.show();
 
 		// setTimeout(() => {
 		// 	/** spinner ends after 5 seconds */
