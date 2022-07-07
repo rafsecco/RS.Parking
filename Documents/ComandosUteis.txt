@@ -4,3 +4,12 @@ EntityFrameWorkCore
 		dotnet ef migrations add Initial -v -p .\RS.Parking.Infrastructure\ -s .\RS.Parking.API\
 		dotnet ef database update -s .\RS.Parking.API\
 		dotnet ef migrations script -v -i -p RS.Parking.Infrastructure -o ..\..\Docker\DataBase\FirstMigration.sql
+
+Iniciar BackEnd
+	Abrir o terminar e ir para a pasta "C:\@BackUp\@Program\Projects\RS.Parking\Back\src\Rs.Parking.API\"
+	Executar o comando "dotnet run"
+
+Iniciar FrontEnd
+	Abrir o terminar e ir para a pasta "C:\@BackUp\@Program\Projects\RS.Parking\Front\RS.Parking-AppAngular\"
+	Executar o comando "ng serve -o"
+
