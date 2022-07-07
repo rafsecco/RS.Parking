@@ -1,5 +1,5 @@
 <h2>Vehicle Types</h2>
-<hr>
+<hr />
 
 <button type="button" class="btn btn-success">Add New</button>
 
@@ -18,19 +18,33 @@
 	</thead>
 	<tbody *ngIf="vehicleTypes && vehicleTypes.length">
 		<tr *ngFor="let vehicleType of vehicleTypes">
-			<td>{{vehicleType.id}}</td>
-			<td>{{vehicleType.description}}</td>
-			<td>{{vehicleType.cost}}</td>
-			<td><input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" [checked]="vehicleType.active"></td>
-			<td>{{vehicleType.dateCreated}}</td>
+			<td>{{ vehicleType.id }}</td>
+			<td>{{ vehicleType.description }}</td>
+			<td>{{ vehicleType.cost }}</td>
 			<td>
-				<button type="button" class="btn btn-info btn-sm mx-1"><i class="bi bi-search"></i></button>
-				<button type="button" class="btn btn-warning btn-sm mx-1"><i class="bi bi-pencil-square"></i></button>
-				<button type="button" class="btn btn-danger btn-sm mx-1"><i class="bi bi-trash"></i></button>
+				<input
+					class="form-check-input"
+					type="checkbox"
+					value=""
+					id="flexCheckChecked"
+					[checked]="vehicleType.active"
+				/>
+			</td>
+			<td>{{ vehicleType.dateCreated | DateTimeFormat }}</td>
+			<td>
+				<button type="button" class="btn btn-info btn-sm mx-1" title="View">
+					<i class="bi bi-search"></i>
+				</button>
+				<button type="button" class="btn btn-warning btn-sm mx-1" title="Edit">
+					<i class="bi bi-pencil-square"></i>
+				</button>
+				<button type="button" class="btn btn-danger btn-sm mx-1" title="Delete" data-bs-toggle="modal" data-bs-target="#exampleModal">
+					<i class="bi bi-trash"></i>
+				</button>
 			</td>
 		</tr>
 	</tbody>
-	<tfoot *ngIf="!vehicleTypes && vehicleTypes.length">
+	<tfoot *ngIf="!vehicleTypes.length">
 		<tr>
 			<td colspan="8" class="text-center">
 				<h4>Nenhum registro encontrado!</h4>
@@ -40,3 +54,36 @@
 </table>
 
 <!-- {{vehicleTypes | json}} -->
+
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+	Launch demo modal
+</button> -->
+
+
+<!-- Modal -->
+<div
+	class="modal fade"
+	id="exampleModal"
+	tabindex="-1"
+	aria-labelledby="exampleModalLabel"
+	aria-hidden="true"
+>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Tem certeza que quer deletar este Evento?</h5>
+				<button
+					type="button"
+					class="btn-close"
+					data-bs-dismiss="modal"
+					aria-label="Close"
+				></button>
+			</div>
+			<div class="modal-body">...</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+				<button type="button" class="btn btn-primary">Yes</button>
+			</div>
+		</div>
+	</div>
+</div>
