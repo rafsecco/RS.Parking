@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { VehicleType } from '../models/VehicleType';
-import { VehicletypesService } from '../services/vehicletypes.service';
+import { VehicleType } from '../../models/VehicleType';
+import { VehicletypesService } from '../../services/vehicletypes.service';
 
 @Component({
 	selector: 'app-vehicletypes',
