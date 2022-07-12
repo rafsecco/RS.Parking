@@ -6,13 +6,15 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { AppComponent } from './app.component';
-import { VehicletypesComponent } from './vehicletypes/vehicletypes.component';
-import { AccordtypesComponent } from './accordtypes/accordtypes.component';
-import { NavegationComponent } from './navegation/navegation.component';
+import { NavegationComponent } from './shared/navegation/navegation.component';
+import { TitleComponent } from './shared/title/title.component';
+import { VehicletypesComponent } from './components/vehicletypes/vehicletypes.component';
+import { AccordtypesComponent } from './components/accordtypes/accordtypes.component';
 
 import { VehicletypesService } from './services/vehicletypes.service';
 
 import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
+import { ControlInOutComponent } from './components/controlinout/controlinout.component';
 
 @NgModule({
 	declarations: [
@@ -20,6 +22,8 @@ import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
 		VehicletypesComponent,
 		AccordtypesComponent,
 		NavegationComponent,
+		TitleComponent,
+		ControlInOutComponent,
 		DateTimeFormatPipe
 	],
 	imports: [
