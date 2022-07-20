@@ -1,2 +1,21 @@
-<h2>{{title}}</h2>
-<hr>
+<div class="d-flex p-3 my-3 text-white bg-secondary rounded shadow-sm">
+
+	<div class="d-flex align-items-center mr-auto">
+		<i class="{{ iconClass }}"></i>
+		<div class="lh-100">
+			<h2 class="mb-0">{{ title }}</h2>
+		</div>
+	</div>
+
+	<div class="p-3" *ngIf="buttonList">
+		<button class="btn btn-outline-light" (click)="List()">
+			<!-- <i class="bi bi-plus-circle"></i> -->
+			<!-- <b class="ml-1 d-none d-sm-block">New</b> -->
+			List {{title}}
+			New
+		</button>
+	</div>
+
+</div>
+
+<!-- <button type="button" class="btn btn-success">Add New</button> -->

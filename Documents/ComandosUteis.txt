@@ -13,3 +13,10 @@ Iniciar FrontEnd
 	Abrir o terminar e ir para a pasta "C:\@BackUp\@Program\Projects\RS.Parking\Front\RS.Parking-AppAngular\"
 	Executar o comando "ng serve -o"
 
+
+
+ng g c [NomeComponente] --module app
+
+
+ng g c components/vehicletypes/vehicletypes-new --module app
+ng g c vehicletypes-edit --module app
