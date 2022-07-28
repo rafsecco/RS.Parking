@@ -5,6 +5,6 @@ namespace RS.Parking.Infrastructure.Contracts;
 public interface IVehicleTypeRepository
 {
 	Task<VehicleType[]> GetAllVehicleTypesAsync();
-	Task<VehicleType> GetVehicleTypesByIdAsync(ulong id);
+	Task<VehicleType> GetVehicleTypeByIdAsync(ulong id);
 }
 

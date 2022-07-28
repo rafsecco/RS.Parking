@@ -17,6 +17,8 @@ public static class ApiConfigs
 		//		x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 		//	);
 
+		
+
 		services.RegisterServices();
 
 		services.AddCors();

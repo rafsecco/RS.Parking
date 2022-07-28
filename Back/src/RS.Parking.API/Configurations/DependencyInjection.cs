@@ -1,5 +1,5 @@
-﻿using RS.Parking.Application;
-using RS.Parking.Application.Contracts;
+﻿using RS.Parking.Application.Contracts;
+using RS.Parking.Application.Services;
 using RS.Parking.Infrastructure.Contracts;
 using RS.Parking.Infrastructure.Repositories;
 
@@ -9,6 +9,8 @@ public static class DependencyInjection
 {
 	public static void RegisterServices(this IServiceCollection services)
 	{
+		services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 		services.AddScoped<ICoreRepository, CoreRepository>();
 
 		services.AddScoped<IVehicleTypeRepository, VehicleTypeRepository>();

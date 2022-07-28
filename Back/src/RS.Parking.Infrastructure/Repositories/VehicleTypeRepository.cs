@@ -20,7 +20,7 @@ public class VehicleTypeRepository : IVehicleTypeRepository
 		return await _context.VehicleTypes.OrderBy(x => x.Description).ToArrayAsync();
 	}
 
-	public async Task<VehicleType> GetVehicleTypesByIdAsync(ulong id)
+	public async Task<VehicleType> GetVehicleTypeByIdAsync(ulong id)
 	{
 		return await _context.VehicleTypes
 			.AsNoTracking()

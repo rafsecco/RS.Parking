@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RS.Parking.Domain.Models;
 using RS.Parking.Application.Contracts;
+using RS.Parking.Application.DTOs;
 
 namespace RS.Parking.API.Controllers;
 
@@ -34,7 +34,8 @@ public class VehicleTypesController : ControllerBase
 		try
 		{
 			var vehicleTypes = await _vehicleTypeService.GetAllVehicleTypesAsync();
-			if (vehicleTypes == null) return NotFound("No vehicleType was found!");
+			if (vehicleTypes == null) return NoContent();
+
 			return Ok(vehicleTypes);
 		}
 		catch (Exception ex)
@@ -48,8 +49,8 @@ public class VehicleTypesController : ControllerBase
 	{
 		try
 		{
-			var vehicleType = await _vehicleTypeService.GetVehicleTypesByIdAsync(id);
-			if (vehicleType == null) return NotFound("No vehicleType was found!");
+			var vehicleType = await _vehicleTypeService.GetVehicleTypeByIdAsync(id);
+			if (vehicleType == null) return NoContent();
 			return Ok(vehicleType);
 		}
 		catch (Exception ex)
@@ -59,7 +60,7 @@ public class VehicleTypesController : ControllerBase
 	}
 
 	[HttpPost]
-	public async Task<IActionResult> Post(VehicleType model)
+	public async Task<IActionResult> Post(VehicleTypeDTO model)
 	{
 		try
 		{
@@ -74,7 +75,7 @@ public class VehicleTypesController : ControllerBase
 	}
 
 	[HttpPut("{id}")]
-	public async Task<IActionResult> Put(ulong id, VehicleType model)
+	public async Task<IActionResult> Put(ulong id, VehicleTypeDTO model)
 	{
 		try
 		{
@@ -93,13 +94,17 @@ public class VehicleTypesController : ControllerBase
 	{
 		try
 		{
-			return await _vehicleTypeService.DeleteVehicleType(id) 
-				? Ok("Deleted") 
-				: BadRequest("");
+			var vehicleType = await _vehicleTypeService.GetVehicleTypeByIdAsync(id);
+			if (vehicleType == null) return NoContent();
+
+			return await _vehicleTypeService.DeleteVehicleType(id)
+				? Ok("Deleted!")
+				: throw new Exception("A non-specific problem occurred while trying to delete the vehicle type!");
 		}
 		catch (Exception ex)
 		{
-			return this.StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+			return this.StatusCode(StatusCodes.Status500InternalServerError, 
+				  $"Error trying to delete VehicleType. Error: {ex.Message}");
 		}
 	}
 
