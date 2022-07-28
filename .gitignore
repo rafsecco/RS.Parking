@@ -364,5 +364,6 @@ FodyWeavers.xsd
 
 # Deleting DB
 *.db
-*.do-sch
+*.db-shm
 *.db-wal
+*.do-sch
