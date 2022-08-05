@@ -40,6 +40,10 @@ export class VehicletypesNewComponent implements OnInit {
 		this.form.reset();
 	}
 
+	public cssValidator(formControl: FormControl): any {
+		return {'is-invalid': formControl.errors && formControl.touched};
+	}
+
 	public saveVehicleType(): void {
 
 	}

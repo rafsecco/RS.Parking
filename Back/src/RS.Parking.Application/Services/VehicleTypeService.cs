@@ -2,7 +2,7 @@
 using RS.Parking.Application.Contracts;
 using RS.Parking.Application.DTOs;
 using RS.Parking.Domain.Models;
-using RS.Parking.Infrastructure.Contracts;
+using RS.Parking.Domain.Contracts;
 
 namespace RS.Parking.Application.Services;
 

@@ -6,7 +6,7 @@ namespace RS.Parking.API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class VehicleTypesController : ControllerBase
+public class VehicleTypeController : ControllerBase
 {
 	//private readonly ILogger<VehicleTypesController> _logger;
 
@@ -23,7 +23,7 @@ public class VehicleTypesController : ControllerBase
 
 	private readonly IVehicleTypeService _vehicleTypeService;
 
-	public VehicleTypesController(IVehicleTypeService vehicleTypeService)
+	public VehicleTypeController(IVehicleTypeService vehicleTypeService)
 	{
 		_vehicleTypeService = vehicleTypeService;
 	}

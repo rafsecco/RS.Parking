@@ -7,82 +7,347 @@
 	},
 	"item": [
 		{
-			"name": "Get All VehicleType",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://localhost:5001/VehicleType",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "5001",
-					"path": [
-						"VehicleType"
-					]
+			"name": "VehicleType",
+			"item": [
+				{
+					"name": "Get All VehicleType",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/VehicleType",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"VehicleType"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save VehicleType",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 0,\r\n  \"active\": true,\r\n  \"dateCreated\": \"2022-06-27T10:37:26.289Z\",\r\n  \"cost\": 10,\r\n  \"description\": \"Car 3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/VehicleType",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"VehicleType"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get VehicleTypes By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/VehicleType/4",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"VehicleType",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update VehicleType",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 0,\r\n  \"active\": true,\r\n  \"dateCreated\": \"2022-06-27T10:37:26.289\",\r\n  \"cost\": 3.7,\r\n  \"description\": \"Moto 1.2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/VehicleType/4",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"VehicleType",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete VehicleType",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/VehicleType/7",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"VehicleType",
+								"7"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "Save VehicleType",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"url": {
-					"raw": "https://localhost:5001/VehicleType",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "5001",
-					"path": [
-						"VehicleType"
-					]
+			"name": "AccordType",
+			"item": [
+				{
+					"name": "Get All AccordType",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/AccordType",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"AccordType"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save AccordType",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 0,\r\n  \"active\": true,\r\n  \"dateCreated\": \"2022-08-05T10:34:48.393Z\",\r\n  \"description\": \"tests\",\r\n  \"accord\": 2,\r\n  \"percentage\": 50\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/AccordType",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"AccordType"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get AccordType By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/AccordType/4",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"AccordType",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update AccordType",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 0,\r\n  \"active\": true,\r\n  \"dateCreated\": \"2022-08-05T10:34:48.393Z\",\r\n  \"description\": \"tests 1\",\r\n  \"accord\": 1,\r\n  \"percentage\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/AccordType/4",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"AccordType",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete AccordType",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/AccordType/4",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"AccordType",
+								"4"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "Update VehicleType",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"url": {
-					"raw": "https://localhost:5001/VehicleType/10",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "5001",
-					"path": [
-						"VehicleType",
-						"10"
-					]
+			"name": "ControlInOut",
+			"item": [
+				{
+					"name": "Get All ControlInOut",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/ControlInOut",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"ControlInOut"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save ControlInOut",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 0,\r\n  \"active\": true,\r\n  \"dateCreated\": \"2022-08-05T10:34:48.393Z\",\r\n  \"description\": \"tests\",\r\n  \"accord\": 2,\r\n  \"percentage\": 50\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/ControlInOut",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"ControlInOut"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get ControlInOut By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/ControlInOut/4",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"ControlInOut",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update ControlInOut",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 0,\r\n  \"active\": true,\r\n  \"dateCreated\": \"2022-08-05T10:34:48.393Z\",\r\n  \"description\": \"tests 1\",\r\n  \"accord\": 1,\r\n  \"percentage\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/ControlInOut/4",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"ControlInOut",
+								"4"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete VehicleType",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "https://localhost:5001/VehicleType/10",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "5001",
-					"path": [
-						"VehicleType",
-						"10"
-					]
-				}
-			},
-			"response": []
+			]
 		}
 	]
 }

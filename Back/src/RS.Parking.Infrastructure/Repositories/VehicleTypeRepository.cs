@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RS.Parking.Infrastructure.Contexts;
-using RS.Parking.Infrastructure.Contracts;
+using RS.Parking.Domain.Contracts;
 using RS.Parking.Domain.Models;
 
 namespace RS.Parking.Infrastructure.Repositories;

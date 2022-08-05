@@ -1,10 +1,11 @@
 ﻿using RS.Parking.Domain.Models;
 
-namespace RS.Parking.Infrastructure.Contracts;
+namespace RS.Parking.Domain.Contracts;
 
 public interface IControlInOutRepository
 {
-	Task<ControlInOut[]> GetControlInOutByDateAsync(DateOnly date);
+	Task<ControlInOut[]> GetControlInOutActiveAsync();
+	
 	Task<ControlInOut> GetControlInOutByIdAsync(ulong id);
 
 }

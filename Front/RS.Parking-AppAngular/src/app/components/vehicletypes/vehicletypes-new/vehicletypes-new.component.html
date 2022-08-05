@@ -15,7 +15,7 @@
 						<div class="form-group col-md-12">
 							<label>Description</label>
 							<input type="text" class="form-control"
-								[ngClass]="{'is-invalid': f.description.errors && f.description.touched}"
+								[ngClass]="cssValidator(f.description)"
 								formControlName="description"
 								placeholder="Insert description" />
 							<div class="invalid-feedback" *ngIf="f.description.errors?.required">Description is required!</div>
@@ -28,7 +28,7 @@
 						<div class="form-group col-md-4">
 							<label>Cost</label>
 							<input type="number" class="form-control"
-								[ngClass]="{'is-invalid': f.cost.errors && f.cost.touched}"
+								[ngClass]="cssValidator(f.cost)"
 								formControlName="cost"
 								placeholder="Insert cost" />
 								<div class="invalid-feedback" *ngIf="f.description.errors?.required">Cost is required!</div>

@@ -1,4 +1,4 @@
-﻿namespace RS.Parking.Infrastructure.Contracts;
+﻿namespace RS.Parking.Domain.Contracts;
 
 public interface ICoreRepository
 {

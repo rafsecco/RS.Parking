@@ -11,6 +11,7 @@ public class ControlInOut
 	#region Properties
 	//[Key]
 	//[Required]
+	//[Column("id_controleInOut", Order = 1, TypeName = "BIGINT UNSIGNED")]
 	public ulong Id { get; set; }
 
 	//[Required]

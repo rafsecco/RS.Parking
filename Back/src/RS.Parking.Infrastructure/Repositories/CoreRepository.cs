@@ -1,5 +1,5 @@
 ﻿using RS.Parking.Infrastructure.Contexts;
-using RS.Parking.Infrastructure.Contracts;
+using RS.Parking.Domain.Contracts;
 
 namespace RS.Parking.Infrastructure.Repositories;
 
