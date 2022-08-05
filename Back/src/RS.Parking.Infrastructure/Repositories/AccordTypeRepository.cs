@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RS.Parking.Infrastructure.Contexts;
-using RS.Parking.Infrastructure.Contracts;
+using RS.Parking.Domain.Contracts;
 using RS.Parking.Domain.Models;
 
 namespace RS.Parking.Infrastructure.Repositories;
@@ -17,10 +17,10 @@ public class AccordTypeRepository : IAccordTypeRepository
 
 	public async Task<AccordType[]> GetAllAccordTypesAsync()
 	{
-		return await _context.AccordTypes.OrderBy(x => x.Id).ToArrayAsync();
+		return await _context.AccordTypes.OrderBy(x => x.Description).ToArrayAsync();
 	}
 
-	public async Task<AccordType> GetAccordTypesByIdAsync(ulong id)
+	public async Task<AccordType> GetAccordTypeByIdAsync(ulong id)
 	{
 		return await _context.AccordTypes
 			.AsNoTracking()

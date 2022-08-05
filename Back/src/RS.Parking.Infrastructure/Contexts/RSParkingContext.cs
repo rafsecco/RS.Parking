@@ -14,12 +14,12 @@ public class RSParkingContext : DbContext
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
 		modelBuilder.Entity<ControlInOut>()
-			.HasKey(CIO => new { CIO.VehicleTypeId, CIO.AccordTypeId });
+			.HasKey(cio => new { cio.VehicleTypeId, cio.AccordTypeId });
 
 		//modelBuilder.UseCollation("utf8_general_ci"); //latin2_general_ci (Default)
 		//modelBuilder.HasDefaultSchema("RS.Parking");
 
-		//modelBuilder.ApplyConfiguration(new VehicleTypeConfigurations());
+		//modelBuilder.ApplyConfiguration(new VehicleTypeMappings());
 		//modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 		//modelBuilder.ApplyConfigurationsFromAssembly(typeof(RSParkingContext).Assembly);
 

@@ -1,6 +1,6 @@
 ﻿using RS.Parking.Domain.Models;
 
-namespace RS.Parking.Infrastructure.Contracts;
+namespace RS.Parking.Domain.Contracts;
 
 public interface IVehicleTypeRepository
 {

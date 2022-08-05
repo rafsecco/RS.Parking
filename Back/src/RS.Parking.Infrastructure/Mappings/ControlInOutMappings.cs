@@ -2,9 +2,9 @@
 //using Microsoft.EntityFrameworkCore.Metadata.Builders;
 //using RS.Parking.Domain.Models;
 
-//namespace RS.Parking.Infrastructure.Configurations;
+//namespace RS.Parking.Infrastructure.Mappings;
 
-//internal class ControlInOutConfigurations : IEntityTypeConfiguration<ControlInOut>
+//internal class ControlInOutMappings : IEntityTypeConfiguration<ControlInOut>
 //{
 //	public void Configure(EntityTypeBuilder<ControlInOut> builder)
 //	{
@@ -44,15 +44,17 @@
 //		builder.HasIndex(i => i.DateTimeIn, "idx_tb_ControleInOut_dt_in");
 //		//.IsUnique();
 
+//		builder.Ignore(i => new { i.AccordType, i.VehicleType });
+
 //		// 1 : 1 => ControlInOut : VehicleType
-//		builder
-//			.HasOne(p => p.VehicleType)
-//			.WithOne(p => p.ControlInOut);
+//		//builder
+//		//	.HasOne(p => p.VehicleType)
+//		//	.WithOne(p => p.ControlInOut);
 
 //		// 1 : 1 => ControlInOut : AccordType
-//		builder
-//			.HasOne(p => p.AccordType)
-//			.WithOne(p => p.ControlInOut);
+//		//builder
+//		//	.HasOne(p => p.AccordType)
+//		//	.WithOne(p => p.ControlInOut);
 
 //		#region Owned Types
 //		//modelBuilder.Entity<ControlInOut>(p => 

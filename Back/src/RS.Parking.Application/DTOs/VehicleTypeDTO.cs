@@ -11,7 +11,7 @@ public class VehicleTypeDTO
 	public DateTime DateCreated { get; set; } = DateTime.Now;
 	
 	[Required]
-	[RegularExpression(@"^\d+(\.\d{1,2})?$")]
+	//[RegularExpression(@"^\d+(\.\d{1,2})?$")]
 	[Range(0, 9999999999999999.99)]
 	public decimal Cost { get; set; }    //decimal myMoney = 300.5m;
 	

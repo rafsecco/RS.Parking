@@ -2,30 +2,35 @@
 //using Microsoft.EntityFrameworkCore.Metadata.Builders;
 //using RS.Parking.Domain.Models;
 
-//namespace RS.Parking.Infrastructure.Configurations;
+//namespace RS.Parking.Infrastructure.Mappings;
 
-//internal class VehicleTypeConfigurations : IEntityTypeConfiguration<VehicleType>
+//internal class AccordTypeMappings : IEntityTypeConfiguration<AccordType>
 //{
-//	public void Configure(EntityTypeBuilder<VehicleType> builder)
+//	public void Configure(EntityTypeBuilder<AccordType> builder)
 //	{
-//		builder.ToTable("tb_VehicleType")
+//		builder.ToTable("tb_AccordType")
 //			.HasKey(k => k.Id);
 
 //		builder.Property(p => p.Id)
-//			.HasColumnName("id_vehicle")
+//			.HasColumnName("id_accord")
 //			.HasColumnType("TINYINT UNSIGNED")  //System.Byte 
 //			.ValueGeneratedOnAdd();
 
 //		builder.Property(p => p.Description)
 //			.IsRequired()
-//			.HasColumnName("ds_vehicle")
+//			.HasColumnName("ds_accord")
 //			.HasColumnType("VARCHAR(100)");
 
-//		builder.Property(p => p.Cost)
+//		builder.Property(p => p.Accord)
 //			.IsRequired()
-//			.HasColumnName("vl_cost")
+//			.HasColumnName("ie_accord")
+//			.HasColumnType("TINYINT");
+
+//		builder.Property(p => p.Accord)
+//			.IsRequired()
+//			.HasColumnName("nr_accord")
 //			.HasColumnType("DECIMAL")
-//			.HasPrecision(15, 2);
+//			.HasPrecision(5, 2);
 
 //		builder.Property(p => p.Active)
 //			.IsRequired()
@@ -37,9 +42,10 @@
 //			.HasColumnName("dt_dateCreated")
 //			.HasDefaultValueSql("NOW()");
 
-//		//builder.HasData(new[] {
-//		//	new VehicleType ("Car One", 5.5m),
-//		//	new VehicleType ("Car Two", 10.5m),
+//		//builder.HasData(new[]
+//		//{
+//		//	new AccordType(),
+//		//	new AccordType()
 //		//});
 
 //	}

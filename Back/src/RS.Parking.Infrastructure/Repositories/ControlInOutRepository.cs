@@ -1,24 +1,25 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RS.Parking.Infrastructure.Contexts;
-using RS.Parking.Infrastructure.Contracts;
+using RS.Parking.Domain.Contracts;
 using RS.Parking.Domain.Models;
 
 namespace RS.Parking.Infrastructure.Repositories;
 
-public class ControllInOutRepository : IControlInOutRepository
+public class ControlInOutRepository : IControlInOutRepository
 {
 	private readonly RSParkingContext _context;
 
-	public ControllInOutRepository(RSParkingContext context)
+	public ControlInOutRepository(RSParkingContext context)
 	{
 		_context = context;
 		//_context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
 	}
 
-	public async Task<ControlInOut[]> GetControlInOutByDateAsync(DateOnly date)
+	public async Task<ControlInOut[]> GetControlInOutActiveAsync()
 	{
 		return await _context.ControlInOut
-			.Where(x => DateOnly.FromDateTime(x.DateTimeIn) == date)
+			.Where(x => x.DateTimeOut == null)
+			//.Where(x => DateOnly.FromDateTime(x.DateTimeIn) == date)
 			.OrderBy(x => x.Id)
 			.ToArrayAsync();
 	}
