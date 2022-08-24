@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RS.Parking.Infrastructure.Contexts;
+using RS.Parking.Infrastructure;
 
 namespace RS.Parking.API.Configurations;
 
@@ -7,8 +7,19 @@ public static class ApiConfigs
 {
 	public static IServiceCollection AddApiConfigureServices(this IServiceCollection services, IConfiguration configurations)
 	{
-		services.AddDbContext<RSParkingContext>(context => 
-			context.UseSqlite(configurations.GetConnectionString("Default"))
+		string strConn = configurations.GetConnectionString("ConnMariaDB");
+
+		services.AddDbContext<RSParkingContext>(options => options
+			.UseMySql(strConn, ServerVersion.AutoDetect(strConn), e => 
+			{
+				e.EnableRetryOnFailure(
+					maxRetryCount: 3,
+					maxRetryDelay: TimeSpan.FromSeconds(5),
+					errorNumbersToAdd: null);
+			})
+			.LogTo(Console.WriteLine)
+			.EnableSensitiveDataLogging()
+			.EnableDetailedErrors()
 		);
 
 		services.AddControllers();
@@ -16,8 +27,6 @@ public static class ApiConfigs
 		//	.AddNewtonsoftJson(x => 
 		//		x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 		//	);
-
-		
 
 		services.RegisterServices();
 

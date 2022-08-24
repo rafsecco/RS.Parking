@@ -4,13 +4,13 @@ namespace RS.Parking.Application.Contracts;
 
 public interface IVehicleTypeService
 {
-	Task<VehicleTypeDTO> AddVehicleType(VehicleTypeDTO model);
-	
-	Task<VehicleTypeDTO> UpdateVehicleType(ulong VehicleTypeId, VehicleTypeDTO model);
-	
-	Task<bool> DeleteVehicleType(ulong VehicleTypeId);
+	Task<List<VehicleTypeDTO>> GetAll();
 
-	Task<VehicleTypeDTO[]> GetAllVehicleTypesAsync();
-	
-	Task<VehicleTypeDTO> GetVehicleTypeByIdAsync(ulong id);
+	Task<VehicleTypeDTO> GetById(ushort id);
+
+	Task<VehicleTypeDTO> Add(VehicleTypeDTO model);
+
+	Task<VehicleTypeDTO> Update(ushort id, VehicleTypeDTO model);
+
+	Task<bool> Delete(ushort id);
 }

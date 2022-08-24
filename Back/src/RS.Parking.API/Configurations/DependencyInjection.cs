@@ -11,8 +11,6 @@ public static class DependencyInjection
 	{
 		services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-		services.AddScoped<ICoreRepository, CoreRepository>();
-
 		services.AddScoped<IVehicleTypeRepository, VehicleTypeRepository>();
 		services.AddScoped<IVehicleTypeService, VehicleTypeService>();
 

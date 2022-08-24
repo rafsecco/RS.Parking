@@ -4,13 +4,13 @@ namespace RS.Parking.Application.Contracts;
 
 public interface IAccordTypeService
 {
-	Task<AccordTypeDTO> AddAccordType(AccordTypeDTO model);
-	
-	Task<AccordTypeDTO> UpdateAccordType(ulong AccordTypeId, AccordTypeDTO model);
-	
-	Task<bool> DeleteAccordType(ulong AccordTypeId);
+	Task<List<AccordTypeDTO>> GetAll();
 
-	Task<AccordTypeDTO[]> GetAllAccordTypesAsync();
-	
-	Task<AccordTypeDTO> GetAccordTypeByIdAsync(ulong id);
+	Task<AccordTypeDTO> GetById(ushort id);
+
+	Task<AccordTypeDTO> Add(AccordTypeDTO model);
+
+	Task<AccordTypeDTO> Update(ushort id, AccordTypeDTO model);
+
+	Task<bool> Delete(ushort id);
 }

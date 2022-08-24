@@ -2,9 +2,8 @@
 
 namespace RS.Parking.Domain.Contracts;
 
-public interface IVehicleTypeRepository
+public interface IVehicleTypeRepository : IRepository<VehicleType>
 {
-	Task<VehicleType[]> GetAllVehicleTypesAsync();
-	Task<VehicleType> GetVehicleTypeByIdAsync(ulong id);
+	
 }
 

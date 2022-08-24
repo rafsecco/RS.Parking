@@ -1,0 +1,24 @@
+
+-Database
+	-tb_VehicleType
+		-id_vehicle		NOT NULL TINYINT(3) UNSIGNED	PK
+		-bln_active		NOT NULL TINYINT(1)
+		-dt_dateCreated NOT NULL DATETIME(6)	NOW()
+		-vl_cost 		NOT NULL DECIMAL(15, 2)
+		-ds_vehicle		NOT NULL VARCHAR(100)
+
+	-tb_AccordType
+		-id_accord		NOT NULL TINYINT(3) UNSIGNED	PK
+		-bln_active		NOT NULL TINYINT(1)
+		-dt_dateCreated	NOT NULL DATETIME(6)	NOW()
+		-ie_accord		NOT NULL INT(11)
+		-nr_percentage	NOT NULL DECIMAL(5, 2)
+		-ds_accord		NOT NULL VARCHAR(100)
+
+	-tb_ControlInOut
+		-id_controlInOut	NOT NULL BIGINT(20) UNSIGNED	PK
+		-cd_vehicle			NOT NULL TINYINT(3) UNSIGNED	FK
+		-cd_accord			NOT NULL TINYINT(3) UNSIGNED	FK
+		-dt_in				NOT NULL DATETIME(6)	NOW()
+		-dt_out				NULL DATETIME(6)
+		-ds_licensePlate	NOT NULL VARCHAR(7)

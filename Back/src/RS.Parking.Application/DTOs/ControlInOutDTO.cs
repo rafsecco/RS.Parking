@@ -4,9 +4,12 @@ namespace RS.Parking.Application.DTOs;
 
 public class ControlInOutDTO
 {
-	#region Properties
 	public ulong Id { get; set; }
+
+	public ulong VehicleTypeId { get; set; }
 	
+	public ulong AccordTypeId { get; set; }
+
 	[Required]
 	public string LicensePlate { get; set; }
 	
@@ -14,8 +17,7 @@ public class ControlInOutDTO
 	
 	public DateTime? DateTimeOut { get; set; }
 	
-	public VehicleTypeDTO VehicleType { get; set; }
+	//public VehicleTypeDTO VehicleType { get; set; }
 	
-	public AccordTypeDTO AccordType { get; set; }
-	#endregion
+	//public AccordTypeDTO AccordType { get; set; }
 }

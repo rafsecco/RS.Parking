@@ -8,28 +8,57 @@ namespace RS.Parking.Application.Services;
 
 public class AccordTypeService : IAccordTypeService
 {
-	private readonly ICoreRepository _coreRepository;
-	private readonly IAccordTypeRepository _AccordTypeRepository;
+	private readonly IAccordTypeRepository _accordTypeRepo;
 	private readonly IMapper _mapper;
 
-	public AccordTypeService(ICoreRepository coreContracts, IAccordTypeRepository AccordTypeContracts, IMapper mapper)
+	public AccordTypeService(IAccordTypeRepository accordTypeContracts, IMapper mapper)
 	{
-		_coreRepository = coreContracts;
-		_AccordTypeRepository = AccordTypeContracts;
+		_accordTypeRepo = accordTypeContracts;
 		_mapper = mapper;
 	}
 
-	public async Task<AccordTypeDTO> AddAccordType(AccordTypeDTO model)
+	public async Task<List<AccordTypeDTO>> GetAll()
+	{
+		try
+		{
+			var AccordTypes = await _accordTypeRepo.GetAll();
+			if (AccordTypes == null) return null;
+
+			var objReturn = _mapper.Map<List<AccordTypeDTO>>(AccordTypes);
+			return objReturn;
+		}
+		catch (Exception ex)
+		{
+			throw new Exception(ex.Message);
+		}
+	}
+
+	public async Task<AccordTypeDTO> GetById(ushort id)
+	{
+		try
+		{
+			var AccordType = await _accordTypeRepo.GetById(id);
+			if (AccordType == null) return null;
+
+			var objReturn = _mapper.Map<AccordTypeDTO>(AccordType);
+			return objReturn;
+		}
+		catch (Exception ex)
+		{
+			throw new Exception(ex.Message);
+		}
+	}
+
+	public async Task<AccordTypeDTO> Add(AccordTypeDTO model)
 	{
 		try
 		{
 			var AccordType = _mapper.Map<AccordType>(model);
+			var objResult = await _accordTypeRepo.Add(AccordType);
 
-			_coreRepository.Add(AccordType);
-
-			if (await _coreRepository.SaveChangesAsync())
+			if (objResult > 0)
 			{
-				var objReturn = await _AccordTypeRepository.GetAccordTypeByIdAsync(AccordType.Id);
+				var objReturn = await _accordTypeRepo.GetById(AccordType.Id);
 				return _mapper.Map<AccordTypeDTO>(objReturn);
 			}
 			return null;
@@ -40,22 +69,20 @@ public class AccordTypeService : IAccordTypeService
 		}
 	}
 
-	public async Task<AccordTypeDTO> UpdateAccordType(ulong AccordTypeId, AccordTypeDTO model)
+	public async Task<AccordTypeDTO> Update(ushort id, AccordTypeDTO model)
 	{
 		try
 		{
-			var AccordType = await _AccordTypeRepository.GetAccordTypeByIdAsync(AccordTypeId);
+			var AccordType = await _accordTypeRepo.GetById(id);
 			if (AccordType == null) return null;
 
 			model.Id = AccordType.Id;
-
 			_mapper.Map(model, AccordType);
+			var objResult = await _accordTypeRepo.Update(AccordType);
 
-			_coreRepository.Update(AccordType);
-
-			if (await _coreRepository.SaveChangesAsync())
+			if (objResult > 0)
 			{
-				var objReturn = await _AccordTypeRepository.GetAccordTypeByIdAsync(AccordType.Id);
+				var objReturn = await _accordTypeRepo.GetById(AccordType.Id);
 				return _mapper.Map<AccordTypeDTO>(objReturn);
 			}
 			return null;
@@ -66,51 +93,15 @@ public class AccordTypeService : IAccordTypeService
 		}
 	}
 
-	public async Task<bool> DeleteAccordType(ulong AccordTypeId)
+	public async Task<bool> Delete(ushort id)
 	{
 		try
 		{
-			var AccordType = await _AccordTypeRepository.GetAccordTypeByIdAsync(AccordTypeId);
+			var AccordType = await _accordTypeRepo.GetById(id);
 			if (AccordType == null) throw new Exception("AccordType was not found!");
 
-			_coreRepository.Delete(AccordType);
-
-			return await _coreRepository.SaveChangesAsync();
-		}
-		catch (Exception ex)
-		{
-			throw new Exception(ex.Message);
-		}
-	}
-
-	public async Task<AccordTypeDTO[]> GetAllAccordTypesAsync()
-	{
-		try
-		{
-			var AccordTypes = await _AccordTypeRepository.GetAllAccordTypesAsync();
-			if (AccordTypes == null) return null;
-
-			var objReturn = _mapper.Map<AccordTypeDTO[]>(AccordTypes);
-
-			return objReturn;
-
-		}
-		catch (Exception ex)
-		{
-			throw new Exception(ex.Message);
-		}
-	}
-
-	public async Task<AccordTypeDTO> GetAccordTypeByIdAsync(ulong id)
-	{
-		try
-		{
-			var AccordType = await _AccordTypeRepository.GetAccordTypeByIdAsync(id);
-			if (AccordType == null) return null;
-
-			var objReturn = _mapper.Map<AccordTypeDTO>(AccordType);
-
-			return objReturn;
+			var objReturn = await _accordTypeRepo.Remove(AccordType);
+			return objReturn > 0;
 		}
 		catch (Exception ex)
 		{

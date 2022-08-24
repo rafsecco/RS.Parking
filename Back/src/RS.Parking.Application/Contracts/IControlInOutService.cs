@@ -4,11 +4,11 @@ namespace RS.Parking.Application.Contracts;
 
 public interface IControlInOutService
 {
-	Task<ControlInOutDTO> AddControlInOut(ControlInOutDTO model);
-	
-	Task<ControlInOutDTO> UpdateControlInOut(ulong ControlInOutId, ControlInOutDTO model);
+	Task<List<ControlInOutDTO>> GetAll();
 
-	Task<ControlInOutDTO[]> GetControlInOutActiveAsync();
+	Task<ControlInOutDTO> GetById(ulong id);
 
-	Task<ControlInOutDTO> GetControlInOutByIdAsync(ulong id);
+	Task<ControlInOutDTO> Add(ControlInOutDTO model);
+
+	Task<ControlInOutDTO> Update(ulong id, ControlInOutDTO model);
 }
