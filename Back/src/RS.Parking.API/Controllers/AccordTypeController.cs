@@ -21,11 +21,11 @@ public class AccordTypeController : ControllerBase
 	//	return Ok();
 	//}
 
-	private readonly IAccordTypeService _AccordTypeService;
+	private readonly IAccordTypeService _accordTypeService;
 
 	public AccordTypeController(IAccordTypeService AccordTypeService)
 	{
-		_AccordTypeService = AccordTypeService;
+		_accordTypeService = AccordTypeService;
 	}
 
 	[HttpGet]
@@ -33,7 +33,7 @@ public class AccordTypeController : ControllerBase
 	{
 		try
 		{
-			var AccordTypes = await _AccordTypeService.GetAllAccordTypesAsync();
+			var AccordTypes = await _accordTypeService.GetAll();
 			if (AccordTypes == null) return NoContent();
 
 			return Ok(AccordTypes);
@@ -45,11 +45,11 @@ public class AccordTypeController : ControllerBase
 	}
 
 	[HttpGet("{id}")]
-	public async Task<IActionResult> Get(ulong id)
+	public async Task<IActionResult> Get(ushort id)
 	{
 		try
 		{
-			var AccordType = await _AccordTypeService.GetAccordTypeByIdAsync(id);
+			var AccordType = await _accordTypeService.GetById(id);
 			if (AccordType == null) return NoContent();
 			return Ok(AccordType);
 		}
@@ -64,7 +64,7 @@ public class AccordTypeController : ControllerBase
 	{
 		try
 		{
-			var AccordType = await _AccordTypeService.AddAccordType(model);
+			var AccordType = await _accordTypeService.Add(model);
 			if (AccordType == null) return BadRequest("Error to add AccordType!");
 			return Ok(AccordType);
 		}
@@ -75,11 +75,11 @@ public class AccordTypeController : ControllerBase
 	}
 
 	[HttpPut("{id}")]
-	public async Task<IActionResult> Put(ulong id, AccordTypeDTO model)
+	public async Task<IActionResult> Put(ushort id, AccordTypeDTO model)
 	{
 		try
 		{
-			var AccordType = await _AccordTypeService.UpdateAccordType(id, model);
+			var AccordType = await _accordTypeService.Update(id, model);
 			if (AccordType == null) return BadRequest("Error to update AccordType!");
 			return Ok(AccordType);
 		}
@@ -90,20 +90,20 @@ public class AccordTypeController : ControllerBase
 	}
 
 	[HttpDelete("{id}")]
-	public async Task<IActionResult> Delete(ulong id)
+	public async Task<IActionResult> Delete(ushort id)
 	{
 		try
 		{
-			var AccordType = await _AccordTypeService.GetAccordTypeByIdAsync(id);
+			var AccordType = await _accordTypeService.GetById(id);
 			if (AccordType == null) return NoContent();
 
-			return await _AccordTypeService.DeleteAccordType(id)
+			return await _accordTypeService.Delete(id)
 				? Ok("Deleted!")
 				: throw new Exception("A non-specific problem occurred while trying to delete the acoord type!");
 		}
 		catch (Exception ex)
 		{
-			return this.StatusCode(StatusCodes.Status500InternalServerError, 
+			return this.StatusCode(StatusCodes.Status500InternalServerError,
 				  $"Error trying to delete AccordType. Error: {ex.Message}");
 		}
 	}

@@ -5,8 +5,11 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:6.0.301 AS build
 WORKDIR /src
+COPY ["Back/src/RS.Parking.Infrastructure/RS.Parking.Infrastructure.csproj", "Back/src/RS.Parking.Infrastructure/"]
+COPY ["Back/src/RS.Parking.Domain/RS.Parking.Domain.csproj", "Back/src/RS.Parking.Domain/"]
+COPY ["Back/src/RS.Parking.Application/RS.Parking.Application.csproj", "Back/src/RS.Parking.Application/"]
 COPY ["Back/src/RS.Parking.API/RS.Parking.API.csproj", "Back/src/RS.Parking.API/"]
 RUN dotnet restore "Back/src/RS.Parking.API/RS.Parking.API.csproj"
 COPY . .

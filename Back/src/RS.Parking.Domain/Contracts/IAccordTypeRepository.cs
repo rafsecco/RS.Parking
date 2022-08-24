@@ -2,8 +2,7 @@
 
 namespace RS.Parking.Domain.Contracts;
 
-public interface IAccordTypeRepository
+public interface IAccordTypeRepository : IRepository<AccordType>
 {
-	Task<AccordType[]> GetAllAccordTypesAsync();
-	Task<AccordType> GetAccordTypeByIdAsync(ulong id);
+	
 }

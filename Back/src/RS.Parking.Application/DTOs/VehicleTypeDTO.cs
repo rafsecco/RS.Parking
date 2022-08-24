@@ -5,9 +5,11 @@ namespace RS.Parking.Application.DTOs;
 public class VehicleTypeDTO
 {
 	public ulong Id { get; set; }
-	
+
+	[Required]
 	public bool Active { get; set; }
-	
+
+	[Required]
 	public DateTime DateCreated { get; set; } = DateTime.Now;
 	
 	[Required]
@@ -20,5 +22,4 @@ public class VehicleTypeDTO
 	//[MinLength(3, ErrorMessage = "")]
 	//[MaxLength(100, ErrorMessage = "")]
 	public string Description { get; set; }
-
 }

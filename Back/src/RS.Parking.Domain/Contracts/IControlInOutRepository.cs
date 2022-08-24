@@ -2,10 +2,13 @@
 
 namespace RS.Parking.Domain.Contracts;
 
-public interface IControlInOutRepository
+public interface IControlInOutRepository : IDisposable
 {
-	Task<ControlInOut[]> GetControlInOutActiveAsync();
-	
-	Task<ControlInOut> GetControlInOutByIdAsync(ulong id);
+	Task<List<ControlInOut>> GetAll();
 
+	Task<ControlInOut> GetById(ulong id);
+
+	Task<int> Add(ControlInOut entity);
+
+	Task<int> Update(ControlInOut entity);
 }

@@ -5,18 +5,18 @@ namespace RS.Parking.Application.DTOs;
 
 public class AccordTypeDTO
 {
-	#region Properties
 	public ulong Id { get; set; }
 
 	public bool Active { get; set; }
+
 	public DateTime DateCreated { get; set; } = DateTime.Now;
 
 	[Required]
 	public string Description { get; set; }
 
-	public EnumAccordType Accord { get; set; }
+	[Required]
+	public EnumAccordType Accord { get; set; } = EnumAccordType.NoDiscount;
 
 	[Required]
-	public double Percentage { get; set; }
-	#endregion
+	public decimal Percentage { get; set; }
 }

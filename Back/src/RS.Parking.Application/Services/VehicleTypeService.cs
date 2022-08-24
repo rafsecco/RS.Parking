@@ -8,28 +8,57 @@ namespace RS.Parking.Application.Services;
 
 public class VehicleTypeService : IVehicleTypeService
 {
-	private readonly ICoreRepository _coreRepository;
-	private readonly IVehicleTypeRepository _vehicleTypeRepository;
+	private readonly IVehicleTypeRepository _vehicleTypeRepo;
 	private readonly IMapper _mapper;
 
-	public VehicleTypeService(ICoreRepository coreContracts, IVehicleTypeRepository vehicleTypeContracts, IMapper mapper)
+	public VehicleTypeService(IVehicleTypeRepository vehicleTypeContracts, IMapper mapper)
 	{
-		_coreRepository = coreContracts;
-		_vehicleTypeRepository = vehicleTypeContracts;
+		_vehicleTypeRepo = vehicleTypeContracts;
 		_mapper = mapper;
 	}
 
-	public async Task<VehicleTypeDTO> AddVehicleType(VehicleTypeDTO model)
+	public async Task<List<VehicleTypeDTO>> GetAll()
+	{
+		try
+		{
+			var vehicleTypes = await _vehicleTypeRepo.GetAll();
+			if (vehicleTypes == null) return null;
+
+			var objReturn = _mapper.Map<List<VehicleTypeDTO>>(vehicleTypes);
+			return objReturn;
+		}
+		catch (Exception ex)
+		{
+			throw new Exception(ex.Message);
+		}
+	}
+
+	public async Task<VehicleTypeDTO> GetById(ushort id)
+	{
+		try
+		{
+			var vehicleType = await _vehicleTypeRepo.GetById(id);
+			if (vehicleType == null) return null;
+
+			var objReturn = _mapper.Map<VehicleTypeDTO>(vehicleType);
+			return objReturn;
+		}
+		catch (Exception ex)
+		{
+			throw new Exception(ex.Message);
+		}
+	}
+
+	public async Task<VehicleTypeDTO> Add(VehicleTypeDTO model)
 	{
 		try
 		{
 			var vehicleType = _mapper.Map<VehicleType>(model);
+			var objResult = await _vehicleTypeRepo.Add(vehicleType);
 
-			_coreRepository.Add(vehicleType);
-
-			if (await _coreRepository.SaveChangesAsync())
+			if (objResult > 0)
 			{
-				var objReturn = await _vehicleTypeRepository.GetVehicleTypeByIdAsync(vehicleType.Id);
+				var objReturn = await _vehicleTypeRepo.GetById(vehicleType.Id);
 				return _mapper.Map<VehicleTypeDTO>(objReturn);
 			}
 			return null;
@@ -40,22 +69,20 @@ public class VehicleTypeService : IVehicleTypeService
 		}
 	}
 
-	public async Task<VehicleTypeDTO> UpdateVehicleType(ulong vehicleTypeId, VehicleTypeDTO model)
+	public async Task<VehicleTypeDTO> Update(ushort vehicleTypeId, VehicleTypeDTO model)
 	{
 		try
 		{
-			var vehicleType = await _vehicleTypeRepository.GetVehicleTypeByIdAsync(vehicleTypeId);
+			var vehicleType = await _vehicleTypeRepo.GetById(vehicleTypeId);
 			if (vehicleType == null) return null;
 
 			model.Id = vehicleType.Id;
-
 			_mapper.Map(model, vehicleType);
+			var objResult = await _vehicleTypeRepo.Update(vehicleType);
 
-			_coreRepository.Update(vehicleType);
-
-			if (await _coreRepository.SaveChangesAsync())
+			if (objResult > 0)
 			{
-				var objReturn = await _vehicleTypeRepository.GetVehicleTypeByIdAsync(vehicleType.Id);
+				var objReturn = await _vehicleTypeRepo.GetById(vehicleType.Id);
 				return _mapper.Map<VehicleTypeDTO>(objReturn);
 			}
 			return null;
@@ -66,51 +93,15 @@ public class VehicleTypeService : IVehicleTypeService
 		}
 	}
 
-	public async Task<bool> DeleteVehicleType(ulong vehicleTypeId)
+	public async Task<bool> Delete(ushort vehicleTypeId)
 	{
 		try
 		{
-			var vehicleType = await _vehicleTypeRepository.GetVehicleTypeByIdAsync(vehicleTypeId);
+			var vehicleType = await _vehicleTypeRepo.GetById(vehicleTypeId);
 			if (vehicleType == null) throw new Exception("VehicleType was not found!");
 
-			_coreRepository.Delete(vehicleType);
-
-			return await _coreRepository.SaveChangesAsync();
-		}
-		catch (Exception ex)
-		{
-			throw new Exception(ex.Message);
-		}
-	}
-
-	public async Task<VehicleTypeDTO[]> GetAllVehicleTypesAsync()
-	{
-		try
-		{
-			var vehicleTypes = await _vehicleTypeRepository.GetAllVehicleTypesAsync();
-			if (vehicleTypes == null) return null;
-
-			var objReturn = _mapper.Map<VehicleTypeDTO[]>(vehicleTypes);
-
-			return objReturn;
-
-		}
-		catch (Exception ex)
-		{
-			throw new Exception(ex.Message);
-		}
-	}
-
-	public async Task<VehicleTypeDTO> GetVehicleTypeByIdAsync(ulong id)
-	{
-		try
-		{
-			var vehicleType = await _vehicleTypeRepository.GetVehicleTypeByIdAsync(id);
-			if (vehicleType == null) return null;
-
-			var objReturn = _mapper.Map<VehicleTypeDTO>(vehicleType);
-
-			return objReturn;
+			var objResult = await _vehicleTypeRepo.Remove(vehicleType);
+			return objResult> 0;
 		}
 		catch (Exception ex)
 		{

@@ -33,7 +33,7 @@ public class VehicleTypeController : ControllerBase
 	{
 		try
 		{
-			var vehicleTypes = await _vehicleTypeService.GetAllVehicleTypesAsync();
+			var vehicleTypes = await _vehicleTypeService.GetAll();
 			if (vehicleTypes == null) return NoContent();
 
 			return Ok(vehicleTypes);
@@ -45,11 +45,11 @@ public class VehicleTypeController : ControllerBase
 	}
 
 	[HttpGet("{id}")]
-	public async Task<IActionResult> Get(ulong id)
+	public async Task<IActionResult> Get(ushort id)
 	{
 		try
 		{
-			var vehicleType = await _vehicleTypeService.GetVehicleTypeByIdAsync(id);
+			var vehicleType = await _vehicleTypeService.GetById(id);
 			if (vehicleType == null) return NoContent();
 			return Ok(vehicleType);
 		}
@@ -64,7 +64,7 @@ public class VehicleTypeController : ControllerBase
 	{
 		try
 		{
-			var vehicleType = await _vehicleTypeService.AddVehicleType(model);
+			var vehicleType = await _vehicleTypeService.Add(model);
 			if (vehicleType == null) return BadRequest("Error to add vehicleType!");
 			return Ok(vehicleType);
 		}
@@ -75,11 +75,11 @@ public class VehicleTypeController : ControllerBase
 	}
 
 	[HttpPut("{id}")]
-	public async Task<IActionResult> Put(ulong id, VehicleTypeDTO model)
+	public async Task<IActionResult> Put(ushort id, VehicleTypeDTO model)
 	{
 		try
 		{
-			var vehicleType = await _vehicleTypeService.UpdateVehicleType(id, model);
+			var vehicleType = await _vehicleTypeService.Update(id, model);
 			if (vehicleType == null) return BadRequest("Error to update vehicleType!");
 			return Ok(vehicleType);
 		}
@@ -90,14 +90,14 @@ public class VehicleTypeController : ControllerBase
 	}
 
 	[HttpDelete("{id}")]
-	public async Task<IActionResult> Delete(ulong id)
+	public async Task<IActionResult> Delete(ushort id)
 	{
 		try
 		{
-			var vehicleType = await _vehicleTypeService.GetVehicleTypeByIdAsync(id);
+			var vehicleType = await _vehicleTypeService.GetById(id);
 			if (vehicleType == null) return NoContent();
 
-			return await _vehicleTypeService.DeleteVehicleType(id)
+			return await _vehicleTypeService.Delete(id)
 				? Ok("Deleted!")
 				: throw new Exception("A non-specific problem occurred while trying to delete the vehicle type!");
 		}

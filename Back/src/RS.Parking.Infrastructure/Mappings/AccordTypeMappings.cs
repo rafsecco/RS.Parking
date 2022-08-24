@@ -1,52 +1,51 @@
-﻿//using Microsoft.EntityFrameworkCore;
-//using Microsoft.EntityFrameworkCore.Metadata.Builders;
-//using RS.Parking.Domain.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using RS.Parking.Domain.Models;
 
-//namespace RS.Parking.Infrastructure.Mappings;
+namespace RS.Parking.Infrastructure.Mappings;
 
-//internal class AccordTypeMappings : IEntityTypeConfiguration<AccordType>
-//{
-//	public void Configure(EntityTypeBuilder<AccordType> builder)
-//	{
-//		builder.ToTable("tb_AccordType")
-//			.HasKey(k => k.Id);
+internal class AccordTypeMappings : IEntityTypeConfiguration<AccordType>
+{
+	public void Configure(EntityTypeBuilder<AccordType> builder)
+	{
+		builder.ToTable("tb_AccordType")
+			.HasKey(k => k.Id);
 
-//		builder.Property(p => p.Id)
-//			.HasColumnName("id_accord")
-//			.HasColumnType("TINYINT UNSIGNED")  //System.Byte 
-//			.ValueGeneratedOnAdd();
+		builder.Property(p => p.Id)
+			.HasColumnName("id_accord")
+			.HasColumnType("TINYINT UNSIGNED")  //System.Byte 
+			.ValueGeneratedOnAdd();
 
-//		builder.Property(p => p.Description)
-//			.IsRequired()
-//			.HasColumnName("ds_accord")
-//			.HasColumnType("VARCHAR(100)");
+		builder.Property(p => p.Active)
+			.IsRequired()
+			.HasColumnName("bln_active");
 
-//		builder.Property(p => p.Accord)
-//			.IsRequired()
-//			.HasColumnName("ie_accord")
-//			.HasColumnType("TINYINT");
+		builder.Property(p => p.DateCreated)
+			.IsRequired()
+			.HasColumnName("dt_dateCreated")
+			.HasDefaultValueSql("NOW()");
 
-//		builder.Property(p => p.Accord)
-//			.IsRequired()
-//			.HasColumnName("nr_accord")
-//			.HasColumnType("DECIMAL")
-//			.HasPrecision(5, 2);
+		builder.Property(p => p.Accord)
+			.IsRequired()
+			.HasColumnName("ie_accord")	;
 
-//		builder.Property(p => p.Active)
-//			.IsRequired()
-//			.HasColumnName("bln_active")
-//			.HasColumnType("BOOLEAN");
+		builder.Property(p => p.Percentage)
+			.IsRequired()
+			.HasColumnName("nr_percentage")
+			.HasPrecision(5, 2);
 
-//		builder.Property(p => p.DateCreated)
-//			.IsRequired()
-//			.HasColumnName("dt_dateCreated")
-//			.HasDefaultValueSql("NOW()");
+		builder.Property(p => p.Description)
+			.IsRequired()
+			.HasColumnName("ds_accord")
+			.HasMaxLength(100);
 
-//		//builder.HasData(new[]
-//		//{
-//		//	new AccordType(),
-//		//	new AccordType()
-//		//});
-
-//	}
-//}
+		#region Populate
+		AccordType[] objAccordType = {
+			new AccordType {Id=1, Active=true, DateCreated=DateTime.Now, Accord=Domain.Enumerables.EnumAccordType.NoDiscount, Percentage=0m, Description="PharmaTech" },
+			new AccordType {Id=2, Active=true, DateCreated=DateTime.Now, Accord=Domain.Enumerables.EnumAccordType.Total, Percentage=50.0m, Description="Subway" },
+			new AccordType {Id=3, Active=true, DateCreated=DateTime.Now, Accord=Domain.Enumerables.EnumAccordType.FirstHour, Percentage=100m, Description="McDonald's" }
+		};
+		builder.HasData(objAccordType);
+		#endregion
+	}
+}

@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
 import { VehicletypesService } from './services/vehicletypes.service';
+import { AccordTypesService } from './services/AccordTypes.service';
 
 import { AppComponent } from './app.component';
 import { NavegationComponent } from './shared/navegation/navegation.component';
@@ -39,7 +40,8 @@ import { ControlInOutComponent } from './components/controlinout/controlinout.co
 		NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
 	],
 	providers: [
-		VehicletypesService
+		VehicletypesService,
+		AccordTypesService
 	],
 	bootstrap: [AppComponent],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -21,11 +21,11 @@ public class ControlInOutController : ControllerBase
 	//	return Ok();
 	//}
 
-	private readonly IControlInOutService _ControlInOutService;
+	private readonly IControlInOutService _controlInOutService;
 
-	public ControlInOutController(IControlInOutService ControlInOutervice)
+	public ControlInOutController(IControlInOutService controlInOutervice)
 	{
-		_ControlInOutService = ControlInOutervice;
+		_controlInOutService = controlInOutervice;
 	}
 
 	[HttpGet]
@@ -33,7 +33,7 @@ public class ControlInOutController : ControllerBase
 	{
 		try
 		{
-			var ControlInOut = await _ControlInOutService.GetControlInOutActiveAsync();
+			var ControlInOut = await _controlInOutService.GetAll();
 			if (ControlInOut == null) return NoContent();
 
 			return Ok(ControlInOut);
@@ -49,7 +49,7 @@ public class ControlInOutController : ControllerBase
 	{
 		try
 		{
-			var ControlInOut = await _ControlInOutService.GetControlInOutByIdAsync(id);
+			var ControlInOut = await _controlInOutService.GetById(id);
 			if (ControlInOut == null) return NoContent();
 			return Ok(ControlInOut);
 		}
@@ -64,7 +64,7 @@ public class ControlInOutController : ControllerBase
 	{
 		try
 		{
-			var ControlInOut = await _ControlInOutService.AddControlInOut(model);
+			var ControlInOut = await _controlInOutService.Add(model);
 			if (ControlInOut == null) return BadRequest("Error to add ControlInOut!");
 			return Ok(ControlInOut);
 		}
@@ -79,7 +79,7 @@ public class ControlInOutController : ControllerBase
 	{
 		try
 		{
-			var ControlInOut = await _ControlInOutService.UpdateControlInOut(id, model);
+			var ControlInOut = await _controlInOutService.Update(id, model);
 			if (ControlInOut == null) return BadRequest("Error to update ControlInOut!");
 			return Ok(ControlInOut);
 		}
