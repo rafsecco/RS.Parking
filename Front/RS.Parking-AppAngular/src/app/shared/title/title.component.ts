@@ -8,15 +8,21 @@ import { Router } from '@angular/router';
 })
 export class TitleComponent implements OnInit {
 
+	@Input() iconClass:string = '';
 	@Input() title:string = '';
-	@Input() iconClass:string = 'bi bi-card-checklist';
+	@Input() link:string = '';
 	@Input() buttonList:boolean = false;
+	@Input() buttonAddNew:boolean = false;
 
 	constructor(private router: Router) {}
 
 	ngOnInit() {}
 
 	List(): void {
-		this.router.navigate([`/${this.title.toLowerCase()}/list`])
+		this.router.navigate([`/${this.link.toLowerCase()}/list`])
+	}
+
+	AddNew(): void {
+		this.router.navigate([`/${this.link.toLowerCase()}/new`])
 	}
 }

@@ -13,23 +13,24 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD: MyDB@123
 
-    api-parking:
-        image: rs_parking_api:latest
-        container_name: RS_Parking_API
-        build:
-            context: ../
-            dockerfile: ./Back/src/RS.Parking.API/Dockerfile
-        restart: always
-        ports:
-            - 5000:80
-            #- 5000:5000
-            #- 5001:5001
-        environment:
-            - ASPNETCORE_ENVIRONMENT=Production
-            - ASPNETCORE_URLS=http://+5000
-            #- ASPNETCORE_URLS=https://+:5001;http://+5000
-        depends_on:
-            - mariadb
+    # api-parking:
+    #     image: rs_parking_api:latest
+    #     container_name: RS_Parking_API
+    #     build:
+    #         context: ../
+    #         dockerfile: ./Back/src/RS.Parking.API/Dockerfile
+    #     restart: always
+    #     ports:
+    #         - 5000:80
+    #         #- 5000:5000
+    #         #- 5001:5001
+    #     environment:
+    #         - ASPNETCORE_ENVIRONMENT=Production
+    #         #- ASPNETCORE_URLS=http://+5000
+    #         #- ASPNETCORE_HTTPS_PORT=5000
+    #         #- ASPNETCORE_URLS=https://+:5001;http://+5000
+    #     depends_on:
+    #         - mariadb
 
 
     # maria-db:

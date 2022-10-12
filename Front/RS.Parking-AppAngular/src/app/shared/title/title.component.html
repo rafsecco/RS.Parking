@@ -1,21 +1,18 @@
-<div class="d-flex p-3 my-3 text-white bg-secondary rounded shadow-sm">
+<div id="title" class="container-fluid d-flex p-1 rounded shadow-sm text-white">
 
-	<div class="d-flex align-items-center mr-auto">
+	<div class="col-md-9 d-flex mr-auto p-2">
 		<i class="{{ iconClass }}"></i>
 		<div class="lh-100">
-			<h2 class="mb-0">{{ title }}</h2>
+			<h4 class="mb-0">{{ title }}</h4>
 		</div>
 	</div>
 
-	<div class="p-3" *ngIf="buttonList">
-		<button class="btn btn-outline-light" (click)="List()">
-			<!-- <i class="bi bi-plus-circle"></i> -->
-			<!-- <b class="ml-1 d-none d-sm-block">New</b> -->
-			List {{title}}
-			New
-		</button>
+	<div class="col-md-2 p-2 text-end">
+		<button class="btn btn-outline-light" (click)="AddNew()">Add New</button>
+	</div>
+
+	<div class="col-md-1 p-2 text-end">
+		<button class="btn btn-outline-light" (click)="List()">List</button>
 	</div>
 
 </div>
-
-<!-- <button type="button" class="btn btn-success">Add New</button> -->
