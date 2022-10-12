@@ -49,6 +49,7 @@ public static class ApiConfigs
 		//{
 		//	app.UseHsts();
 		//}
+		//app.UseHttpsRedirection();
 
 		app.UseAuthorization();
 

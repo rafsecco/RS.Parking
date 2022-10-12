@@ -1,9 +1,12 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID } from '@angular/core';
+import localept from '@angular/common/locales/pt';
+import {registerLocaleData} from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxCurrencyModule, CurrencyMaskInputMode } from 'ngx-currency';
 import { AppRoutingModule } from './app-routing.module';
 
 import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
@@ -18,6 +21,23 @@ import { VehicletypesListComponent } from './components/vehicletypes/vehicletype
 import { VehicletypesNewComponent } from './components/vehicletypes/vehicletypes-new/vehicletypes-new.component';
 import { AccordtypesComponent } from './components/accordtypes/accordtypes.component';
 import { ControlInOutComponent } from './components/controlinout/controlinout.component';
+
+registerLocaleData(localept, 'pt');
+
+export const customCurrencyMaskConfig = {
+	prefix: 'R$ ',
+	thousands: '.',
+	decimal: ',',
+	align: 'left',
+	allowNegative: true,
+	allowZero: true,
+	precision: 2,
+	suffix: '',
+	nullable: true,
+	min: null,
+	max: null,
+	inputMode: CurrencyMaskInputMode.FINANCIAL,
+};
 
 @NgModule({
 	declarations: [
@@ -38,8 +58,10 @@ import { ControlInOutComponent } from './components/controlinout/controlinout.co
 		HttpClientModule,
 		BrowserAnimationsModule,
 		NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
+		NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
 	],
 	providers: [
+		{ provide: LOCALE_ID, useValue: "pt"},
 		VehicletypesService,
 		AccordTypesService
 	],
