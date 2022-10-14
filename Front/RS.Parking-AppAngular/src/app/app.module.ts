@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { ToastrModule } from 'ngx-toastr';
 import { NgxCurrencyModule, CurrencyMaskInputMode } from 'ngx-currency';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -59,6 +60,12 @@ export const customCurrencyMaskConfig = {
 		BrowserAnimationsModule,
 		NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
 		NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
+		ToastrModule.forRoot({
+			timeOut: 3000,
+			positionClass: 'toast-bottom-right',
+			preventDuplicates: true,
+			progressBar: true
+		})
 	],
 	providers: [
 		{ provide: LOCALE_ID, useValue: "pt"},
