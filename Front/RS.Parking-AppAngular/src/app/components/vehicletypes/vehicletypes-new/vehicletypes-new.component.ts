@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { VehicleType } from '@app/models/VehicleType';
+
+import { VehicletypesService } from '@app/services/vehicletypes.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
 	selector: 'app-vehicletypes-new',
@@ -9,22 +15,23 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class VehicletypesNewComponent implements OnInit {
 
 	form: FormGroup;
+	vehicleType = {} as VehicleType;
 
 	get f(): any {
 		return this.form.controls;
 	}
 
-	constructor(private fb: FormBuilder) {}
+	constructor(
+		private fb: FormBuilder,
+		private eventoService: VehicletypesService,
+		private router: Router,
+		private spinner: NgxSpinnerService,
+		private toastr: ToastrService
+	) {}
 
 	ngOnInit(): void {
 		this.validation();
 	}
-
-	// id: number;
-	// active: boolean
-	// dateCreated: Date;
-	// cost: number;
-	// description: string;
 
 	public validation(): void {
 		this.form = this.fb.group({
@@ -45,7 +52,33 @@ export class VehicletypesNewComponent implements OnInit {
 	}
 
 	public saveVehicleType(): void {
+		this.spinner.show();
 
+		if (this.form.valid) {
+			this.vehicleType = Object.assign({}, this.vehicleType, this.form.value);
+
+			this.eventoService.saveVehicleType(this.vehicleType).subscribe(
+				success => { this.processSuccess(success) },
+				failure => { this.processFailure(failure) },
+				() => this.spinner.hide()
+			);
+		}
+	}
+
+	processSuccess(response: any) {
+		this.form.reset();
+
+		let toast = this.toastr.success('Vehicle', 'Sucesso!');
+		if (toast) {
+			toast.onHidden.subscribe(() => {
+			this.router.navigate(['/vehicletype/list']);
+			});
+		}
+	}
+
+	processFailure(fail: any) {
+		this.spinner.hide();
+		this.toastr.error('Error ao salvar evento', 'Erro');
 	}
 
 }
