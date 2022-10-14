@@ -15,17 +15,17 @@ export class VehicletypesService {
 		return this.http.get<VehicleType[]>(this.baseURL);
 	}
 
-	public getVehicleTypesById(id: number): Observable<VehicleType> {
+	public getVehicleTypeById(id: number): Observable<VehicleType> {
 		return this.http.get<VehicleType>(`${this.baseURL}/${id}`);
 	}
 
-	public post(vehicletype: VehicleType): Observable<VehicleType> {
+	public saveVehicleType(vehicletype: VehicleType): Observable<VehicleType> {
 		return this.http
 			.post<VehicleType>(this.baseURL, vehicletype)
 			.pipe(take(1));
 	}
 
-	public put(vehicletype: VehicleType): Observable<VehicleType> {
+	public updateVehicleType(vehicletype: VehicleType): Observable<VehicleType> {
 		return this.http
 			.put<VehicleType>(`${this.baseURL}/${vehicletype.id}`, vehicletype)
 			.pipe(take(1));
