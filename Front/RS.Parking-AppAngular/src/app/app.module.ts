@@ -5,11 +5,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
+
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxCurrencyModule, CurrencyMaskInputMode } from 'ngx-currency';
-import { AppRoutingModule } from './app-routing.module';
 
+import { AppRoutingModule } from './app-routing.module';
 import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
 import { VehicletypesService } from './services/vehicletypes.service';
 import { AccordTypesService } from './services/AccordTypes.service';
@@ -58,6 +60,7 @@ export const customCurrencyMaskConfig = {
 		AppRoutingModule,
 		HttpClientModule,
 		BrowserAnimationsModule,
+		ModalModule.forRoot(),
 		NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
 		NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
 		ToastrModule.forRoot({
