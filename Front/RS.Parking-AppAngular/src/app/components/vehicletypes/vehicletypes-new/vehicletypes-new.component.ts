@@ -69,14 +69,14 @@ export class VehicletypesNewComponent implements OnInit {
 		let toast = this.toastr.success('Vehicle', 'Sucesso!');
 		if (toast) {
 			toast.onHidden.subscribe(() => {
-			this.router.navigate(['/vehicletype/list']);
+			this.router.navigate(['/vehicletypes/list']);
 			});
 		}
 	}
 
 	processFailure(fail: any) {
-		this.spinner.hide();
 		this.toastr.error('Error ao salvar evento', 'Erro');
+		this.spinner.hide();
 	}
 
 }
