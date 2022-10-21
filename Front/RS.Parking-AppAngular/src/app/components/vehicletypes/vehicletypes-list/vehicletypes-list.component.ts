@@ -18,6 +18,7 @@ export class VehicletypesListComponent implements OnInit {
 
 	modalRef: BsModalRef;
 	message?: string;
+	vehicleTypeId: number;
 	public vehicleTypes: VehicleType[] = [];
 
 	constructor(
@@ -28,9 +29,9 @@ export class VehicletypesListComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
-		this.getVehicleTypes();
+		this.LoadVehicleTypeList();
 		/** spinner starts on init */
-		this.spinner.show();
+		//this.spinner.show();
 
 		// setTimeout(() => {
 		// 	/** spinner ends after 5 seconds */
@@ -38,29 +39,66 @@ export class VehicletypesListComponent implements OnInit {
 		// }, 5000);
 	}
 
-	public getVehicleTypes(): void {
+	public LoadVehicleTypeList(): void {
+		this.spinner.show();
 		this.vehicleTypesService.getAllVehicleTypes().subscribe({
 			next: (_vehicleTypes: VehicleType[]) => this.vehicleTypes = _vehicleTypes,
 			error: (error: any) => {
-				this.spinner.hide();
 				console.log(error);
 			},
 			complete: () => this.spinner.hide()
 		});
 	}
 
-	openModal(template: TemplateRef<any>): void {
+	openModal(template: TemplateRef<any>, vehicleTypeId: number): void {
+		this.vehicleTypeId = vehicleTypeId;
 		this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
 	}
 
-	confirm(): void {
+	confirmDeleteVehicleType(): void {
 		this.message = 'Confirmed!';
 		this.modalRef?.hide();
-		this.toastr.success('The record has been successfully deleted!', 'Deleted!');
+		this.spinner.show();
+		this.vehicleTypesService.deleteVehicleType(this.vehicleTypeId)
+			.subscribe({
+				next: (success: any) => this.processDeleteSuccess(success),
+				error: (failure: any) => this.processDeleteFailure(failure)
+				// complete: () => this.spinner.hide()
+			}).add(() => this.spinner.hide());
+
+		// 	(result: any) => {
+		// 		//this.toastr.success('Vehicle successfully deleted!', 'Deleted!');
+		// 		// console.log(result);
+		// 		// if (result.message === 'Deleted!') {
+		// 		// 	this.toastr.success('Vehicle successfully deleted!', 'Deleted!');
+		// 		this.LoadVehicleTypeList();
+		// 		// }
+		// 	},
+		// 	(error: any) => {
+		// 		// console.error(error);
+		// 		// this.toastr.error(`Error when trying to delete the vehicle ${this.vehicleTypeId}`, 'Error');
+		// 	},
+		// 	() => this.spinner.hide()
+		// );
+		// this.spinner.hide()
 	}
 
-	decline(): void {
+	declineDeleteVehicleType(): void {
 		this.message = 'Declined!';
 		this.modalRef?.hide();
+	}
+
+	processDeleteSuccess(success: any) {
+		console.log(success);
+		if (success.message === 'Deleted') {
+			this.toastr.success('Vehicle successfully deleted!', 'Deleted!');
+			this.LoadVehicleTypeList();
+		}
+	}
+
+	processDeleteFailure(fail: any){
+		console.error(fail);
+		//this.toastr.error(`Error: ${fail}`, 'Error!');
+		this.toastr.error(`Error: `, 'Error!');
 	}
 }

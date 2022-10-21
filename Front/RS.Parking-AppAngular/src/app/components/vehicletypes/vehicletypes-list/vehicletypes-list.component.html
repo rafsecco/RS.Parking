@@ -22,7 +22,7 @@
 				<button type="button" class="btn btn-info btn-sm mx-1" title="View"><i class="bi bi-search"></i></button>
 				<button type="button" class="btn btn-warning btn-sm mx-1" title="Edit"><i class="bi bi-pencil-square"></i></button>
 				<!-- <button type="button" class="btn btn-danger btn-sm mx-1" title="Delete" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-trash"></i></button> -->
-				<button type="button" class="btn btn-danger btn-sm mx-1" tooltip="Delete" (click)="openModal(template)"><i class="bi bi-trash"></i></button>
+				<button type="button" class="btn btn-danger btn-sm mx-1" tooltip="Delete" (click)="openModal(template, vehicleType.id)"><i class="bi bi-trash"></i></button>
 			</td>
 		</tr>
 	</tbody>
@@ -41,9 +41,9 @@
 
 <ng-template #template>
 	<div class="modal-body text-center">
-		<p>Do you want to confirm?</p>
-		<button type="button" class="btn btn-default" (click)="confirm()" >Yes</button>
-		<button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+		<p>Are you sure you want to delete Vehicle {{this.vehicleTypeId}}?</p>
+		<button type="button" class="btn btn-default" (click)="confirmDeleteVehicleType()" >Yes</button>
+		<button type="button" class="btn btn-primary" (click)="declineDeleteVehicleType()" >No</button>
 	</div>
 </ng-template>
 
