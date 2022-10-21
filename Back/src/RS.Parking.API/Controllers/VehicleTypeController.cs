@@ -98,13 +98,16 @@ public class VehicleTypeController : ControllerBase
 			if (vehicleType == null) return NoContent();
 
 			return await _vehicleTypeService.Delete(id)
-				? Ok("Deleted!")
+				// ? Ok("Deleted")
+				? Ok( new { message = "Deleted" } )
 				: throw new Exception("A non-specific problem occurred while trying to delete the vehicle type!");
 		}
 		catch (Exception ex)
 		{
-			return this.StatusCode(StatusCodes.Status500InternalServerError, 
-				  $"Error trying to delete VehicleType. Error: {ex.Message}");
+			return this.StatusCode(
+				StatusCodes.Status500InternalServerError, 
+				$"Error trying to delete VehicleType. Error: {ex.Message}"
+			);
 		}
 	}
 

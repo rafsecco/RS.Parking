@@ -32,6 +32,8 @@ export class VehicletypesService {
 	}
 
 	public deleteVehicleType(id: number): Observable<any> {
-		return this.http.delete(`${this.baseURL}/${id}`).pipe(take(1));
+		return this.http
+			.delete(`${this.baseURL}/${id.toString()}`)
+			.pipe(take(1));
 	}
 }
