@@ -6,6 +6,7 @@ import { ControlInOutComponent } from './components/controlinout/controlinout.co
 import { VehicletypesComponent } from './components/vehicletypes/vehicletypes.component';
 import { VehicletypesListComponent } from './components/vehicletypes/vehicletypes-list/vehicletypes-list.component';
 import { VehicletypesNewComponent } from './components/vehicletypes/vehicletypes-new/vehicletypes-new.component';
+import { VehicletypesEditComponent } from './components/vehicletypes/vehicletypes-edit/vehicletypes-edit.component';
 
 const routes: Routes = [
 	{ path: 'controlinout', component: ControlInOutComponent },
@@ -14,8 +15,9 @@ const routes: Routes = [
 	{
 		path: 'vehicletypes', component: VehicletypesComponent,
 		children: [
-			{ path: 'new', component: VehicletypesNewComponent },
-			{ path: 'list', component: VehicletypesListComponent }
+			{ path: 'edit/:id', component: VehicletypesEditComponent },
+			{ path: 'list', component: VehicletypesListComponent },
+			{ path: 'new', component: VehicletypesNewComponent }
 		]
 	},
 	{ path: '', redirectTo: 'controlinout', pathMatch: 'full' },

@@ -20,7 +20,7 @@
 			<td class="d-none d-md-table-cell">{{ vehicleType.dateCreated | DateTimeFormat }}</td>
 			<td class="text-right">
 				<button type="button" class="btn btn-info btn-sm mx-1" title="View"><i class="bi bi-search"></i></button>
-				<button type="button" class="btn btn-warning btn-sm mx-1" title="Edit"><i class="bi bi-pencil-square"></i></button>
+				<button type="button" class="btn btn-warning btn-sm mx-1" title="Edit" (click)="openEdit(vehicleType.id)"><i class="bi bi-pencil-square"></i></button>
 				<!-- <button type="button" class="btn btn-danger btn-sm mx-1" title="Delete" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-trash"></i></button> -->
 				<button type="button" class="btn btn-danger btn-sm mx-1" tooltip="Delete" (click)="openModal(template, vehicleType.id)"><i class="bi bi-trash"></i></button>
 			</td>

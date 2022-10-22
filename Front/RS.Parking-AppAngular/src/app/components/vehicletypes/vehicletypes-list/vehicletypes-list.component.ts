@@ -1,13 +1,10 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-
-import { VehicleType } from '@app/models/VehicleType';
-
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { VehicletypesService } from '@app/services/vehicletypes.service';
-
-
+import { VehicleType } from '@app/models/VehicleType';
 
 @Component({
 	selector: 'app-vehicletypes-list',
@@ -23,31 +20,27 @@ export class VehicletypesListComponent implements OnInit {
 
 	constructor(
 		private modalService: BsModalService,
-		private toastr: ToastrService,
 		private vehicleTypesService: VehicletypesService,
+		private router: Router,
+		private toastr: ToastrService,
 		private spinner: NgxSpinnerService
 	) {}
 
 	ngOnInit(): void {
 		this.LoadVehicleTypeList();
-		/** spinner starts on init */
-		//this.spinner.show();
-
-		// setTimeout(() => {
-		// 	/** spinner ends after 5 seconds */
-		// 	this.spinner.hide();
-		// }, 5000);
 	}
 
 	public LoadVehicleTypeList(): void {
 		this.spinner.show();
 		this.vehicleTypesService.getAllVehicleTypes().subscribe({
 			next: (_vehicleTypes: VehicleType[]) => this.vehicleTypes = _vehicleTypes,
-			error: (error: any) => {
-				console.log(error);
-			},
+			error: (error: any) => { console.log(error); },
 			complete: () => this.spinner.hide()
 		});
+	}
+
+	openEdit(id: number): void {
+		this.router.navigate([`/vehicletypes/edit/${id}`]);
 	}
 
 	openModal(template: TemplateRef<any>, vehicleTypeId: number): void {
@@ -59,28 +52,11 @@ export class VehicletypesListComponent implements OnInit {
 		this.message = 'Confirmed!';
 		this.modalRef?.hide();
 		this.spinner.show();
-		this.vehicleTypesService.deleteVehicleType(this.vehicleTypeId)
-			.subscribe({
-				next: (success: any) => this.processDeleteSuccess(success),
-				error: (failure: any) => this.processDeleteFailure(failure)
-				// complete: () => this.spinner.hide()
-			}).add(() => this.spinner.hide());
-
-		// 	(result: any) => {
-		// 		//this.toastr.success('Vehicle successfully deleted!', 'Deleted!');
-		// 		// console.log(result);
-		// 		// if (result.message === 'Deleted!') {
-		// 		// 	this.toastr.success('Vehicle successfully deleted!', 'Deleted!');
-		// 		this.LoadVehicleTypeList();
-		// 		// }
-		// 	},
-		// 	(error: any) => {
-		// 		// console.error(error);
-		// 		// this.toastr.error(`Error when trying to delete the vehicle ${this.vehicleTypeId}`, 'Error');
-		// 	},
-		// 	() => this.spinner.hide()
-		// );
-		// this.spinner.hide()
+		this.vehicleTypesService.deleteVehicleType(this.vehicleTypeId).subscribe({
+			next: (success: any) => this.processDeleteSuccess(success),
+			error: (failure: any) => this.processDeleteFailure(failure),
+			complete: () => this.spinner.hide()
+		});
 	}
 
 	declineDeleteVehicleType(): void {
@@ -98,7 +74,6 @@ export class VehicletypesListComponent implements OnInit {
 
 	processDeleteFailure(fail: any){
 		console.error(fail);
-		//this.toastr.error(`Error: ${fail}`, 'Error!');
-		this.toastr.error(`Error: `, 'Error!');
+		this.toastr.error(`Error: ${fail}`, 'Error!');
 	}
 }

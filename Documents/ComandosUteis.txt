@@ -25,7 +25,6 @@ ng g c vehicletypes-edit --module app
 ########## DOCKER ##########
 docker system prune -af --volumes
 
-
 Ir para a pasta C:\@BackUp\@Program\Projects\RS.Parking\Docker
 docker compose -p rs_parking build --force-rm
 docker compose -p rs_parking up -d
