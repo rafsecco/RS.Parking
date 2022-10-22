@@ -24,6 +24,7 @@ import { VehicletypesListComponent } from './components/vehicletypes/vehicletype
 import { VehicletypesNewComponent } from './components/vehicletypes/vehicletypes-new/vehicletypes-new.component';
 import { AccordtypesComponent } from './components/accordtypes/accordtypes.component';
 import { ControlInOutComponent } from './components/controlinout/controlinout.component';
+import { VehicletypesEditComponent } from './components/vehicletypes/vehicletypes-edit/vehicletypes-edit.component';
 
 registerLocaleData(localept, 'pt');
 
@@ -53,6 +54,7 @@ export const customCurrencyMaskConfig = {
 		VehicletypesComponent,
 		VehicletypesListComponent,
 		VehicletypesNewComponent,
+  VehicletypesEditComponent,
 	],
 	imports: [
 		BrowserModule,
