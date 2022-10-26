@@ -12,7 +12,8 @@
 
 					<div class="form-group col-md-3 py-3">
 						<label>Date Created</label>
-						<input readonly type="text" class="form-control" formControlName="dateCreated" value="{{ vehicleType.dateCreated | DateTimeFormat }}">
+						<!-- <input readonly type="text" class="form-control" formControlName="dateCreated" value="{{ vehicleType.dateCreated | DateTimeFormat }}"> -->
+						<input readonly type="text" class="form-control" formControlName="dateCreated" [value]="form.get('dateCreated').value | DateTimeFormat">
 					</div>
 
 					<div class="form-group col-md-3 py-3">
