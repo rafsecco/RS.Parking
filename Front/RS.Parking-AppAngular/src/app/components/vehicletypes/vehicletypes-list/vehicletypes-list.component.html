@@ -19,10 +19,9 @@
 			</td>
 			<td class="d-none d-md-table-cell">{{ vehicleType.dateCreated | DateTimeFormat }}</td>
 			<td class="text-right">
-				<button type="button" class="btn btn-info btn-sm mx-1" title="View"><i class="bi bi-search"></i></button>
-				<button type="button" class="btn btn-warning btn-sm mx-1" title="Edit" (click)="openEdit(vehicleType.id)"><i class="bi bi-pencil-square"></i></button>
-				<!-- <button type="button" class="btn btn-danger btn-sm mx-1" title="Delete" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-trash"></i></button> -->
-				<button type="button" class="btn btn-danger btn-sm mx-1" tooltip="Delete" (click)="openModal(template, vehicleType.id)"><i class="bi bi-trash"></i></button>
+				<button type="button" class="btn btn-sm mx-1 btn-info" title="View" (click)="openModalView(templateView, vehicleType.id)"><i class="bi bi-search"></i></button>
+				<button type="button" class="btn btn-sm mx-1 btn-warning" title="Edit" (click)="openEdit(vehicleType.id)"><i class="bi bi-pencil-square"></i></button>
+				<button type="button" class="btn btn-sm mx-1 btn-danger" tooltip="Delete" (click)="openModal(template, vehicleType.id)"><i class="bi bi-trash"></i></button>
 			</td>
 		</tr>
 	</tbody>
@@ -47,31 +46,21 @@
 	</div>
 </ng-template>
 
-
-
-<!-- <div
-	class="modal fade"
-	id="exampleModal"
-	tabindex="-1"
-	aria-labelledby="exampleModalLabel"
-	aria-hidden="true"
->
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete the item?</h5>
-				<button
-					type="button"
-					class="btn-close"
-					data-bs-dismiss="modal"
-					aria-label="Close"
-				></button>
-			</div>
-			<div class="modal-body">...</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-				<button type="button" class="btn btn-primary">Yes</button>
-			</div>
-		</div>
+<ng-template #templateView>
+	<div class="modal-header">
+		<h4 class="modal-title">Details</h4>
+		<!-- <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button> -->
+		<button type="button" class="btn-close" aria-label="Close" (click)="modalRef.hide()"></button>
 	</div>
-</div> -->
+	<div class="modal-body">
+		<p>Id: {{vehicleType.id}}</p>
+		<p>Date Created: {{vehicleType.dateCreated | DateTimeFormat}}</p>
+		<p>Description: {{vehicleType.description}}</p>
+		<p>Cost: {{vehicleType.cost | currency: "BRL" }}</p>
+		<p>Active? {{vehicleType.active ? 'activated' : 'disabled'}}</p>
+	</div>
+	<div class="modal-footer">
+		<!-- <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button> -->
+		<button type="button" class="btn btn-light" (click)="modalRef.hide()">Close</button>
+	</div>
+</ng-template>

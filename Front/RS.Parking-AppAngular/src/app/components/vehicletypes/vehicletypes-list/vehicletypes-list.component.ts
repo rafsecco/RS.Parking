@@ -16,6 +16,7 @@ export class VehicletypesListComponent implements OnInit {
 	modalRef: BsModalRef;
 	message?: string;
 	vehicleTypeId: number;
+	vehicleType = {} as VehicleType;
 	public vehicleTypes: VehicleType[] = [];
 
 	constructor(
@@ -37,6 +38,24 @@ export class VehicletypesListComponent implements OnInit {
 			error: (error: any) => { console.log(error); },
 			complete: () => this.spinner.hide()
 		});
+	}
+
+	openModalView(template: TemplateRef<any>, vehicleTypeId: number): void {
+		this.spinner.show();
+		this.vehicleTypeId = vehicleTypeId;
+		this.vehicleTypesService.getVehicleTypeById(vehicleTypeId).subscribe({
+			next: (vehicleType: VehicleType) => {
+				this.vehicleType = { ... vehicleType };
+			},
+			error: (error: any) => {
+				this.toastr.error('Error loading VehicleType.', 'Error!');
+				console.error(error);
+			},
+			complete: () => this.spinner.hide()
+		});
+
+
+		this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
 	}
 
 	openEdit(id: number): void {
