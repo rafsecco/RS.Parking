@@ -23,7 +23,7 @@ export class VehicletypesEditComponent implements OnInit {
 
 	constructor(
 		private fb: FormBuilder,
-		private vehicletypesService: VehicletypesService,
+		private vehicleTypesService: VehicletypesService,
 		private router: Router,
 		private activatedRouter: ActivatedRoute,
 		private spinner: NgxSpinnerService,
@@ -64,7 +64,7 @@ export class VehicletypesEditComponent implements OnInit {
 		this.vehicleTypeId = +this.activatedRouter.snapshot.paramMap.get('id');
 		if (this.vehicleTypeId !== null && this.vehicleTypeId !== 0) {
 			this.spinner.show();
-			this.vehicletypesService.getVehicleTypeById(this.vehicleTypeId).subscribe({
+			this.vehicleTypesService.getVehicleTypeById(this.vehicleTypeId).subscribe({
 				next: (vehicleType: VehicleType) => {
 					this.vehicleType = { ... vehicleType };
 					this.form.patchValue(this.vehicleType);
@@ -82,7 +82,7 @@ export class VehicletypesEditComponent implements OnInit {
 		this.spinner.show();
 		if (this.form.valid) {
 			this.vehicleType = Object.assign({}, this.vehicleType, this.form.value);
-			this.vehicletypesService.updateVehicleType(this.vehicleType).subscribe({
+			this.vehicleTypesService.updateVehicleType(this.vehicleType).subscribe({
 				next: success => this.processSuccess(success),
 				error: failure => this.processFailure(failure),
 				complete: () => this.spinner.hide()
