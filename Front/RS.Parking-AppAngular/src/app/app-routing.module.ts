@@ -10,7 +10,15 @@ import { VehicletypesEditComponent } from './components/vehicletypes/vehicletype
 
 const routes: Routes = [
 	{ path: 'controlinout', component: ControlInOutComponent },
-	{ path: 'accordtypes', component: AccordtypesComponent },
+	{ path: 'accordtypes', redirectTo: 'accordtypes/list' },
+	{
+		path: 'accordtypes', component: AccordtypesComponent,
+		children: [
+			// { path: 'edit/:id', component: AccordTypesEditComponent },
+			{ path: 'list', component: AccordTypesListComponent }
+			// { path: 'new', component: AccordTypesNewComponent }
+		]
+	},
 	{ path: 'vehicletypes', redirectTo: 'vehicletypes/list' },
 	{
 		path: 'vehicletypes', component: VehicletypesComponent,
