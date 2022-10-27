@@ -17,10 +17,7 @@ Iniciar FrontEnd
 
 
 ng g c [NomeComponente] --module app
-
 ng g c components/vehicletypes/vehicletypes-new --module app
-ng g c vehicletypes-edit --module app
-
 
 ########## DOCKER ##########
 docker system prune -af --volumes
