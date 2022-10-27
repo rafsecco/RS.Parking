@@ -7,6 +7,7 @@ import { VehicletypesComponent } from './components/vehicletypes/vehicletypes.co
 import { VehicletypesListComponent } from './components/vehicletypes/vehicletypes-list/vehicletypes-list.component';
 import { VehicletypesNewComponent } from './components/vehicletypes/vehicletypes-new/vehicletypes-new.component';
 import { VehicletypesEditComponent } from './components/vehicletypes/vehicletypes-edit/vehicletypes-edit.component';
+import { AccordTypesListComponent } from './components/accordtypes/accordtypes-list/accordtypes-list.component';
 
 const routes: Routes = [
 	{ path: 'controlinout', component: ControlInOutComponent },

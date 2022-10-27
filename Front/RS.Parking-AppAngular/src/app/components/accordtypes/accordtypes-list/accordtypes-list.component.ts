@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 	templateUrl: './accordtypes-list.component.html',
 	styleUrls: ['./accordtypes-list.component.scss'],
 })
-export class AccordtypesListComponent implements OnInit {
+export class AccordTypesListComponent implements OnInit {
 
 	modalRef: BsModalRef;
 	message?: string;

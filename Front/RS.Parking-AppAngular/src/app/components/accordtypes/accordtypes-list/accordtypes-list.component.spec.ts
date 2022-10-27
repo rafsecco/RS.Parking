@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AccordtypesListComponent } from './accordtypes-list.component';
+import { AccordTypesListComponent } from './accordtypes-list.component';
 
-describe('AccordtypesListComponent', () => {
-  let component: AccordtypesListComponent;
-  let fixture: ComponentFixture<AccordtypesListComponent>;
+describe('AccordTypesListComponent', () => {
+  let component: AccordTypesListComponent;
+  let fixture: ComponentFixture<AccordTypesListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AccordtypesListComponent ]
+      declarations: [ AccordTypesListComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AccordtypesListComponent);
+    fixture = TestBed.createComponent(AccordTypesListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
