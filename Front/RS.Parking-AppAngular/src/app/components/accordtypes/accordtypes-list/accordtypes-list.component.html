@@ -1,0 +1,69 @@
+<table class="table table-striped table-hover">
+	<thead class="table-dark">
+		<tr>
+			<th class="d-none d-md-table-cell">#</th>
+			<th>Description</th>
+			<th>Accord</th>
+			<th>Percentage</th>
+			<th class="d-none d-md-table-cell">Active?</th>
+			<th class="d-none d-md-table-cell">Date Created</th>
+			<th class="text-right">Actions</th>
+		</tr>
+	</thead>
+	<tbody *ngIf="accordTypes && accordTypes.length">
+		<tr *ngFor="let accordType of accordTypes">
+			<td class="d-none d-md-table-cell">{{accordType.id}}</td>
+			<td>{{accordType.description}}</td>
+			<td>{{getDiscountTypesById(accordType.accord)}}</td>
+			<td>{{accordType.percentage | number:'1.0-2'}}% - {{accordType.percentage | percent}}</td>
+			<td class="d-none d-md-table-cell">
+				<input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" [checked]="accordType.active" disabled />
+			</td>
+			<td class="d-none d-md-table-cell">{{accordType.dateCreated | DateTimeFormat}}</td>
+			<td class="text-right">
+				<button type="button" class="btn btn-sm mx-1 btn-info" title="View" (click)="openModalView(templateView, accordType.id)"><i class="bi bi-search"></i></button>
+				<button type="button" class="btn btn-sm mx-1 btn-warning" title="Edit" (click)="openEdit(accordType.id)"><i class="bi bi-pencil-square"></i></button>
+				<button type="button" class="btn btn-sm mx-1 btn-danger" tooltip="Delete" (click)="openModal(template, accordType.id)"><i class="bi bi-trash"></i></button>
+			</td>
+		</tr>
+	</tbody>
+	<tfoot *ngIf="!accordTypes.length">
+		<tr>
+			<td colspan="8" class="text-center">
+				<h4>No record found!</h4>
+			</td>
+		</tr>
+	</tfoot>
+</table>
+
+<!-- {{accordTypes | json}} -->
+
+<!-- Modal -->
+
+<ng-template #template>
+	<div class="modal-body text-center">
+		<p>Are you sure you want to delete Accord {{this.accordTypeId}}?</p>
+		<button type="button" class="btn btn-default" (click)="confirmDeleteAccordType()" >Yes</button>
+		<button type="button" class="btn btn-primary" (click)="declineDeleteAccordType()" >No</button>
+	</div>
+</ng-template>
+
+<ng-template #templateView>
+	<div class="modal-header">
+		<h4 class="modal-title">Details</h4>
+		<!-- <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button> -->
+		<button type="button" class="btn-close" aria-label="Close" (click)="modalRef.hide()"></button>
+	</div>
+	<div class="modal-body">
+		<p>Id: {{accordType.id}}</p>
+		<p>Date Created: {{accordType.dateCreated | DateTimeFormat}}</p>
+		<p>Description: {{accordType.description}}</p>
+		<p>Accord: {{getDiscountTypesById(accordType.accord)}}</p>
+		<p>Percentage: {{accordType.percentage | percent}}</p>
+		<p>Active? {{accordType.active ? 'activated' : 'disabled'}}</p>
+	</div>
+	<div class="modal-footer">
+		<!-- <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button> -->
+		<button type="button" class="btn btn-light" (click)="modalRef.hide()">Close</button>
+	</div>
+</ng-template>

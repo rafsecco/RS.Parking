@@ -1,5 +1,5 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID } from '@angular/core';
-import localept from '@angular/common/locales/pt';
+import ptBr from '@angular/common/locales/pt';
 import {registerLocaleData} from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -25,8 +25,11 @@ import { VehicletypesNewComponent } from './components/vehicletypes/vehicletypes
 import { AccordtypesComponent } from './components/accordtypes/accordtypes.component';
 import { ControlInOutComponent } from './components/controlinout/controlinout.component';
 import { VehicletypesEditComponent } from './components/vehicletypes/vehicletypes-edit/vehicletypes-edit.component';
+import { AccordTypesListComponent } from './components/accordtypes/accordtypes-list/accordtypes-list.component';
+import { AccordTypesNewComponent } from './components/accordtypes/accordtypes-new/accordtypes-new.component';
+import { AccordTypesEditComponent } from './components/accordtypes/accordtypes-edit/accordtypes-edit.component';
 
-registerLocaleData(localept, 'pt');
+registerLocaleData(ptBr, 'pt-BR');
 
 export const customCurrencyMaskConfig = {
 	prefix: 'R$ ',
@@ -54,7 +57,10 @@ export const customCurrencyMaskConfig = {
 		VehicletypesComponent,
 		VehicletypesListComponent,
 		VehicletypesNewComponent,
-  VehicletypesEditComponent,
+		VehicletypesEditComponent,
+		AccordTypesListComponent,
+		AccordTypesNewComponent,
+		AccordTypesEditComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -73,7 +79,7 @@ export const customCurrencyMaskConfig = {
 		})
 	],
 	providers: [
-		{ provide: LOCALE_ID, useValue: "pt"},
+		{ provide: LOCALE_ID, useValue: "pt-BR"},
 		VehicletypesService,
 		AccordTypesService
 	],

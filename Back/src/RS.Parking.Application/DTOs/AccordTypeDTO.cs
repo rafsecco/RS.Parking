@@ -1,5 +1,4 @@
-﻿using RS.Parking.Domain.Enumerables;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace RS.Parking.Application.DTOs;
 
@@ -15,7 +14,7 @@ public class AccordTypeDTO
 	public string Description { get; set; }
 
 	[Required]
-	public EnumAccordType Accord { get; set; } = EnumAccordType.NoDiscount;
+	public ushort Accord { get; set; }
 
 	[Required]
 	public decimal Percentage { get; set; }

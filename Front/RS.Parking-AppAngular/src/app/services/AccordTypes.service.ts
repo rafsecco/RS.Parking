@@ -19,19 +19,21 @@ export class AccordTypesService {
 		return this.http.get<AccordType>(`${this.baseURL}/${id}`);
 	}
 
-	public post(accordType: AccordType): Observable<AccordType> {
+	public saveAccordType(accordType: AccordType): Observable<AccordType> {
 		return this.http
 			.post<AccordType>(this.baseURL, accordType)
 			.pipe(take(1));
 	}
 
-	public put(accordType: AccordType): Observable<AccordType> {
+	public updateAccordType(accordType: AccordType): Observable<AccordType> {
 		return this.http
 			.put<AccordType>(`${this.baseURL}/${accordType.id}`, accordType)
 			.pipe(take(1));
 	}
 
 	public deleteAccordType(id: number): Observable<any> {
-		return this.http.delete(`${this.baseURL}/${id}`).pipe(take(1));
+		return this.http
+			.delete(`${this.baseURL}/${id}`)
+			.pipe(take(1));
 	}
 }

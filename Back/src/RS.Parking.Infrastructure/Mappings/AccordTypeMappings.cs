@@ -41,9 +41,9 @@ internal class AccordTypeMappings : IEntityTypeConfiguration<AccordType>
 
 		#region Populate
 		AccordType[] objAccordType = {
-			new AccordType {Id=1, Active=true, DateCreated=DateTime.Now, Accord=Domain.Enumerables.EnumAccordType.NoDiscount, Percentage=0m, Description="PharmaTech" },
-			new AccordType {Id=2, Active=true, DateCreated=DateTime.Now, Accord=Domain.Enumerables.EnumAccordType.Total, Percentage=50.0m, Description="Subway" },
-			new AccordType {Id=3, Active=true, DateCreated=DateTime.Now, Accord=Domain.Enumerables.EnumAccordType.FirstHour, Percentage=100m, Description="McDonald's" }
+			new AccordType { Id=1, Active=true, DateCreated=DateTime.Now, Accord=0, Percentage=0m, Description="PharmaTech" },
+			new AccordType { Id=2, Active=true, DateCreated=DateTime.Now, Accord=1, Percentage=50.0m, Description="Subway" },
+			new AccordType { Id=3, Active=true, DateCreated=DateTime.Now, Accord=2, Percentage=100m, Description="McDonald's" }
 		};
 		builder.HasData(objAccordType);
 		#endregion
