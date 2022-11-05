@@ -14,8 +14,8 @@
 		<tr *ngFor="let accordType of accordTypes">
 			<td class="d-none d-md-table-cell">{{accordType.id}}</td>
 			<td>{{accordType.description}}</td>
-			<td>{{accordType.accord}}</td>
-			<td>{{accordType.percentage}}</td>
+			<td>{{getDiscountTypesById(accordType.accord)}}</td>
+			<td>{{accordType.percentage | number:'1.0-2'}}% - {{accordType.percentage | percent}}</td>
 			<td class="d-none d-md-table-cell">
 				<input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" [checked]="accordType.active" disabled />
 			</td>
@@ -58,8 +58,8 @@
 		<p>Id: {{accordType.id}}</p>
 		<p>Date Created: {{accordType.dateCreated | DateTimeFormat}}</p>
 		<p>Description: {{accordType.description}}</p>
-		<p>Accord: {{accordType.accord}}</p>
-		<p>Percentage: {{accordType.percentage}}</p>
+		<p>Accord: {{getDiscountTypesById(accordType.accord)}}</p>
+		<p>Percentage: {{accordType.percentage | percent}}</p>
 		<p>Active? {{accordType.active ? 'activated' : 'disabled'}}</p>
 	</div>
 	<div class="modal-footer">

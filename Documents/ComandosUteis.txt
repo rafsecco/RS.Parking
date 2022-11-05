@@ -8,7 +8,7 @@ EntityFrameWorkCore
 		dotnet ef migrations list -p .\RS.Parking.Infrastructure\ -s .\RS.Parking.API\
 
 Iniciar BackEnd
-	Abrir o terminar e ir para a pasta "C:\@BackUp\@Program\Projects\RS.Parking\Back\src\Rs.Parking.API\"
+	Abrir o terminar e ir para a pasta "C:\@BackUp\@Program\Projects\RS.Parking\Back\src\RS.Parking.API\"
 	Executar o comando "dotnet run"
 
 Iniciar FrontEnd
