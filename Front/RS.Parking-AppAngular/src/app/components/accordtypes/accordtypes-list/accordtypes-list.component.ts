@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccordType } from '@app/models/AccordType';
+import { discountTypesList } from '@app/models/DiscountTypes.enum';
 import { AccordTypesService } from '@app/services/AccordTypes.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -13,6 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AccordTypesListComponent implements OnInit {
 
+	enumAccordType: typeof discountTypesList = discountTypesList;
 	modalRef: BsModalRef;
 	message?: string;
 	accordTypeId: number;
@@ -29,6 +31,12 @@ export class AccordTypesListComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.LoadAccordTypeList();
+	}
+
+	public getDiscountTypesById(id: number) : string {
+		//var obj = discountTypesList.find(x => x.id === id)?.name;
+		//return `${obj.id} - ${obj.name}`;
+		return `${id} - ${discountTypesList.find(x => x.id === id)?.name}`
 	}
 
 	public LoadAccordTypeList(): void {
@@ -84,7 +92,6 @@ export class AccordTypesListComponent implements OnInit {
 	}
 
 	processDeleteSuccess(success: any) {
-		console.log(success);
 		if (success.message === 'Deleted') {
 			this.toastr.success('Accord successfully deleted!', 'Deleted!');
 			this.LoadAccordTypeList();
@@ -92,7 +99,6 @@ export class AccordTypesListComponent implements OnInit {
 	}
 
 	processDeleteFailure(fail: any){
-		console.error(fail);
 		this.toastr.error(`Error: ${fail}`, 'Error!');
 	}
 }

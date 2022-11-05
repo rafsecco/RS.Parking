@@ -8,6 +8,8 @@ import { VehicletypesListComponent } from './components/vehicletypes/vehicletype
 import { VehicletypesNewComponent } from './components/vehicletypes/vehicletypes-new/vehicletypes-new.component';
 import { VehicletypesEditComponent } from './components/vehicletypes/vehicletypes-edit/vehicletypes-edit.component';
 import { AccordTypesListComponent } from './components/accordtypes/accordtypes-list/accordtypes-list.component';
+import { AccordTypesNewComponent } from './components/accordtypes/accordtypes-new/accordtypes-new.component';
+import { AccordTypesEditComponent } from './components/accordtypes/accordtypes-edit/accordtypes-edit.component';
 
 const routes: Routes = [
 	{ path: 'controlinout', component: ControlInOutComponent },
@@ -15,9 +17,9 @@ const routes: Routes = [
 	{
 		path: 'accordtypes', component: AccordtypesComponent,
 		children: [
-			// { path: 'edit/:id', component: AccordTypesEditComponent },
-			{ path: 'list', component: AccordTypesListComponent }
-			// { path: 'new', component: AccordTypesNewComponent }
+			{ path: 'edit/:id', component: AccordTypesEditComponent },
+			{ path: 'list', component: AccordTypesListComponent },
+			{ path: 'new', component: AccordTypesNewComponent }
 		]
 	},
 	{ path: 'vehicletypes', redirectTo: 'vehicletypes/list' },
