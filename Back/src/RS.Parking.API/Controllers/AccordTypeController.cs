@@ -98,7 +98,8 @@ public class AccordTypeController : ControllerBase
 			if (AccordType == null) return NoContent();
 
 			return await _accordTypeService.Delete(id)
-				? Ok("Deleted!")
+				//? Ok("Deleted!")
+				? Ok(new { message = "Deleted" })
 				: throw new Exception("A non-specific problem occurred while trying to delete the acoord type!");
 		}
 		catch (Exception ex)

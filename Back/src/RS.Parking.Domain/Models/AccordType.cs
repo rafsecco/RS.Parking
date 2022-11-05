@@ -1,6 +1,4 @@
-﻿using RS.Parking.Domain.Enumerables;
-
-namespace RS.Parking.Domain.Models;
+﻿namespace RS.Parking.Domain.Models;
 
 public class AccordType
 {
@@ -12,7 +10,7 @@ public class AccordType
 	
 	public DateTime DateCreated { get; set; } = DateTime.Now;
 	
-	public EnumAccordType Accord { get; set; } = EnumAccordType.NoDiscount;
+	public ushort Accord { get; set; }
 	
 	public decimal Percentage { get; set; }
 

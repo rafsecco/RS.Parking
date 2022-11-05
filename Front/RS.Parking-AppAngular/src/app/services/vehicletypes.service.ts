@@ -20,6 +20,7 @@ export class VehicletypesService {
 	}
 
 	public saveVehicleType(vehicletype: VehicleType): Observable<VehicleType> {
+		console.log(vehicletype);
 		return this.http
 			.post<VehicleType>(this.baseURL, vehicletype)
 			.pipe(take(1));
