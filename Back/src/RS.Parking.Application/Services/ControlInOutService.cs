@@ -9,11 +9,16 @@ namespace RS.Parking.Application.Services;
 public class ControlInOutService : IControlInOutService
 {
 	private readonly IControlInOutRepository _controlInOutRepo;
+	private readonly IVehicleTypeService _vehicleTypeService;
 	private readonly IMapper _mapper;
 
-	public ControlInOutService(IControlInOutRepository controlInOutRepo, IMapper mapper)
+	public ControlInOutService(
+		IControlInOutRepository controlInOutRepo,
+		IVehicleTypeService vehicleTypeService,
+		IMapper mapper)
 	{
 		_controlInOutRepo = controlInOutRepo;
+		_vehicleTypeService = vehicleTypeService;
 		_mapper = mapper;
 	}
 
@@ -25,6 +30,7 @@ public class ControlInOutService : IControlInOutService
 			if (ControlInOuts == null) return null;
 
 			var objReturn = _mapper.Map<List<ControlInOutDTO>>(ControlInOuts);
+			objReturn.ForEach(x => x.VehicleTypeName = _vehicleTypeService.GetById(x.VehicleTypeId).Result.Description);
 			return objReturn;
 		}
 		catch (Exception ex)
@@ -41,6 +47,7 @@ public class ControlInOutService : IControlInOutService
 			if (ControlInOut == null) return null;
 
 			var objreturn = _mapper.Map<ControlInOutDTO>(ControlInOut);
+			objreturn.VehicleTypeName = _vehicleTypeService.GetById(objreturn.VehicleTypeId).Result.Description;
 			return objreturn;
 		}
 		catch (Exception ex)

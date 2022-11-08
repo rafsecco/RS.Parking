@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class TitleComponent implements OnInit {
 
 	@Input() iconClass:string = '';
+	@Input() iconSecondClass:string = '';
 	@Input() title:string = '';
 	@Input() link:string = '';
 	@Input() buttonAddNew:boolean = false;
