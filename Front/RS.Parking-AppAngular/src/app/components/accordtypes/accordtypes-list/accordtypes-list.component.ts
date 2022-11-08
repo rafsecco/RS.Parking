@@ -43,7 +43,7 @@ export class AccordTypesListComponent implements OnInit {
 		this.spinner.show();
 		this.accordTypesService.getAllAccordTypes().subscribe({
 			next: (_accordTypes: AccordType[]) => this.accordTypes = _accordTypes,
-			error: (error: any) => { console.log(error); },
+			error: (error: any) => { this.toastr.error('Error loading AccordType.', 'Error!'); },
 			complete: () => this.spinner.hide()
 		});
 	}
@@ -52,17 +52,10 @@ export class AccordTypesListComponent implements OnInit {
 		this.spinner.show();
 		this.accordTypeId = accordTypeId;
 		this.accordTypesService.getAccordTypeById(accordTypeId).subscribe({
-			next: (accordType: AccordType) => {
-				this.accordType = { ... accordType };
-			},
-			error: (error: any) => {
-				this.toastr.error('Error loading AccordType.', 'Error!');
-				console.error(error);
-			},
+			next: (accordType: AccordType) => { this.accordType = { ... accordType }; },
+			error: (error: any) => { this.toastr.error('Error loading AccordType.', 'Error!'); },
 			complete: () => this.spinner.hide()
 		});
-
-
 		this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
 	}
 

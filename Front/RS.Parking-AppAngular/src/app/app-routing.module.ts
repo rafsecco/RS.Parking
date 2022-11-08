@@ -10,9 +10,21 @@ import { VehicletypesEditComponent } from './components/vehicletypes/vehicletype
 import { AccordTypesListComponent } from './components/accordtypes/accordtypes-list/accordtypes-list.component';
 import { AccordTypesNewComponent } from './components/accordtypes/accordtypes-new/accordtypes-new.component';
 import { AccordTypesEditComponent } from './components/accordtypes/accordtypes-edit/accordtypes-edit.component';
+import { ControlInOutListComponent } from './components/controlinout/controlinout-list/controlinout-list.component';
+import { ControlinoutEditComponent } from './components/controlinout/controlinout-edit/controlinout-edit.component';
+import { ControlinoutNewComponent } from './components/controlinout/controlinout-new/controlinout-new.component';
 
 const routes: Routes = [
-	{ path: 'controlinout', component: ControlInOutComponent },
+	{ path: 'controlinout', redirectTo: 'controlinout/list' },
+	{
+		path: 'controlinout', component: ControlInOutComponent,
+		children: [
+			{ path: 'edit/:id', component: ControlinoutEditComponent },
+			{ path: 'list', component: ControlInOutListComponent },
+			{ path: 'new', component: ControlinoutNewComponent }
+		]
+	},
+
 	{ path: 'accordtypes', redirectTo: 'accordtypes/list' },
 	{
 		path: 'accordtypes', component: AccordtypesComponent,
@@ -22,6 +34,7 @@ const routes: Routes = [
 			{ path: 'new', component: AccordTypesNewComponent }
 		]
 	},
+
 	{ path: 'vehicletypes', redirectTo: 'vehicletypes/list' },
 	{
 		path: 'vehicletypes', component: VehicletypesComponent,
@@ -31,8 +44,9 @@ const routes: Routes = [
 			{ path: 'new', component: VehicletypesNewComponent }
 		]
 	},
-	{ path: '', redirectTo: 'controlinout', pathMatch: 'full' },
-	{ path: '**', redirectTo: 'controlinout', pathMatch: 'full' }
+
+	{ path: '', redirectTo: 'controlinout/list', pathMatch: 'full' },
+	{ path: '**', redirectTo: 'controlinout/list', pathMatch: 'full' }
 ];
 
 @NgModule({

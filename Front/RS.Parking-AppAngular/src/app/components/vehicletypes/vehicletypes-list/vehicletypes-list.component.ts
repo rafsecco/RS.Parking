@@ -35,7 +35,7 @@ export class VehicletypesListComponent implements OnInit {
 		this.spinner.show();
 		this.vehicleTypesService.getAllVehicleTypes().subscribe({
 			next: (_vehicleTypes: VehicleType[]) => this.vehicleTypes = _vehicleTypes,
-			error: (error: any) => { console.log(error); },
+			error: (error: any) => { this.toastr.error('Error loading VehicleType.', 'Error!'); },
 			complete: () => this.spinner.hide()
 		});
 	}
@@ -44,17 +44,10 @@ export class VehicletypesListComponent implements OnInit {
 		this.spinner.show();
 		this.vehicleTypeId = vehicleTypeId;
 		this.vehicleTypesService.getVehicleTypeById(vehicleTypeId).subscribe({
-			next: (vehicleType: VehicleType) => {
-				this.vehicleType = { ... vehicleType };
-			},
-			error: (error: any) => {
-				this.toastr.error('Error loading VehicleType.', 'Error!');
-				console.error(error);
-			},
+			next: (vehicleType: VehicleType) => { this.vehicleType = { ... vehicleType }; },
+			error: (error: any) => { this.toastr.error('Error loading VehicleType.', 'Error!'); },
 			complete: () => this.spinner.hide()
 		});
-
-
 		this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
 	}
 
@@ -84,7 +77,6 @@ export class VehicletypesListComponent implements OnInit {
 	}
 
 	processDeleteSuccess(success: any) {
-		console.log(success);
 		if (success.message === 'Deleted') {
 			this.toastr.success('Vehicle successfully deleted!', 'Deleted!');
 			this.LoadVehicleTypeList();
@@ -92,7 +84,6 @@ export class VehicletypesListComponent implements OnInit {
 	}
 
 	processDeleteFailure(fail: any){
-		console.error(fail);
 		this.toastr.error(`Error: ${fail}`, 'Error!');
 	}
 }

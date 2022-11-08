@@ -71,7 +71,6 @@ export class VehicletypesEditComponent implements OnInit {
 				},
 				error: (error: any) => {
 					this.toastr.error('Error loading VehicleType.', 'Error!');
-					console.error(error);
 				},
 				complete: () => this.spinner.hide()
 			});

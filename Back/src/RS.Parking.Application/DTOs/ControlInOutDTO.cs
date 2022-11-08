@@ -6,8 +6,10 @@ public class ControlInOutDTO
 {
 	public ulong Id { get; set; }
 
-	public ulong VehicleTypeId { get; set; }
-	
+	public ushort VehicleTypeId { get; set; }
+
+	public string VehicleTypeName { get; set; }
+
 	public ulong AccordTypeId { get; set; }
 
 	[Required]
