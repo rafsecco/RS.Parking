@@ -20,7 +20,6 @@ export class ControlInOutService {
 	}
 
 	public saveControlInOut(controlInOut: ControlInOut): Observable<ControlInOut> {
-		console.log(controlInOut);
 		return this.http
 			.post<ControlInOut>(this.baseURL, controlInOut)
 			.pipe(take(1));

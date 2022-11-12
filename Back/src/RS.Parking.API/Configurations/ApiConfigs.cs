@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using RS.Parking.Infrastructure;
 
 namespace RS.Parking.API.Configurations;
@@ -16,6 +17,7 @@ public static class ApiConfigs
 					maxRetryCount: 3,
 					maxRetryDelay: TimeSpan.FromSeconds(5),
 					errorNumbersToAdd: null);
+				e.SchemaBehavior(MySqlSchemaBehavior.Ignore);
 			})
 			.LogTo(Console.WriteLine)
 			.EnableSensitiveDataLogging()

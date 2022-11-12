@@ -10,7 +10,7 @@ public class ControlInOutDTO
 
 	public string VehicleTypeName { get; set; }
 
-	public ulong AccordTypeId { get; set; }
+	public ushort? AccordTypeId { get; set; }
 
 	[Required]
 	public string LicensePlate { get; set; }

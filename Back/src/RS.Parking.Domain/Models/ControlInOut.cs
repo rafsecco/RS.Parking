@@ -16,7 +16,7 @@ public class ControlInOut
 	public ushort VehicleTypeId { get; set; }
 
 	//[ForeignKey("AccordType")]
-	public ushort AccordTypeId { get; set; }
+	public ushort? AccordTypeId { get; set; }
 
 	public DateTime DateTimeIn { get; set; } = DateTime.Now;
 
