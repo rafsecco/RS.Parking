@@ -71,10 +71,7 @@ export class AccordTypesEditComponent implements OnInit {
 					this.accordType = { ... accordType };
 					this.accordFormGroup.patchValue(this.accordType);
 				},
-				error: (error: any) => {
-					this.toastr.error('Error loading AccordType.', 'Error!');
-					console.error(error);
-				},
+				error: (error: any) => { this.toastr.error(`Error loading AccordType.\n${error}`, 'Error!'); },
 				complete: () => this.spinner.hide()
 			});
 		}
@@ -102,7 +99,6 @@ export class AccordTypesEditComponent implements OnInit {
 	}
 
 	processFailure(fail: any) {
-		this.toastr.error('Error saving AccordType', 'Error');
-		this.spinner.hide();
+		this.toastr.error(`Error saving AccordType.\n${fail}`, 'Error');
 	}
 }

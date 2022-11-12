@@ -34,8 +34,6 @@ export class AccordTypesListComponent implements OnInit {
 	}
 
 	public getDiscountTypesById(id: number) : string {
-		//var obj = discountTypesList.find(x => x.id === id)?.name;
-		//return `${obj.id} - ${obj.name}`;
 		return `${id} - ${discountTypesList.find(x => x.id === id)?.name}`
 	}
 

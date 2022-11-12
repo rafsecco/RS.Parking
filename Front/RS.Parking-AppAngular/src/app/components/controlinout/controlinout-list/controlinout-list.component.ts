@@ -1,7 +1,9 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { AccordType } from '@app/models/AccordType';
 import { ControlInOut } from '@app/models/ControlInOut';
 import { discountTypesList } from '@app/models/DiscountTypes.enum';
+import { AccordTypesService } from '@app/services/AccordTypes.service';
 import { ControlInOutService } from '@app/services/ControlInOut.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -18,10 +20,13 @@ export class ControlInOutListComponent implements OnInit {
 	enumAccordType: typeof discountTypesList = discountTypesList;
 	controlInOutId: number;
 	controlInOut = {} as ControlInOut;
+
+	public accordTypesList: AccordType[] = [];
 	public controlInOutList: ControlInOut[] = [];
 
 	constructor(
 		private router: Router,
+		private accordTypesService: AccordTypesService,
 		private controlInOutService: ControlInOutService,
 		private modalService: BsModalService,
 		private spinner: NgxSpinnerService,
@@ -29,7 +34,17 @@ export class ControlInOutListComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
+		this.LoadAccordTypeList();
 		this.LoadControlInOutList();
+	}
+
+	public LoadAccordTypeList(): void {
+		this.spinner.show();
+		this.accordTypesService.getAllAccordTypes().subscribe({
+			next: (_accordTypes: AccordType[]) => this.accordTypesList = _accordTypes,
+			error: (error: any) => { this.toastr.error('Error loading AccordType.', 'Error!'); },
+			complete: () => this.spinner.hide()
+		});
 	}
 
 	public LoadControlInOutList(): void {
@@ -42,7 +57,11 @@ export class ControlInOutListComponent implements OnInit {
 	}
 
 	public getDiscountTypesNameById(id: number) : string {
-		return `${id} - ${discountTypesList.find(x => x.id === id)?.name}`
+		if (id === null) {
+			return "No Discount";
+		} else {
+			return `${id} - ${this.accordTypesList.find(x => x.id == id)?.description}`;
+		}
 	}
 
 	openModalView(template: TemplateRef<any>, controlInOutId: number): void {

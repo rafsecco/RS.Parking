@@ -4,19 +4,21 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using RS.Parking.Infrastructure;
 
 #nullable disable
 
 namespace RS.Parking.Infrastructure.Migrations
 {
     [DbContext(typeof(RSParkingContext))]
-    [Migration("20220806165747_Initial")]
+    [Migration("20221112120157_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("RS.Parking")
                 .UseCollation("utf8_general_ci")
                 .HasAnnotation("ProductVersion", "6.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
@@ -28,8 +30,8 @@ namespace RS.Parking.Infrastructure.Migrations
                         .HasColumnType("TINYINT UNSIGNED")
                         .HasColumnName("id_accord");
 
-                    b.Property<int>("Accord")
-                        .HasColumnType("int")
+                    b.Property<ushort>("Accord")
+                        .HasColumnType("smallint unsigned")
                         .HasColumnName("ie_accord");
 
                     b.Property<bool>("Active")
@@ -55,33 +57,33 @@ namespace RS.Parking.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("tb_AccordType", (string)null);
+                    b.ToTable("tb_AccordType", "RS.Parking");
 
                     b.HasData(
                         new
                         {
                             Id = (byte)1,
-                            Accord = 0,
+                            Accord = (ushort)0,
                             Active = true,
-                            DateCreated = new DateTime(2022, 8, 6, 13, 57, 46, 932, DateTimeKind.Local).AddTicks(3423),
+                            DateCreated = new DateTime(2022, 11, 12, 9, 1, 57, 438, DateTimeKind.Local).AddTicks(9929),
                             Description = "PharmaTech",
                             Percentage = 0m
                         },
                         new
                         {
                             Id = (byte)2,
-                            Accord = 1,
+                            Accord = (ushort)1,
                             Active = true,
-                            DateCreated = new DateTime(2022, 8, 6, 13, 57, 46, 932, DateTimeKind.Local).AddTicks(3426),
+                            DateCreated = new DateTime(2022, 11, 12, 9, 1, 57, 438, DateTimeKind.Local).AddTicks(9932),
                             Description = "Subway",
                             Percentage = 50.0m
                         },
                         new
                         {
                             Id = (byte)3,
-                            Accord = 2,
+                            Accord = (ushort)2,
                             Active = true,
-                            DateCreated = new DateTime(2022, 8, 6, 13, 57, 46, 932, DateTimeKind.Local).AddTicks(3429),
+                            DateCreated = new DateTime(2022, 11, 12, 9, 1, 57, 438, DateTimeKind.Local).AddTicks(9935),
                             Description = "McDonald's",
                             Percentage = 100m
                         });
@@ -94,7 +96,7 @@ namespace RS.Parking.Infrastructure.Migrations
                         .HasColumnType("BIGINT UNSIGNED")
                         .HasColumnName("id_controlInOut");
 
-                    b.Property<byte>("AccordTypeId")
+                    b.Property<byte?>("AccordTypeId")
                         .HasColumnType("TINYINT UNSIGNED")
                         .HasColumnName("cd_accord");
 
@@ -120,13 +122,25 @@ namespace RS.Parking.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AccordTypeId");
-
-                    b.HasIndex("VehicleTypeId");
-
                     b.HasIndex(new[] { "DateTimeOut" }, "idx_tb_ControleInOut_dt_out");
 
-                    b.ToTable("tb_ControlInOut", (string)null);
+                    b.ToTable("tb_ControlInOut", "RS.Parking");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1ul,
+                            DateTimeIn = new DateTime(2022, 11, 12, 9, 1, 57, 439, DateTimeKind.Local).AddTicks(2670),
+                            LicensePlate = "BRL-123",
+                            VehicleTypeId = (byte)1
+                        },
+                        new
+                        {
+                            Id = 2ul,
+                            DateTimeIn = new DateTime(2022, 11, 12, 9, 1, 57, 439, DateTimeKind.Local).AddTicks(2673),
+                            LicensePlate = "BRL-456",
+                            VehicleTypeId = (byte)2
+                        });
                 });
 
             modelBuilder.Entity("RS.Parking.Domain.Models.VehicleType", b =>
@@ -160,60 +174,41 @@ namespace RS.Parking.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("tb_VehicleType", (string)null);
+                    b.ToTable("tb_VehicleType", "RS.Parking");
 
                     b.HasData(
                         new
                         {
-                            Id = (byte)2,
+                            Id = (byte)1,
                             Active = true,
                             Cost = 5m,
-                            DateCreated = new DateTime(2022, 8, 6, 13, 57, 46, 932, DateTimeKind.Local).AddTicks(6538),
+                            DateCreated = new DateTime(2022, 11, 12, 9, 1, 57, 439, DateTimeKind.Local).AddTicks(3809),
                             Description = "Car 1"
+                        },
+                        new
+                        {
+                            Id = (byte)2,
+                            Active = true,
+                            Cost = 5.5m,
+                            DateCreated = new DateTime(2022, 11, 12, 9, 1, 57, 439, DateTimeKind.Local).AddTicks(3811),
+                            Description = "Car 2"
                         },
                         new
                         {
                             Id = (byte)3,
                             Active = true,
-                            Cost = 5.5m,
-                            DateCreated = new DateTime(2022, 8, 6, 13, 57, 46, 932, DateTimeKind.Local).AddTicks(6540),
-                            Description = "Car 2"
+                            Cost = 3m,
+                            DateCreated = new DateTime(2022, 11, 12, 9, 1, 57, 439, DateTimeKind.Local).AddTicks(3813),
+                            Description = "Moto 1"
                         },
                         new
                         {
                             Id = (byte)4,
                             Active = true,
-                            Cost = 3m,
-                            DateCreated = new DateTime(2022, 8, 6, 13, 57, 46, 932, DateTimeKind.Local).AddTicks(6542),
-                            Description = "Moto 1"
-                        },
-                        new
-                        {
-                            Id = (byte)5,
-                            Active = true,
                             Cost = 3.5m,
-                            DateCreated = new DateTime(2022, 8, 6, 13, 57, 46, 932, DateTimeKind.Local).AddTicks(6543),
+                            DateCreated = new DateTime(2022, 11, 12, 9, 1, 57, 439, DateTimeKind.Local).AddTicks(3814),
                             Description = "Moto 2"
                         });
-                });
-
-            modelBuilder.Entity("RS.Parking.Domain.Models.ControlInOut", b =>
-                {
-                    b.HasOne("RS.Parking.Domain.Models.AccordType", "AccordType")
-                        .WithMany()
-                        .HasForeignKey("AccordTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RS.Parking.Domain.Models.VehicleType", "VehicleType")
-                        .WithMany()
-                        .HasForeignKey("VehicleTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AccordType");
-
-                    b.Navigation("VehicleType");
                 });
 #pragma warning restore 612, 618
         }

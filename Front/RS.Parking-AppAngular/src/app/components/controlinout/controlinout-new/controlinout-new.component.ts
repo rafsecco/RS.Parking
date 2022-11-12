@@ -3,7 +3,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { ControlInOut } from '@app/models/ControlInOut';
 import { discountTypesList } from '@app/models/DiscountTypes.enum';
+import { VehicleType } from '@app/models/VehicleType';
 import { ControlInOutService } from '@app/services/ControlInOut.service';
+import { VehicletypesService } from '@app/services/vehicletypes.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 
@@ -15,7 +17,9 @@ import { ToastrService } from 'ngx-toastr';
 export class ControlinoutNewComponent implements OnInit {
 
 	form: FormGroup;
+	accordTypeId = 0;
 	discountTypes = discountTypesList;
+	vehicleTypeList: VehicleType[] = [];
 	controlInOut = {} as ControlInOut;
 
 	get f(): any {
@@ -29,6 +33,7 @@ export class ControlinoutNewComponent implements OnInit {
 
 	constructor(
 		private fb: FormBuilder,
+		private vehicleTypeService: VehicletypesService,
 		private controlInOutService: ControlInOutService,
 		private router: Router,
 		private spinner: NgxSpinnerService,
@@ -36,6 +41,7 @@ export class ControlinoutNewComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
+		this.LoadVehicleTypeList();
 		this.validation();
 	}
 
@@ -43,17 +49,24 @@ export class ControlinoutNewComponent implements OnInit {
 		return {'is-invalid': formControl.errors && formControl.touched};
 	}
 
+	public validation(): void {
+		this.form = this.fb.group({
+			licensePlate: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(7)]],
+			vehicleTypeId: [0 + '', [Validators.required]]
+		});
+	}
+
 	public resetForm(): void {
 		this.form.reset();
 		this.myInputFocus.nativeElement.focus();
 	}
 
-	public validation(): void {
-		this.form = this.fb.group({
-			active: [true, [Validators.required]],
-			percentage: ['0', [Validators.required, Validators.min(0.01), Validators.max(9999999999999) ]],
-			accord: [0, [Validators.required, Validators.min(0), , Validators.max(2) ]],
-			description: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(100)]]
+	public LoadVehicleTypeList(): void {
+		this.spinner.show();
+		this.vehicleTypeService.getAllVehicleTypes().subscribe({
+			next: (_vehicleTypes: VehicleType[]) => this.vehicleTypeList = _vehicleTypes,
+			error: (error: any) => { this.toastr.error(`Error loading VehicleTypes.\n${error}`, 'Error!'); },
+			complete: () => this.spinner.hide()
 		});
 	}
 
