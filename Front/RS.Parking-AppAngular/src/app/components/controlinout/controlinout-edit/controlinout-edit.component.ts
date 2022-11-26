@@ -1,11 +1,13 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AccordType } from '@app/models/AccordType';
 import { ControlInOut } from '@app/models/ControlInOut';
-import { discountTypesList } from '@app/models/DiscountTypes.enum';
 import { VehicleType } from '@app/models/VehicleType';
+import { AccordTypesService } from '@app/services/AccordTypes.service';
 import { ControlInOutService } from '@app/services/ControlInOut.service';
 import { VehicletypesService } from '@app/services/vehicletypes.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 
@@ -16,12 +18,12 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ControlinoutEditComponent implements OnInit {
 
+	modalRef: BsModalRef;
 	form: FormGroup;
-	controlInOutId = 0;
-	accordTypeId = 0;
-	discountTypes = discountTypesList;
-	vehicleTypeList: VehicleType[] = [];
 	controlInOut = {} as ControlInOut;
+	vehicleType = {} as VehicleType;
+	accordTypesList: AccordType[] = [];
+	accordTypeId = 0;
 
 	get f(): any {
 		return this.form.controls;
@@ -34,16 +36,17 @@ export class ControlinoutEditComponent implements OnInit {
 
 	constructor(
 		private fb: FormBuilder,
-		private vehicleTypeService: VehicletypesService,
+		private vehicleTypesService: VehicletypesService,
+		private accordTypesService: AccordTypesService,
 		private controlInOutService: ControlInOutService,
 		private router: Router,
 		private activatedRouter: ActivatedRoute,
+		private modalService: BsModalService,
 		private spinner: NgxSpinnerService,
 		private toastr: ToastrService
 	) {}
 
 	ngOnInit(): void {
-		this.LoadVehicleTypeList();
 		this.LoadControlInOut();
 		this.Validation();
 	}
@@ -55,8 +58,8 @@ export class ControlinoutEditComponent implements OnInit {
 	public Validation(): void {
 		this.form = this.fb.group({
 			licensePlate: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(7)]],
-			accordTypeId: [0 + '', [Validators.required]],
 			vehicleTypeId: [0 + '', [Validators.required]],
+			accordTypeId: ['', [Validators.required, Validators.min(1)]],
 			dateTimeIn: ['' , [Validators.required]],
 			dateTimeOut: ['' , [Validators.required]]
 		});
@@ -68,29 +71,114 @@ export class ControlinoutEditComponent implements OnInit {
 		this.myInputFocus.nativeElement.focus();
 	}
 
-	public LoadVehicleTypeList(): void {
-		this.spinner.show();
-		this.vehicleTypeService.getAllVehicleTypes().subscribe({
-			next: (_vehicleTypes: VehicleType[]) => this.vehicleTypeList = _vehicleTypes,
-			error: (error: any) => { this.toastr.error(`Error loading VehicleTypes.\n${error}`, 'Error!'); },
-			complete: () => this.spinner.hide()
-		});
-	}
-
 	public LoadControlInOut(): void {
-		this.controlInOutId = +this.activatedRouter.snapshot.paramMap.get('id');
-		if (this.controlInOutId !== null && this.controlInOutId !== 0) {
+		this.spinner.show();
+		let controlInOutId = +this.activatedRouter.snapshot.paramMap.get('id');
+		if (controlInOutId !== null && controlInOutId !== 0) {
 			this.spinner.show();
-			this.controlInOutService.getControlInOutById(this.controlInOutId).subscribe({
+			this.controlInOutService.getControlInOutById(controlInOutId).subscribe({
 				next: (controlInOut: ControlInOut) => {
-					//this.controlInOut = { dateTimeOut: new Date(), ... controlInOut };
-					this.controlInOut = { ... controlInOut };
+					this.controlInOut = {... controlInOut, dateTimeOut: new Date(Date.now()) };
+					this.LoadVehicleType();
 					this.form.patchValue(this.controlInOut);
+					this.LoadAccordTypeList();
 				},
 				error: (error: any) => { this.toastr.error(`Error loading Control In Out.\n${error}`, 'Error!'); },
 				complete: () => this.spinner.hide()
 			});
 		}
+	}
+
+	public LoadVehicleType(): void {
+		let vehicleTypeId = this.controlInOut.vehicleTypeId;
+		if (vehicleTypeId !== null && vehicleTypeId !== 0) {
+			this.spinner.show();
+			this.vehicleTypesService.getVehicleTypeById(vehicleTypeId).subscribe({
+				next: (vehicleType: VehicleType) => {
+					this.vehicleType = { ... vehicleType };
+					this.controlInOut.vehicleType = { ... vehicleType };
+				},
+				error: (error: any) => { this.toastr.error(`Error loading VehicleType.\n${error}`, 'Error!'); },
+				complete: () => this.spinner.hide()
+			});
+		}
+	}
+
+	public LoadAccordTypeList(): void {
+		this.spinner.show();
+		this.accordTypesService.getAllAccordTypes().subscribe({
+			next: (_accordTypes: AccordType[]) => this.accordTypesList = _accordTypes,
+			error: (error: any) => { this.toastr.error(`Error loading AccordType.\n${error}`, 'Error!'); },
+			complete: () => this.spinner.hide()
+		});
+	}
+
+	public getAccordTypeById(id: number): void {
+		this.spinner.show();
+		this.accordTypesService.getAccordTypeById(id).subscribe({
+			next: (_accordType: AccordType) => this.controlInOut.accordType = _accordType,
+			error: (error: any) => { this.toastr.error(`Error loading AccordType.\n${error}`, 'Error!'); },
+			complete: () => this.spinner.hide()
+		});
+	}
+
+	getVehicleDescription(): string {
+		return `${this.vehicleType.id} - ${this.vehicleType.description}`;
+	}
+
+	getChangeAccordTypeValue(val:string): void {
+		this.accordTypeId = Number(val);
+		this.getAccordTypeById(this.accordTypeId);
+	}
+
+	getAccordTypeDescription(): string {
+		let accordType = {} as AccordType;
+		accordType = this.accordTypesList.find(x => x.id == this.accordTypeId)
+		return `${accordType.id} - ${accordType.description}`;
+	}
+
+	public getPrice(): string {
+
+		//double tolerance = (double)Convert.ToInt32(ConfigurationManager.AppSettings.Get("Tolerance")) / 60;    // 0.0833333333333333;	//5 min defatul
+		const tolerance = 5 / 60; //5 min defatul
+
+		// let dateIn = new Date(this.controlInOut.dateTimeIn);
+		// let dateOut = new Date(this.controlInOut.dateTimeOut);
+
+		let dateIn = new Date("2022-11-19T06:00:00.000000");
+		let dateOut = new Date("2022-11-19T07:00:00.000000");
+
+		//var diffDays = dateOut.getDate() - dateIn.getDate();
+		let totalHours = Math.abs(dateOut.getTime() - dateIn.getTime()) / 36e5; //36e5 is the scientific notation for 60*60*1000
+		let rest = totalHours - Math.floor(totalHours);
+		let totalHoursRounded = (rest > tolerance) ? Math.ceil(totalHours) : Math.floor(totalHours);
+
+		let returnValue:string;
+		let totalCost:number;
+
+		switch (this.controlInOut.accordType.accord) {
+			case 1:	// Total
+				totalHoursRounded /= this.controlInOut.accordType.percentage / 100;
+				returnValue = `${totalHoursRounded} Tickets`;
+				break;
+			case 2:	// First Hour
+				let firstHourCost = this.controlInOut.vehicleType.cost * (this.controlInOut.accordType.percentage / 100);
+				let totalHoursCost = totalHoursRounded * this.controlInOut.vehicleType.cost;
+				totalCost = totalHoursCost - firstHourCost;
+				returnValue = `R$ ${totalCost} `;
+				break;
+			default:	// No Discount
+				totalCost = totalHoursRounded * this.controlInOut.vehicleType.cost;
+				returnValue = `R$ ${totalCost} `;
+		}
+
+		return returnValue;
+	}
+
+
+	openModalView(event: any, template: TemplateRef<any>): void {
+		event.stopPropagation();
+		this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
 	}
 
 	public updateControlInOut(): void {

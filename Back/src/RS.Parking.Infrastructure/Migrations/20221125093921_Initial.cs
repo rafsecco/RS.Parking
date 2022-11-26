@@ -40,7 +40,7 @@ namespace RS.Parking.Infrastructure.Migrations
                     id_controlInOut = table.Column<ulong>(type: "BIGINT UNSIGNED", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     cd_vehicle = table.Column<byte>(type: "TINYINT UNSIGNED", nullable: false),
-                    cd_accord = table.Column<byte>(type: "TINYINT UNSIGNED", nullable: true),
+                    cd_accord = table.Column<byte>(type: "TINYINT UNSIGNED", nullable: false),
                     dt_in = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValueSql: "NOW()"),
                     dt_out = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     ds_licensePlate = table.Column<string>(type: "varchar(7)", maxLength: 7, nullable: false, collation: "utf8_general_ci")
@@ -75,9 +75,10 @@ namespace RS.Parking.Infrastructure.Migrations
                 columns: new[] { "id_accord", "ie_accord", "bln_active", "dt_dateCreated", "ds_accord", "nr_percentage" },
                 values: new object[,]
                 {
-                    { (byte)1, (ushort)0, true, new DateTime(2022, 11, 12, 9, 1, 57, 438, DateTimeKind.Local).AddTicks(9929), "PharmaTech", 0m },
-                    { (byte)2, (ushort)1, true, new DateTime(2022, 11, 12, 9, 1, 57, 438, DateTimeKind.Local).AddTicks(9932), "Subway", 50.0m },
-                    { (byte)3, (ushort)2, true, new DateTime(2022, 11, 12, 9, 1, 57, 438, DateTimeKind.Local).AddTicks(9935), "McDonald's", 100m }
+                    { (byte)1, (ushort)0, true, new DateTime(2022, 11, 25, 6, 39, 20, 808, DateTimeKind.Local).AddTicks(2780), "No Discount", 0m },
+                    { (byte)2, (ushort)0, true, new DateTime(2022, 11, 25, 6, 39, 20, 808, DateTimeKind.Local).AddTicks(2784), "PharmaTech", 0m },
+                    { (byte)3, (ushort)1, true, new DateTime(2022, 11, 25, 6, 39, 20, 808, DateTimeKind.Local).AddTicks(2785), "Subway", 50.0m },
+                    { (byte)4, (ushort)2, true, new DateTime(2022, 11, 25, 6, 39, 20, 808, DateTimeKind.Local).AddTicks(2789), "McDonald's", 100m }
                 });
 
             migrationBuilder.InsertData(
@@ -86,8 +87,8 @@ namespace RS.Parking.Infrastructure.Migrations
                 columns: new[] { "id_controlInOut", "cd_accord", "dt_in", "dt_out", "ds_licensePlate", "cd_vehicle" },
                 values: new object[,]
                 {
-                    { 1ul, null, new DateTime(2022, 11, 12, 9, 1, 57, 439, DateTimeKind.Local).AddTicks(2670), null, "BRL-123", (byte)1 },
-                    { 2ul, null, new DateTime(2022, 11, 12, 9, 1, 57, 439, DateTimeKind.Local).AddTicks(2673), null, "BRL-456", (byte)2 }
+                    { 1ul, (byte)1, new DateTime(2022, 11, 25, 6, 39, 20, 808, DateTimeKind.Local).AddTicks(5768), null, "BRL-123", (byte)1 },
+                    { 2ul, (byte)1, new DateTime(2022, 11, 25, 6, 39, 20, 808, DateTimeKind.Local).AddTicks(5772), null, "BRL-456", (byte)2 }
                 });
 
             migrationBuilder.InsertData(
@@ -96,10 +97,10 @@ namespace RS.Parking.Infrastructure.Migrations
                 columns: new[] { "id_vehicle", "bln_active", "vl_cost", "dt_dateCreated", "ds_vehicle" },
                 values: new object[,]
                 {
-                    { (byte)1, true, 5m, new DateTime(2022, 11, 12, 9, 1, 57, 439, DateTimeKind.Local).AddTicks(3809), "Car 1" },
-                    { (byte)2, true, 5.5m, new DateTime(2022, 11, 12, 9, 1, 57, 439, DateTimeKind.Local).AddTicks(3811), "Car 2" },
-                    { (byte)3, true, 3m, new DateTime(2022, 11, 12, 9, 1, 57, 439, DateTimeKind.Local).AddTicks(3813), "Moto 1" },
-                    { (byte)4, true, 3.5m, new DateTime(2022, 11, 12, 9, 1, 57, 439, DateTimeKind.Local).AddTicks(3814), "Moto 2" }
+                    { (byte)1, true, 5m, new DateTime(2022, 11, 25, 6, 39, 20, 808, DateTimeKind.Local).AddTicks(6810), "Car 1" },
+                    { (byte)2, true, 5.5m, new DateTime(2022, 11, 25, 6, 39, 20, 808, DateTimeKind.Local).AddTicks(6812), "Car 2" },
+                    { (byte)3, true, 3m, new DateTime(2022, 11, 25, 6, 39, 20, 808, DateTimeKind.Local).AddTicks(6814), "Moto 1" },
+                    { (byte)4, true, 3.5m, new DateTime(2022, 11, 25, 6, 39, 20, 808, DateTimeKind.Local).AddTicks(6815), "Moto 2" }
                 });
 
             migrationBuilder.CreateIndex(

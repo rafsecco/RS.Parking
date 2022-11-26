@@ -63,25 +63,34 @@ namespace RS.Parking.Infrastructure.Migrations
                             Id = (byte)1,
                             Accord = (ushort)0,
                             Active = true,
-                            DateCreated = new DateTime(2022, 11, 12, 9, 1, 57, 438, DateTimeKind.Local).AddTicks(9929),
-                            Description = "PharmaTech",
+                            DateCreated = new DateTime(2022, 11, 25, 6, 39, 20, 808, DateTimeKind.Local).AddTicks(2780),
+                            Description = "No Discount",
                             Percentage = 0m
                         },
                         new
                         {
                             Id = (byte)2,
+                            Accord = (ushort)0,
+                            Active = true,
+                            DateCreated = new DateTime(2022, 11, 25, 6, 39, 20, 808, DateTimeKind.Local).AddTicks(2784),
+                            Description = "PharmaTech",
+                            Percentage = 0m
+                        },
+                        new
+                        {
+                            Id = (byte)3,
                             Accord = (ushort)1,
                             Active = true,
-                            DateCreated = new DateTime(2022, 11, 12, 9, 1, 57, 438, DateTimeKind.Local).AddTicks(9932),
+                            DateCreated = new DateTime(2022, 11, 25, 6, 39, 20, 808, DateTimeKind.Local).AddTicks(2785),
                             Description = "Subway",
                             Percentage = 50.0m
                         },
                         new
                         {
-                            Id = (byte)3,
+                            Id = (byte)4,
                             Accord = (ushort)2,
                             Active = true,
-                            DateCreated = new DateTime(2022, 11, 12, 9, 1, 57, 438, DateTimeKind.Local).AddTicks(9935),
+                            DateCreated = new DateTime(2022, 11, 25, 6, 39, 20, 808, DateTimeKind.Local).AddTicks(2789),
                             Description = "McDonald's",
                             Percentage = 100m
                         });
@@ -94,7 +103,7 @@ namespace RS.Parking.Infrastructure.Migrations
                         .HasColumnType("BIGINT UNSIGNED")
                         .HasColumnName("id_controlInOut");
 
-                    b.Property<byte?>("AccordTypeId")
+                    b.Property<byte>("AccordTypeId")
                         .HasColumnType("TINYINT UNSIGNED")
                         .HasColumnName("cd_accord");
 
@@ -128,14 +137,16 @@ namespace RS.Parking.Infrastructure.Migrations
                         new
                         {
                             Id = 1ul,
-                            DateTimeIn = new DateTime(2022, 11, 12, 9, 1, 57, 439, DateTimeKind.Local).AddTicks(2670),
+                            AccordTypeId = (byte)1,
+                            DateTimeIn = new DateTime(2022, 11, 25, 6, 39, 20, 808, DateTimeKind.Local).AddTicks(5768),
                             LicensePlate = "BRL-123",
                             VehicleTypeId = (byte)1
                         },
                         new
                         {
                             Id = 2ul,
-                            DateTimeIn = new DateTime(2022, 11, 12, 9, 1, 57, 439, DateTimeKind.Local).AddTicks(2673),
+                            AccordTypeId = (byte)1,
+                            DateTimeIn = new DateTime(2022, 11, 25, 6, 39, 20, 808, DateTimeKind.Local).AddTicks(5772),
                             LicensePlate = "BRL-456",
                             VehicleTypeId = (byte)2
                         });
@@ -180,7 +191,7 @@ namespace RS.Parking.Infrastructure.Migrations
                             Id = (byte)1,
                             Active = true,
                             Cost = 5m,
-                            DateCreated = new DateTime(2022, 11, 12, 9, 1, 57, 439, DateTimeKind.Local).AddTicks(3809),
+                            DateCreated = new DateTime(2022, 11, 25, 6, 39, 20, 808, DateTimeKind.Local).AddTicks(6810),
                             Description = "Car 1"
                         },
                         new
@@ -188,7 +199,7 @@ namespace RS.Parking.Infrastructure.Migrations
                             Id = (byte)2,
                             Active = true,
                             Cost = 5.5m,
-                            DateCreated = new DateTime(2022, 11, 12, 9, 1, 57, 439, DateTimeKind.Local).AddTicks(3811),
+                            DateCreated = new DateTime(2022, 11, 25, 6, 39, 20, 808, DateTimeKind.Local).AddTicks(6812),
                             Description = "Car 2"
                         },
                         new
@@ -196,7 +207,7 @@ namespace RS.Parking.Infrastructure.Migrations
                             Id = (byte)3,
                             Active = true,
                             Cost = 3m,
-                            DateCreated = new DateTime(2022, 11, 12, 9, 1, 57, 439, DateTimeKind.Local).AddTicks(3813),
+                            DateCreated = new DateTime(2022, 11, 25, 6, 39, 20, 808, DateTimeKind.Local).AddTicks(6814),
                             Description = "Moto 1"
                         },
                         new
@@ -204,7 +215,7 @@ namespace RS.Parking.Infrastructure.Migrations
                             Id = (byte)4,
                             Active = true,
                             Cost = 3.5m,
-                            DateCreated = new DateTime(2022, 11, 12, 9, 1, 57, 439, DateTimeKind.Local).AddTicks(3814),
+                            DateCreated = new DateTime(2022, 11, 25, 6, 39, 20, 808, DateTimeKind.Local).AddTicks(6815),
                             Description = "Moto 2"
                         });
                 });

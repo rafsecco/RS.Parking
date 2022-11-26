@@ -23,7 +23,7 @@ internal class ControlInOutMappings : IEntityTypeConfiguration<ControlInOut>
 			.HasColumnType("TINYINT UNSIGNED");
 
 		builder.Property(p => p.AccordTypeId)
-			.IsRequired(false)
+			.IsRequired()
 			.HasColumnName("cd_accord")
 			.HasColumnType("TINYINT UNSIGNED");
 

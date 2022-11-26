@@ -13,10 +13,10 @@ public class ControlInOut
 	public ulong Id { get; set; }
 
 	//[ForeignKey("VehicleType")]
-	public ushort VehicleTypeId { get; set; }
+	public ushort VehicleTypeId { get; set; } = 1;
 
 	//[ForeignKey("AccordType")]
-	public ushort? AccordTypeId { get; set; }
+	public ushort AccordTypeId { get; set; } = 1;
 
 	public DateTime DateTimeIn { get; set; } = DateTime.Now;
 
