@@ -9,8 +9,8 @@ public class AccordType
 	public bool Active { get; set; }
 	
 	public DateTime DateCreated { get; set; } = DateTime.Now;
-	
-	public ushort Accord { get; set; }
+
+	public ushort Accord { get; set; } = 0;
 	
 	public decimal Percentage { get; set; }
 

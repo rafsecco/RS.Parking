@@ -9,24 +9,26 @@
 				<div class="form-row">
 					<div class="form-group col-md-4 py-3">
 						<label for="licensePlate">License Plate:</label>
-						<input type="text" readonly id="licensePlate" name="licensePlate" class="form-control" formControlName="licensePlate">
+						<input type="text" class="form-control" readonly id="licensePlate" name="licensePlate" formControlName="licensePlate">
 					</div>
 				</div>
 
 				<div class="form-row">
 					<div class="form-group col-md-4 py-3">
 						<label class="control-label" for="vehicle">Vehicle:</label>
-						<select class="form-control" id="vehicle" formControlName="vehicleTypeId">
+						<input type="text" class="form-control" readonly id="vehicleTypeId" name="vehicleTypeId" formControlName="vehicleTypeId" value="{{getVehicleDescription()}}">
+						<!-- <select class="form-control" id="vehicle" formControlName="vehicleTypeId" readonly>
 							<option *ngFor="let vehicleType of vehicleTypeList" value="{{vehicleType.id}}">{{vehicleType.description}}</option>
-						</select>
+						</select> -->
 					</div>
 				</div>
 
 				<div class="form-row">
 					<div class="form-group col-md-4 py-3">
-						<label class="control-label" for="accord">Accord:</label>
-						<select class="form-control" id="accord" formControlName="accordTypeId" #angularFocus autofocus>
-							<option *ngFor="let discountType of discountTypes" value="{{discountType.id}}">{{discountType.name}}</option>
+						<label class="control-label" for="accordTypeId">Accord:</label>
+						<select class="form-control" id="accordTypeId" name="accordTypeId" formControlName="accordTypeId" value="{{this.controlInOut.accordTypeId}}" (change)="getChangeAccordTypeValue(angularFocus.value)" #angularFocus autofocus>
+						<!-- <select class="form-control" id="accord" formControlName="accordTypeId" #angularFocus autofocus> -->
+							<option *ngFor="let accordType of accordTypesList" value="{{accordType.id}}">{{accordType.description}}</option>
 						</select>
 					</div>
 				</div>
@@ -34,14 +36,14 @@
 				<div class="form-row">
 					<div class="form-group col-md-4 py-3">
 						<label for="dateTimeIn">Date Time In:</label>
-						<input type="datetime-local" readonly id="dateTimeIn" name="dateTimeIn" class="form-control" formControlName="dateTimeIn" />
+						<input type="text" class="form-control" id="dateTimeIn" name="dateTimeIn" formControlName="dateTimeIn" value="{{ controlInOut.dateTimeIn | DateTimeFormat }}" readonly />
 					</div>
 				</div>
 
 				<div class="form-row">
 					<div class="form-group col-md-4 py-3">
 						<label for="dateTimeOut">Date Time Out:</label>
-						<input type="datetime-local" id="dateTimeOut" name="dateTimeOut" class="form-control" formControlName="dateTimeOut" placeholder="Insert Date Time Out" />
+						<input type="text" class="form-control" id="dateTimeOut" name="dateTimeOut" formControlName="dateTimeOut" value="{{ controlInOut.dateTimeOut | DateTimeFormat }}" readonly />
 					</div>
 				</div>
 
@@ -50,10 +52,29 @@
 			<div class="card-footer savecancel rounded shadow-sm">
 				<div class="d-flex">
 					<button class="btn btn-outline-light mx-3" (click)="resetForm()">Cancel</button>
-					<button class="btn btn-success mx-3" [disabled]="!form.valid" (click)="updateControlInOut()">Save</button>
+					<button class="btn btn-success mx-3" [disabled]="!form.valid" (click)="openModalView($event, templateView)">CheckOut</button>
 				</div>
 			</div>
 
 		</form>
 	</div>
 </div>
+
+<!-- Modal -->
+<ng-template #templateView>
+	<div class="modal-header">
+		<h4 class="modal-title">CheckOut</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modalRef.hide()"></button>
+	</div>
+	<div class="modal-body">
+		<p>License Plate: {{controlInOut.licensePlate}}</p>
+		<p>VehicleType: {{getVehicleDescription()}}</p>
+		<p>AccordType: {{getAccordTypeDescription()}}</p>
+		<p>Date In: {{controlInOut.dateTimeIn | DateTimeFormat}}</p>
+		<p>Date Out: {{controlInOut.dateTimeOut | DateTimeFormat}}</p>
+		<p>Price: {{getPrice()}}</p>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-light" (click)="modalRef.hide()">Close</button>
+	</div>
+</ng-template>

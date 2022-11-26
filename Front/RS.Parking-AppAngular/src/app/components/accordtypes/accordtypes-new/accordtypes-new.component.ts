@@ -42,8 +42,8 @@ export class AccordTypesNewComponent implements OnInit {
 	public validation(): void {
 		this.accordFormGroup = this.fb.group({
 			active: [true, [Validators.required]],
-			percentage: ['0', [Validators.required, Validators.min(0.01), Validators.max(9999999999999) ]],
-			accord: [0, [Validators.required, Validators.min(0), , Validators.max(2) ]],
+			percentage: ['0', [Validators.required, Validators.min(0.00), Validators.max(9999999999999) ]],
+			accord: ['0', [Validators.required, Validators.min(0), , Validators.max(2) ]],
 			description: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(100)]]
 		});
 	}
