@@ -12,7 +12,7 @@ export class TitleComponent implements OnInit {
 	@Input() iconSecondClass:string = '';
 	@Input() title:string = '';
 	@Input() link:string = '';
-	@Input() buttonAddNew:boolean = false;
+	@Input() buttonAddNew:string = 'visible';
 
 	constructor(private router: Router) {}
 

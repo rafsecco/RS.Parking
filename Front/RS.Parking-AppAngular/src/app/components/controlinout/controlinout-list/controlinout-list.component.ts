@@ -57,8 +57,9 @@ export class ControlInOutListComponent implements OnInit {
 	}
 
 	public getDiscountTypesNameById(id: number) : string {
-		if (id === null) {
-			return "No Discount";
+		console.log(id);
+		if (id === null || id === 0) {
+			return "";
 		} else {
 			return `${id} - ${this.accordTypesList.find(x => x.id == id)?.description}`;
 		}

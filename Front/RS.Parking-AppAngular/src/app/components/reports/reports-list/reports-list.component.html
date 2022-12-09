@@ -1,0 +1,50 @@
+
+<form [formGroup]="form">
+	<div class="d-flex">
+		<div class="form-group col-md-4 py-3">
+			<input type="text"
+				class="form-control"
+				id="dateRange"
+				name="dateRange"
+				formControlName="dateRange"
+				placeholder="Date Range Picker"
+				bsDaterangepicker
+				[bsConfig]="bsConfig"
+			/>
+		</div>
+
+		<div class="d-flex col-md-4 py-3">
+			<button class="btn btn-success mx-3" [disabled]="!form.valid" (click)="searchReport()">Search</button>
+		</div>
+	</div>
+</form>
+
+
+<table class="table table-striped table-hover">
+	<thead class="table-dark">
+		<tr>
+			<th class="d-none d-md-table-cell">#</th>
+			<th>License Plate</th>
+			<th>Vehicle Type</th>
+			<th>Accord Type</th>
+			<th class="d-none d-md-table-cell">DateTime In</th>
+			<th class="d-none d-md-table-cell">DateTime Out</th>
+			<th>Cost</th>
+		</tr>
+	</thead>
+	<!-- <tbody *ngIf="controlInOutList && controlInOutList.length">
+		<tr *ngFor="let controlInOut of controlInOutList">
+			<td class="d-none d-md-table-cell">{{controlInOut.id}}</td>
+			<td>{{controlInOut.licensePlate}}</td>
+			<td>{{controlInOut.vehicleTypeId}} - {{controlInOut.vehicleTypeName}}</td>
+			<td class="d-none d-md-table-cell">{{controlInOut.dateTimeIn | DateTimeFormat}}</td>
+		</tr>
+	</tbody>
+	<tfoot *ngIf="!controlInOutList.length">
+		<tr>
+			<td colspan="8" class="text-center">
+				<h4>No record found!</h4>
+			</td>
+		</tr>
+	</tfoot> -->
+</table>
