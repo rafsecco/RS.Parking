@@ -11,6 +11,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxCurrencyModule, CurrencyMaskInputMode } from 'ngx-currency';
 import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { ptBrLocale } from 'ngx-bootstrap/locale';
 
 import { VehicletypesService } from './services/vehicletypes.service';
 import { AccordTypesService } from './services/AccordTypes.service';
@@ -31,9 +34,11 @@ import { AccordTypesEditComponent } from './components/accordtypes/accordtypes-e
 import { ControlInOutListComponent } from './components/controlinout/controlinout-list/controlinout-list.component';
 import { ControlinoutEditComponent } from './components/controlinout/controlinout-edit/controlinout-edit.component';
 import { ControlinoutNewComponent } from './components/controlinout/controlinout-new/controlinout-new.component';
-
+import { ReportsComponent } from './components/reports/reports.component';
+import { ReportsListComponent } from './components/reports/reports-list/reports-list.component';
 
 registerLocaleData(ptBr, 'pt-BR');
+defineLocale('pt-br', ptBrLocale);
 
 export const customCurrencyMaskConfig = {
 	prefix: 'R$ ',
@@ -66,8 +71,10 @@ export const customCurrencyMaskConfig = {
 		AccordTypesEditComponent,
 		ControlInOutComponent,
 		ControlInOutListComponent,
-  ControlinoutEditComponent,
-  ControlinoutNewComponent
+		ControlinoutEditComponent,
+		ControlinoutNewComponent,
+		ReportsComponent,
+		ReportsListComponent
 	],
 	imports: [
 		BrowserModule,
@@ -76,6 +83,7 @@ export const customCurrencyMaskConfig = {
 		HttpClientModule,
 		BrowserAnimationsModule,
 		ModalModule.forRoot(),
+		BsDatepickerModule.forRoot(),
 		NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
 		NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
 		ToastrModule.forRoot({

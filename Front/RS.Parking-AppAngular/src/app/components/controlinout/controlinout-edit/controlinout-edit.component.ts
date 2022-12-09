@@ -1,3 +1,4 @@
+import { CurrencyPipe } from '@angular/common';
 import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -24,6 +25,21 @@ export class ControlinoutEditComponent implements OnInit {
 	vehicleType = {} as VehicleType;
 	accordTypesList: AccordType[] = [];
 	accordTypeId = 0;
+
+	formatter = new Intl.NumberFormat('pt-BR', {
+		style: 'currency',
+		currency: 'BRL',
+
+		// These options are needed to round to whole numbers if that's what you want.
+		//minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+		//maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+		//console.log(formatter.format(2500)); /* $2,500.00 */
+	});
+
+	// formatter = new Intl.NumberFormat('en-US', {
+	// 	style: 'currency',
+	// 	currency: 'USD',
+	// });
 
 	get f(): any {
 		return this.form.controls;
@@ -142,11 +158,11 @@ export class ControlinoutEditComponent implements OnInit {
 		//double tolerance = (double)Convert.ToInt32(ConfigurationManager.AppSettings.Get("Tolerance")) / 60;    // 0.0833333333333333;	//5 min defatul
 		const tolerance = 5 / 60; //5 min defatul
 
-		// let dateIn = new Date(this.controlInOut.dateTimeIn);
-		// let dateOut = new Date(this.controlInOut.dateTimeOut);
+		let dateIn = new Date(this.controlInOut.dateTimeIn);
+		let dateOut = new Date(this.controlInOut.dateTimeOut);
 
-		let dateIn = new Date("2022-11-19T06:00:00.000000");
-		let dateOut = new Date("2022-11-19T07:00:00.000000");
+		// let dateIn = new Date("2022-11-19T06:00:00.000000");
+		// let dateOut = new Date("2022-11-19T07:00:00.000000");
 
 		//var diffDays = dateOut.getDate() - dateIn.getDate();
 		let totalHours = Math.abs(dateOut.getTime() - dateIn.getTime()) / 36e5; //36e5 is the scientific notation for 60*60*1000
@@ -165,15 +181,16 @@ export class ControlinoutEditComponent implements OnInit {
 				let firstHourCost = this.controlInOut.vehicleType.cost * (this.controlInOut.accordType.percentage / 100);
 				let totalHoursCost = totalHoursRounded * this.controlInOut.vehicleType.cost;
 				totalCost = totalHoursCost - firstHourCost;
-				returnValue = `R$ ${totalCost} `;
+				returnValue = this.formatter.format(totalCost);
 				break;
 			default:	// No Discount
 				totalCost = totalHoursRounded * this.controlInOut.vehicleType.cost;
-				returnValue = `R$ ${totalCost} `;
+				returnValue = this.formatter.format(totalCost);
 		}
 
 		return returnValue;
 	}
+
 
 
 	openModalView(event: any, template: TemplateRef<any>): void {
@@ -181,7 +198,7 @@ export class ControlinoutEditComponent implements OnInit {
 		this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
 	}
 
-	public updateControlInOut(): void {
+	public checkOutConfirmed(): void {
 		this.spinner.show();
 		if (this.form.valid) {
 			this.controlInOut = Object.assign({}, this.controlInOut, this.form.value);

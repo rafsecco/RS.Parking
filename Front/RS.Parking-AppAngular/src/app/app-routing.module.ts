@@ -13,6 +13,8 @@ import { AccordTypesEditComponent } from './components/accordtypes/accordtypes-e
 import { ControlInOutListComponent } from './components/controlinout/controlinout-list/controlinout-list.component';
 import { ControlinoutEditComponent } from './components/controlinout/controlinout-edit/controlinout-edit.component';
 import { ControlinoutNewComponent } from './components/controlinout/controlinout-new/controlinout-new.component';
+import { ReportsComponent } from './components/reports/reports.component';
+import { ReportsListComponent } from './components/reports/reports-list/reports-list.component';
 
 const routes: Routes = [
 	{ path: 'controlinout', redirectTo: 'controlinout/list' },
@@ -24,7 +26,6 @@ const routes: Routes = [
 			{ path: 'new', component: ControlinoutNewComponent }
 		]
 	},
-
 	{ path: 'accordtypes', redirectTo: 'accordtypes/list' },
 	{
 		path: 'accordtypes', component: AccordtypesComponent,
@@ -34,7 +35,6 @@ const routes: Routes = [
 			{ path: 'new', component: AccordTypesNewComponent }
 		]
 	},
-
 	{ path: 'vehicletypes', redirectTo: 'vehicletypes/list' },
 	{
 		path: 'vehicletypes', component: VehicletypesComponent,
@@ -42,6 +42,13 @@ const routes: Routes = [
 			{ path: 'edit/:id', component: VehicletypesEditComponent },
 			{ path: 'list', component: VehicletypesListComponent },
 			{ path: 'new', component: VehicletypesNewComponent }
+		]
+	},
+	{ path: 'reports', redirectTo: 'reports/list' },
+	{
+		path: 'reports', component: ReportsComponent,
+		children: [
+			{ path: 'list', component: ReportsListComponent }
 		]
 	},
 
