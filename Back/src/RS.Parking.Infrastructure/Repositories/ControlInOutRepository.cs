@@ -42,8 +42,20 @@ public class ControlInOutRepository : IControlInOutRepository
 		return await _context.SaveChangesAsync();
 	}
 
+	public async Task<List<ControlInOut>> GetByRange(DateTime pDate)
+	{
+		return await _context.ControlInOut
+			.AsNoTracking()
+			.Where(x => x.DateTimeIn >= pDate && (x.DateTimeOut == null || x.DateTimeOut >= pDate))
+			.OrderBy(x => x.DateTimeIn)
+			.ToListAsync();
+	}
+
 	public void Dispose()
 	{
 		_context?.Dispose();
 	}
+
+	
+
 }

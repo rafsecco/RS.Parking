@@ -58,6 +58,22 @@ public class ControlInOutController : ControllerBase
 			return this.StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
 		}
 	}
+	
+	//[HttpGet("{dateStart:datetime}/{dateEnd:datetime}")]
+	[HttpGet("{dateStart:datetime}")]
+	public async Task<IActionResult> GetByRange(DateTime dateStart)
+	{
+		try
+		{
+			var ControlInOut = await _controlInOutService.GetByRange(dateStart);
+			if (ControlInOut == null) return NoContent();
+			return Ok(ControlInOut);
+		}
+		catch (Exception ex)
+		{
+			return this.StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+		}
+	}
 
 	[HttpPost]
 	public async Task<IActionResult> Post(ControlInOutDTO model)
