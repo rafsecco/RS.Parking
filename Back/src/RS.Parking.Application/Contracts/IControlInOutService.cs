@@ -11,4 +11,6 @@ public interface IControlInOutService
 	Task<ControlInOutDTO> Add(ControlInOutDTO model);
 
 	Task<ControlInOutDTO> Update(ulong id, ControlInOutDTO model);
+
+	Task<List<ControlInOutDTO>> GetByRange(DateTime pDate);
 }

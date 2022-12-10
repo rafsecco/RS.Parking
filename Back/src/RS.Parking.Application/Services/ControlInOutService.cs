@@ -103,4 +103,21 @@ public class ControlInOutService : IControlInOutService
 			throw new Exception(ex.Message);
 		}
 	}
+
+	public async Task<List<ControlInOutDTO>> GetByRange(DateTime pDate)
+	{
+		try
+		{
+			var ControlInOuts = await _controlInOutRepo.GetByRange(pDate);
+			if (ControlInOuts == null) return null;
+
+			var objReturn = _mapper.Map<List<ControlInOutDTO>>(ControlInOuts);
+			objReturn.ForEach(x => x.VehicleTypeName = _vehicleTypeService.GetById(x.VehicleTypeId).Result.Description);
+			return objReturn;
+		}
+		catch (Exception ex)
+		{
+			throw new Exception(ex.Message);
+		}
+	}
 }

@@ -11,4 +11,6 @@ public interface IControlInOutRepository : IDisposable
 	Task<int> Add(ControlInOut entity);
 
 	Task<int> Update(ControlInOut entity);
+
+	Task<List<ControlInOut>> GetByRange(DateTime pDate);
 }
