@@ -62,7 +62,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:5001/VehicleType/6",
+							"raw": "https://localhost:5001/VehicleType/28",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -70,7 +70,7 @@
 							"port": "5001",
 							"path": [
 								"VehicleType",
-								"6"
+								"28"
 							]
 						}
 					},
@@ -313,6 +313,26 @@
 							"path": [
 								"ControlInOut",
 								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get ControlInOut By Range",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/ControlInOut/2022-11-25",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"ControlInOut",
+								"2022-11-25"
 							]
 						}
 					},
