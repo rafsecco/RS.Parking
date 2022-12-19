@@ -19,6 +19,10 @@ export class ControlInOutService {
 		return this.http.get<ControlInOut>(`${this.baseURL}/${id}`);
 	}
 
+	public getControlInOutByRange(date: string): Observable<ControlInOut[]> {
+		return this.http.get<ControlInOut[]>(`${this.baseURL}/${date}`);
+	}
+
 	public saveControlInOut(controlInOut: ControlInOut): Observable<ControlInOut> {
 		return this.http
 			.post<ControlInOut>(this.baseURL, controlInOut)

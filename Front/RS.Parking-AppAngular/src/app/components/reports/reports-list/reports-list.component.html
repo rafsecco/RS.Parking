@@ -4,11 +4,11 @@
 		<div class="form-group col-md-4 py-3">
 			<input type="text"
 				class="form-control"
-				id="dateRange"
-				name="dateRange"
-				formControlName="dateRange"
-				placeholder="Date Range Picker"
-				bsDaterangepicker
+				id="dateSearch"
+				name="dateSearch"
+				formControlName="dateSearch"
+				placeholder="Date Picker"
+				bsDatepicker
 				[bsConfig]="bsConfig"
 			/>
 		</div>
@@ -32,12 +32,16 @@
 			<th>Cost</th>
 		</tr>
 	</thead>
-	<!-- <tbody *ngIf="controlInOutList && controlInOutList.length">
+	<tbody *ngIf="controlInOutList && controlInOutList.length">
 		<tr *ngFor="let controlInOut of controlInOutList">
 			<td class="d-none d-md-table-cell">{{controlInOut.id}}</td>
 			<td>{{controlInOut.licensePlate}}</td>
 			<td>{{controlInOut.vehicleTypeId}} - {{controlInOut.vehicleTypeName}}</td>
+			<td>{{controlInOut.accordTypeId}}</td>
 			<td class="d-none d-md-table-cell">{{controlInOut.dateTimeIn | DateTimeFormat}}</td>
+			<td class="d-none d-md-table-cell">{{controlInOut.dateTimeOut | DateTimeFormat}}</td>
+			<!-- <td class="d-none d-md-table-cell">{{controlInOut.dateTimeIn | date:'dd/MM/yyyy hh:mm:ss'}}</td> -->
+			<td>N/A {{getPrice(controlInOut.id)}}</td>
 		</tr>
 	</tbody>
 	<tfoot *ngIf="!controlInOutList.length">
@@ -46,5 +50,5 @@
 				<h4>No record found!</h4>
 			</td>
 		</tr>
-	</tfoot> -->
+	</tfoot>
 </table>
