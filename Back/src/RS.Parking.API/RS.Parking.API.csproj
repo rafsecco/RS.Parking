@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <!--<Nullable>enable</Nullable>-->
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>7d2e095d-090f-4399-b179-dbe2f8a557fd</UserSecretsId>
@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\RS.Core\RS.Core.csproj" />
     <ProjectReference Include="..\RS.Parking.Application\RS.Parking.Application.csproj" />
   </ItemGroup>
 

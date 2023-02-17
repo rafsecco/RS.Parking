@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccordType } from '@app/models/AccordType';
-import { discountTypesList } from '@app/models/DiscountTypes.enum';
+import { DiscountTypeEnum } from '@app/models/DiscountTypes.enum';
 import { AccordTypesService } from '@app/services/AccordTypes.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
@@ -16,7 +16,9 @@ export class AccordTypesNewComponent implements OnInit {
 
 	accordFormGroup: FormGroup;
 	accordType = {} as AccordType;
-	discountTypes = discountTypesList;
+	public discountTypeEnum: DiscountTypeEnum[] = [];
+
+
 
 	get f(): any {
 		return this.accordFormGroup.controls;
@@ -31,6 +33,7 @@ export class AccordTypesNewComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
+		this.LoadDiscountTypeEnum();
 		this.validation();
 	}
 
@@ -39,10 +42,19 @@ export class AccordTypesNewComponent implements OnInit {
 		this.myInputFocus.nativeElement.focus();
 	}
 
+	public LoadDiscountTypeEnum(): void {
+		this.spinner.show();
+		this.accordTypesService.getDiscountTypeEnum().subscribe({
+			next: (_discountTypes: DiscountTypeEnum[]) => this.discountTypeEnum = _discountTypes,
+			error: (error: any) => { this.toastr.error('Error loading DiscountTypeEnum.', 'Error!'); },
+			complete: () => this.spinner.hide()
+		});
+	}
+
 	public validation(): void {
 		this.accordFormGroup = this.fb.group({
 			active: [true, [Validators.required]],
-			percentage: ['0', [Validators.required, Validators.min(0.00), Validators.max(9999999999999) ]],
+			percentage: ['0', [Validators.required, Validators.min(0.00), Validators.max(100) ]],
 			accord: ['0', [Validators.required, Validators.min(0), , Validators.max(2) ]],
 			description: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(100)]]
 		});

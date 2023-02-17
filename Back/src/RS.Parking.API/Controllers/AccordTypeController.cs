@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RS.Core.Helpers;
 using RS.Parking.Application.Contracts;
 using RS.Parking.Application.DTOs;
+using static RS.Parking.Domain.Enums.Enumerators;
 
 namespace RS.Parking.API.Controllers;
 
@@ -33,7 +35,7 @@ public class AccordTypeController : ControllerBase
 	{
 		try
 		{
-			var AccordTypes = await _accordTypeService.GetAll();
+			List<AccordTypeDTO> AccordTypes = await _accordTypeService.GetAll();
 			if (AccordTypes == null) return NoContent();
 
 			return Ok(AccordTypes);
@@ -106,6 +108,20 @@ public class AccordTypeController : ControllerBase
 		{
 			return this.StatusCode(StatusCodes.Status500InternalServerError,
 				  $"Error trying to delete AccordType. Error: {ex.Message}");
+		}
+	}
+
+	[HttpGet("DiscountTypeEnum")]
+	public IActionResult GetDiscountTypeEnum()
+	{
+		try
+		{
+			IEnumerable<EnumDTO> enumDiscoutTypeDTO = EnumHelper<DiscountTypeEnum>.GetAllValuesAsIEnumerable().Select(d => new EnumDTO(d));
+			return Ok(enumDiscoutTypeDTO);
+		}
+		catch (Exception ex)
+		{
+			return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
 		}
 	}
 

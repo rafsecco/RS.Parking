@@ -1,7 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccordType } from '@app/models/AccordType';
-import { discountTypesList } from '@app/models/DiscountTypes.enum';
+import { DiscountTypeEnum } from '@app/models/DiscountTypes.enum';
 import { AccordTypesService } from '@app/services/AccordTypes.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -14,12 +14,12 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AccordTypesListComponent implements OnInit {
 
-	enumAccordType: typeof discountTypesList = discountTypesList;
 	modalRef: BsModalRef;
 	message?: string;
 	accordTypeId: number;
 	accordType = {} as AccordType;
 	public accordTypes: AccordType[] = [];
+	public discountTypeEnum: DiscountTypeEnum[] = [];
 
 	constructor(
 		private modalService: BsModalService,
@@ -30,11 +30,12 @@ export class AccordTypesListComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
+		this.LoadDiscountTypeEnum();
 		this.LoadAccordTypeList();
 	}
 
 	public getDiscountTypesById(id: number) : string {
-		return `${id} - ${discountTypesList.find(x => x.id === id)?.name}`
+		return `${id} - ${this.discountTypeEnum.find(x => x.id === id)?.description}`
 	}
 
 	public LoadAccordTypeList(): void {
@@ -42,6 +43,15 @@ export class AccordTypesListComponent implements OnInit {
 		this.accordTypesService.getAllAccordTypes().subscribe({
 			next: (_accordTypes: AccordType[]) => this.accordTypes = _accordTypes,
 			error: (error: any) => { this.toastr.error('Error loading AccordType.', 'Error!'); },
+			complete: () => this.spinner.hide()
+		});
+	}
+
+	public LoadDiscountTypeEnum(): void {
+		this.spinner.show();
+		this.accordTypesService.getDiscountTypeEnum().subscribe({
+			next: (_discountTypes: DiscountTypeEnum[]) => this.discountTypeEnum = _discountTypes,
+			error: (error: any) => { this.toastr.error('Error loading DiscountTypeEnum.', 'Error!'); },
 			complete: () => this.spinner.hide()
 		});
 	}

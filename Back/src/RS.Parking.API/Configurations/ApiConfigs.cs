@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using RS.Parking.Infrastructure;
+using System.Text.Json.Serialization;
 
 namespace RS.Parking.API.Configurations;
 
@@ -25,6 +26,10 @@ public static class ApiConfigs
 		);
 
 		services.AddControllers();
+		//services.AddControllers().AddJsonOptions(options =>
+		//{
+		//	options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+		//});
 		//services.AddControllers()
 		//	.AddNewtonsoftJson(x => 
 		//		x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
@@ -55,7 +60,8 @@ public static class ApiConfigs
 
 		app.UseAuthorization();
 
-		app.UseCors(x => x.AllowAnyHeader()
+		app.UseCors(x => x
+			.AllowAnyHeader()
 			.AllowAnyMethod()
 			.AllowAnyOrigin()
 		);

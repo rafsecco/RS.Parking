@@ -41,7 +41,7 @@ registerLocaleData(ptBr, 'pt-BR');
 defineLocale('pt-br', ptBrLocale);
 
 export const customCurrencyMaskConfig = {
-	prefix: 'R$ ',
+	prefix: '',
 	thousands: '.',
 	decimal: ',',
 	align: 'left',

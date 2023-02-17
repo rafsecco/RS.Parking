@@ -14,8 +14,8 @@ public class AccordTypeDTO
 	public string Description { get; set; }
 
 	[Required]
-	public ushort Accord { get; set; }
+	public ushort DiscountTypeId { get; set; } = 0;
 
-	[Required]
 	public decimal Percentage { get; set; }
+
 }

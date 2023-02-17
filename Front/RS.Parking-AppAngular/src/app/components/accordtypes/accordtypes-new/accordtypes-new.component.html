@@ -20,7 +20,7 @@
 					<div class="form-group col-md-4 py-3">
 						<label class="control-label">Accord: </label>
 						<select class="form-control" id="accord" formControlName="accord">
-							<option *ngFor="let discountType of discountTypes" value="{{discountType.id}}">{{discountType.name}}</option>
+							<option *ngFor="let discountType of discountTypeEnum" value="{{discountType.id}}">{{discountType.description}}</option>
 						</select>
 					</div>
 				</div>
@@ -28,10 +28,14 @@
 				<div class="form-row">
 					<div class="form-group col-md-4 py-3">
 						<label>Percentage</label>
-						<input type="text" class="form-control" formControlName="percentage" placeholder="Insert Percentage" [ngClass]="cssValidator(f.percentage)"/>
+						<input type="text" class="form-control" formControlName="percentage" placeholder="Insert Percentage"
+							[ngClass]="cssValidator(f.percentage)"
+							min="0" max="100"
+							currencyMask [options]="{ suffix: ' %' }"
+						/>
 						<div class="invalid-feedback" *ngIf="f.percentage.errors?.required">Percentage is required!</div>
 						<div class="invalid-feedback" *ngIf="f.percentage.errors?.minlength">Percentage must have the minimum value of 0.01</div>
-						<div class="invalid-feedback" *ngIf="f.percentage.errors?.maxlength">Percentage must have the maximum value of 9999999999999</div>
+						<div class="invalid-feedback" *ngIf="f.percentage.errors?.maxlength">Percentage must have the maximum value of 100.00</div>
 					</div>
 				</div>
 

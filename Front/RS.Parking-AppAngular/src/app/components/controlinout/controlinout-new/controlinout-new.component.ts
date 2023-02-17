@@ -2,7 +2,6 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ControlInOut } from '@app/models/ControlInOut';
-import { discountTypesList } from '@app/models/DiscountTypes.enum';
 import { VehicleType } from '@app/models/VehicleType';
 import { ControlInOutService } from '@app/services/ControlInOut.service';
 import { VehicletypesService } from '@app/services/vehicletypes.service';
@@ -18,7 +17,6 @@ export class ControlinoutNewComponent implements OnInit {
 
 	form: FormGroup;
 	accordTypeId = 0;
-	discountTypes = discountTypesList;
 	vehicleTypeList: VehicleType[] = [];
 	controlInOut = {} as ControlInOut;
 

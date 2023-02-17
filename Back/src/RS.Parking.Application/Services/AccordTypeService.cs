@@ -21,7 +21,7 @@ public class AccordTypeService : IAccordTypeService
 	{
 		try
 		{
-			var AccordTypes = await _accordTypeRepo.GetAll();
+			List<AccordType> AccordTypes = await _accordTypeRepo.GetAll();
 			if (AccordTypes == null) return null;
 
 			var objReturn = _mapper.Map<List<AccordTypeDTO>>(AccordTypes);

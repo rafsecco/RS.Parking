@@ -172,7 +172,7 @@ export class ControlinoutEditComponent implements OnInit {
 		let returnValue:string;
 		let totalCost:number;
 
-		switch (this.controlInOut.accordType.accord) {
+		switch (this.controlInOut.accordType.discountTypeId) {
 			case 1:	// Total
 				totalHoursRounded /= this.controlInOut.accordType.percentage / 100;
 				returnValue = `${totalHoursRounded} Tickets`;
@@ -205,9 +205,10 @@ export class ControlinoutEditComponent implements OnInit {
 			this.controlInOutService.updateControlInOut(this.controlInOut).subscribe({
 				next: success => this.processSuccess(success),
 				error: failure => this.processFailure(failure),
-				complete: () => this.spinner.hide()
+				complete: () => { this.spinner.hide(); this.modalRef.hide(); }
 			});
 		}
+
 	}
 
 	processSuccess(response: any) {
