@@ -98,7 +98,6 @@ public class VehicleTypeController : ControllerBase
 			if (vehicleType == null) return NoContent();
 
 			return await _vehicleTypeService.Delete(id)
-				// ? Ok("Deleted")
 				? Ok( new { message = "Deleted" } )
 				: throw new Exception("A non-specific problem occurred while trying to delete the vehicle type!");
 		}

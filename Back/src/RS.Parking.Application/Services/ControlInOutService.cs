@@ -30,7 +30,7 @@ public class ControlInOutService : IControlInOutService
 			if (ControlInOuts == null) return null;
 
 			var objReturn = _mapper.Map<List<ControlInOutDTO>>(ControlInOuts);
-			objReturn.ForEach(x => x.VehicleTypeName = _vehicleTypeService.GetById(x.VehicleTypeId).Result.Description);
+			//objReturn.ForEach(x => x.VehicleTypeName = _vehicleTypeService.GetById(x.VehicleTypeId).Result.Description);
 			return objReturn;
 		}
 		catch (Exception ex)
@@ -47,7 +47,8 @@ public class ControlInOutService : IControlInOutService
 			if (ControlInOut == null) return null;
 
 			var objreturn = _mapper.Map<ControlInOutDTO>(ControlInOut);
-			objreturn.VehicleTypeName = _vehicleTypeService.GetById(objreturn.VehicleTypeId).Result.Description;
+			//objreturn.VehicleTypeName = _vehicleTypeService.GetById(objreturn.VehicleTypeId).Result.Description;
+			objreturn.Price = ControlInOut.CalculatePrice();
 			return objreturn;
 		}
 		catch (Exception ex)
@@ -112,7 +113,7 @@ public class ControlInOutService : IControlInOutService
 			if (ControlInOuts == null) return null;
 
 			var objReturn = _mapper.Map<List<ControlInOutDTO>>(ControlInOuts);
-			objReturn.ForEach(x => x.VehicleTypeName = _vehicleTypeService.GetById(x.VehicleTypeId).Result.Description);
+			//objReturn.ForEach(x => x.VehicleTypeName = _vehicleTypeService.GetById(x.VehicleTypeId).Result.Description);
 			return objReturn;
 		}
 		catch (Exception ex)

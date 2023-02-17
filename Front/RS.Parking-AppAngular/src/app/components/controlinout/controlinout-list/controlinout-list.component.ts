@@ -2,7 +2,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccordType } from '@app/models/AccordType';
 import { ControlInOut } from '@app/models/ControlInOut';
-import { discountTypesList } from '@app/models/DiscountTypes.enum';
+import { DiscountTypeEnum } from '@app/models/DiscountTypes.enum';
 import { AccordTypesService } from '@app/services/AccordTypes.service';
 import { ControlInOutService } from '@app/services/ControlInOut.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -17,10 +17,10 @@ import { ToastrService } from 'ngx-toastr';
 export class ControlInOutListComponent implements OnInit {
 
 	modalRef: BsModalRef;
-	enumAccordType: typeof discountTypesList = discountTypesList;
 	controlInOutId: number;
 	controlInOut = {} as ControlInOut;
 
+	public discountTypeEnum: DiscountTypeEnum[] = [];
 	public accordTypesList: AccordType[] = [];
 	public controlInOutList: ControlInOut[] = [];
 
@@ -34,8 +34,18 @@ export class ControlInOutListComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
+		this.LoadDiscountTypeEnum();
 		this.LoadAccordTypeList();
 		this.LoadControlInOutList();
+	}
+
+	public LoadDiscountTypeEnum(): void {
+		this.spinner.show();
+		this.accordTypesService.getDiscountTypeEnum().subscribe({
+			next: (_discountTypes: DiscountTypeEnum[]) => this.discountTypeEnum = _discountTypes,
+			error: (error: any) => { this.toastr.error('Error loading DiscountTypeEnum.', 'Error!'); },
+			complete: () => this.spinner.hide()
+		});
 	}
 
 	public LoadAccordTypeList(): void {

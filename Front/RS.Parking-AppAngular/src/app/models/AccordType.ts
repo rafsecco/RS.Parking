@@ -3,6 +3,6 @@ export interface AccordType {
 	active: boolean;
 	dateCreated: Date;
 	description: string;
-	accord: number;
+	discountTypeId: number;
 	percentage: number;
 }

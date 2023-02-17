@@ -40,7 +40,7 @@ export class ReportsListComponent implements OnInit {
 
 	get bsConfig(): any {
 		return {
-			isAnimated: true,
+			// isAnimated: true,
 			adaptivePosition: true,
 			containerClass: 'theme-dark-blue',
 			showWeekNumbers: false

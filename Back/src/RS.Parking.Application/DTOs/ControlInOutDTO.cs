@@ -6,11 +6,11 @@ public class ControlInOutDTO
 {
 	public ulong Id { get; set; }
 
-	public ushort VehicleTypeId { get; set; }
+	//public ushort VehicleTypeId { get; set; }
 
-	public string VehicleTypeName { get; set; }
+	//public string VehicleTypeName { get; set; }
 
-	public ushort? AccordTypeId { get; set; }
+	//public ushort? AccordTypeId { get; set; }
 
 	[Required]
 	public string LicensePlate { get; set; }
@@ -19,7 +19,10 @@ public class ControlInOutDTO
 	
 	public DateTime? DateTimeOut { get; set; }
 	
-	//public VehicleTypeDTO VehicleType { get; set; }
+	public VehicleTypeDTO VehicleType { get; set; }
 	
-	//public AccordTypeDTO AccordType { get; set; }
+	public AccordTypeDTO AccordType { get; set; }
+
+
+	public string Price { get; set; }
 }

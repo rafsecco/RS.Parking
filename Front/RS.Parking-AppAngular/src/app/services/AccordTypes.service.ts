@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import { AccordType } from '@app/models/AccordType';
+import { DiscountTypeEnum } from '@app/models/DiscountTypes.enum';
 
 @Injectable()
 export class AccordTypesService {
@@ -35,5 +36,9 @@ export class AccordTypesService {
 		return this.http
 			.delete(`${this.baseURL}/${id}`)
 			.pipe(take(1));
+	}
+
+	public getDiscountTypeEnum(): Observable<DiscountTypeEnum[]> {
+		return this.http.get<DiscountTypeEnum[]>(`${this.baseURL}/DiscountTypeEnum`);
 	}
 }

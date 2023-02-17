@@ -10,7 +10,7 @@ public class AccordType
 	
 	public DateTime DateCreated { get; set; } = DateTime.Now;
 
-	public ushort Accord { get; set; } = 0;
+	public ushort DiscountTypeId { get; set; } = 0;
 	
 	public decimal Percentage { get; set; }
 
