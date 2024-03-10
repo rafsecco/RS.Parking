@@ -7,6 +7,7 @@ import { ControlInOutService } from '@app/services/ControlInOut.service';
 import { VehicletypesService } from '@app/services/vehicletypes.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { Location } from '@angular/common';
 
 @Component({
 	selector: 'app-controlinout-new',
@@ -35,12 +36,17 @@ export class ControlinoutNewComponent implements OnInit {
 		private controlInOutService: ControlInOutService,
 		private router: Router,
 		private spinner: NgxSpinnerService,
-		private toastr: ToastrService
+		private toastr: ToastrService,
+		private location: Location
 	) {}
 
 	ngOnInit(): void {
 		this.LoadVehicleTypeList();
 		this.validation();
+	}
+
+	backClicked() {
+		this.location.back();
 	}
 
 	public cssValidator(formControl: FormControl): any {

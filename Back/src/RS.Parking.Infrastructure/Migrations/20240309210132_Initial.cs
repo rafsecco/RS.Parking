@@ -72,13 +72,13 @@ namespace RS.Parking.Infrastructure.Migrations
             migrationBuilder.InsertData(
                 schema: "RS.Parking",
                 table: "tb_AccordType",
-                columns: new[] { "id_accord", "ie_accord", "bln_active", "dt_dateCreated", "ds_accord", "nr_percentage" },
+                columns: new[] { "id_accord", "bln_active", "dt_dateCreated", "ds_accord", "ie_accord", "nr_percentage" },
                 values: new object[,]
                 {
-                    { (byte)1, (ushort)0, true, new DateTime(2022, 11, 25, 6, 39, 20, 808, DateTimeKind.Local).AddTicks(2780), "No Discount", 0m },
-                    { (byte)2, (ushort)0, true, new DateTime(2022, 11, 25, 6, 39, 20, 808, DateTimeKind.Local).AddTicks(2784), "PharmaTech", 0m },
-                    { (byte)3, (ushort)1, true, new DateTime(2022, 11, 25, 6, 39, 20, 808, DateTimeKind.Local).AddTicks(2785), "Subway", 50.0m },
-                    { (byte)4, (ushort)2, true, new DateTime(2022, 11, 25, 6, 39, 20, 808, DateTimeKind.Local).AddTicks(2789), "McDonald's", 100m }
+                    { (byte)1, true, new DateTime(2024, 3, 9, 18, 1, 32, 264, DateTimeKind.Local).AddTicks(7562), "No Discount", (ushort)0, 0m },
+                    { (byte)2, true, new DateTime(2024, 3, 9, 18, 1, 32, 264, DateTimeKind.Local).AddTicks(7566), "Subway", (ushort)1, 50.0m },
+                    { (byte)3, true, new DateTime(2024, 3, 9, 18, 1, 32, 264, DateTimeKind.Local).AddTicks(7569), "McDonald's", (ushort)2, 100m },
+                    { (byte)4, true, new DateTime(2024, 3, 9, 18, 1, 32, 264, DateTimeKind.Local).AddTicks(7571), "PharmaTech", (ushort)2, 50m }
                 });
 
             migrationBuilder.InsertData(
@@ -87,8 +87,22 @@ namespace RS.Parking.Infrastructure.Migrations
                 columns: new[] { "id_controlInOut", "cd_accord", "dt_in", "dt_out", "ds_licensePlate", "cd_vehicle" },
                 values: new object[,]
                 {
-                    { 1ul, (byte)1, new DateTime(2022, 11, 25, 6, 39, 20, 808, DateTimeKind.Local).AddTicks(5768), null, "BRL-123", (byte)1 },
-                    { 2ul, (byte)1, new DateTime(2022, 11, 25, 6, 39, 20, 808, DateTimeKind.Local).AddTicks(5772), null, "BRL-456", (byte)2 }
+                    { 1ul, (byte)1, new DateTime(2024, 3, 8, 8, 0, 0, 0, DateTimeKind.Local), new DateTime(2024, 3, 8, 10, 0, 0, 0, DateTimeKind.Local), "BRL-123", (byte)1 },
+                    { 2ul, (byte)2, new DateTime(2024, 3, 8, 10, 0, 0, 0, DateTimeKind.Local), new DateTime(2024, 3, 8, 12, 30, 0, 0, DateTimeKind.Local), "BRL-456", (byte)1 },
+                    { 3ul, (byte)3, new DateTime(2024, 3, 8, 12, 30, 0, 0, DateTimeKind.Local), new DateTime(2024, 3, 8, 14, 30, 0, 0, DateTimeKind.Local), "BRL-789", (byte)1 },
+                    { 4ul, (byte)4, new DateTime(2024, 3, 8, 16, 30, 0, 0, DateTimeKind.Local), new DateTime(2024, 3, 8, 18, 30, 0, 0, DateTimeKind.Local), "BRL-147", (byte)1 },
+                    { 5ul, (byte)1, new DateTime(2024, 3, 7, 8, 0, 0, 0, DateTimeKind.Local), new DateTime(2024, 3, 7, 10, 0, 0, 0, DateTimeKind.Local), "BRL-123", (byte)2 },
+                    { 6ul, (byte)2, new DateTime(2024, 3, 7, 10, 0, 0, 0, DateTimeKind.Local), new DateTime(2024, 3, 7, 12, 30, 0, 0, DateTimeKind.Local), "BRL-456", (byte)2 },
+                    { 7ul, (byte)3, new DateTime(2024, 3, 7, 12, 30, 0, 0, DateTimeKind.Local), new DateTime(2024, 3, 7, 14, 30, 0, 0, DateTimeKind.Local), "BRL-789", (byte)2 },
+                    { 8ul, (byte)4, new DateTime(2024, 3, 7, 16, 30, 0, 0, DateTimeKind.Local), new DateTime(2024, 3, 7, 18, 30, 0, 0, DateTimeKind.Local), "BRL-147", (byte)2 },
+                    { 9ul, (byte)1, new DateTime(2024, 3, 6, 8, 0, 0, 0, DateTimeKind.Local), new DateTime(2024, 3, 6, 10, 0, 0, 0, DateTimeKind.Local), "BRL-123", (byte)3 },
+                    { 10ul, (byte)2, new DateTime(2024, 3, 6, 10, 0, 0, 0, DateTimeKind.Local), new DateTime(2024, 3, 6, 12, 30, 0, 0, DateTimeKind.Local), "BRL-456", (byte)3 },
+                    { 11ul, (byte)3, new DateTime(2024, 3, 6, 12, 30, 0, 0, DateTimeKind.Local), new DateTime(2024, 3, 6, 14, 30, 0, 0, DateTimeKind.Local), "BRL-789", (byte)3 },
+                    { 12ul, (byte)4, new DateTime(2024, 3, 6, 16, 30, 0, 0, DateTimeKind.Local), new DateTime(2024, 3, 6, 18, 30, 0, 0, DateTimeKind.Local), "BRL-147", (byte)3 },
+                    { 13ul, (byte)1, new DateTime(2024, 3, 9, 8, 0, 0, 0, DateTimeKind.Local), null, "BRL-123", (byte)3 },
+                    { 14ul, (byte)2, new DateTime(2024, 3, 9, 10, 0, 0, 0, DateTimeKind.Local), null, "BRL-456", (byte)3 },
+                    { 15ul, (byte)3, new DateTime(2024, 3, 9, 12, 30, 0, 0, DateTimeKind.Local), null, "BRL-789", (byte)3 },
+                    { 16ul, (byte)4, new DateTime(2024, 3, 9, 16, 30, 0, 0, DateTimeKind.Local), null, "BRL-147", (byte)3 }
                 });
 
             migrationBuilder.InsertData(
@@ -97,10 +111,9 @@ namespace RS.Parking.Infrastructure.Migrations
                 columns: new[] { "id_vehicle", "bln_active", "vl_cost", "dt_dateCreated", "ds_vehicle" },
                 values: new object[,]
                 {
-                    { (byte)1, true, 5m, new DateTime(2022, 11, 25, 6, 39, 20, 808, DateTimeKind.Local).AddTicks(6810), "Car 1" },
-                    { (byte)2, true, 5.5m, new DateTime(2022, 11, 25, 6, 39, 20, 808, DateTimeKind.Local).AddTicks(6812), "Car 2" },
-                    { (byte)3, true, 3m, new DateTime(2022, 11, 25, 6, 39, 20, 808, DateTimeKind.Local).AddTicks(6814), "Moto 1" },
-                    { (byte)4, true, 3.5m, new DateTime(2022, 11, 25, 6, 39, 20, 808, DateTimeKind.Local).AddTicks(6815), "Moto 2" }
+                    { (byte)1, true, 4m, new DateTime(2024, 3, 9, 18, 1, 32, 265, DateTimeKind.Local).AddTicks(2993), "Car 1 (small)" },
+                    { (byte)2, true, 5.5m, new DateTime(2024, 3, 9, 18, 1, 32, 265, DateTimeKind.Local).AddTicks(2996), "Car 2 (big)" },
+                    { (byte)3, true, 3m, new DateTime(2024, 3, 9, 18, 1, 32, 265, DateTimeKind.Local).AddTicks(2998), "Moto 1" }
                 });
 
             migrationBuilder.CreateIndex(

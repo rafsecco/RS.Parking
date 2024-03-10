@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using RS.Parking.Application.Contracts;
 using RS.Parking.Application.DTOs;
 
@@ -6,7 +6,7 @@ namespace RS.Parking.API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class ControlInOutController : ControllerBase
+public class ControlInOutController : Controller
 {
 	//private readonly ILogger<ControlInOutController> _logger;
 
@@ -58,7 +58,7 @@ public class ControlInOutController : ControllerBase
 			return this.StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
 		}
 	}
-	
+
 	//[HttpGet("{dateStart:datetime}/{dateEnd:datetime}")]
 	[HttpGet("{dateStart:datetime}")]
 	public async Task<IActionResult> GetByRange(DateTime dateStart)

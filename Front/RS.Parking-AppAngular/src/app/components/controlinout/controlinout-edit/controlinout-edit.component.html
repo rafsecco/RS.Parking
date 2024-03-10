@@ -51,7 +51,7 @@
 
 			<div class="card-footer savecancel rounded shadow-sm">
 				<div class="d-flex">
-					<button class="btn btn-outline-light mx-3" (click)="resetForm()">Cancel</button>
+					<button class="btn btn-outline-light mx-3" (click)="backClicked()">Cancel</button>
 					<button class="btn btn-success mx-3" [disabled]="!form.valid" (click)="openModalView($event, templateView)">CheckOut</button>
 				</div>
 			</div>

@@ -1,8 +1,8 @@
-﻿using AutoMapper;
+using AutoMapper;
 using RS.Parking.Application.Contracts;
 using RS.Parking.Application.DTOs;
-using RS.Parking.Domain.Models;
 using RS.Parking.Domain.Contracts;
+using RS.Parking.Domain.Models;
 
 namespace RS.Parking.Application.Services;
 
@@ -10,15 +10,18 @@ public class ControlInOutService : IControlInOutService
 {
 	private readonly IControlInOutRepository _controlInOutRepo;
 	private readonly IVehicleTypeService _vehicleTypeService;
+	private readonly IAccordTypeService _accordTypeService;
 	private readonly IMapper _mapper;
 
 	public ControlInOutService(
 		IControlInOutRepository controlInOutRepo,
 		IVehicleTypeService vehicleTypeService,
+		IAccordTypeService accordTypeService,
 		IMapper mapper)
 	{
 		_controlInOutRepo = controlInOutRepo;
 		_vehicleTypeService = vehicleTypeService;
+		_accordTypeService = accordTypeService;
 		_mapper = mapper;
 	}
 
@@ -30,7 +33,13 @@ public class ControlInOutService : IControlInOutService
 			if (ControlInOuts == null) return null;
 
 			var objReturn = _mapper.Map<List<ControlInOutDTO>>(ControlInOuts);
-			//objReturn.ForEach(x => x.VehicleTypeName = _vehicleTypeService.GetById(x.VehicleTypeId).Result.Description);
+
+			foreach (var dto in objReturn)
+			{
+				dto.VehicleType = await _vehicleTypeService.GetById(dto.VehicleTypeId);
+				dto.AccordType = await _accordTypeService.GetById((ushort)dto.AccordTypeId);
+			}
+
 			return objReturn;
 		}
 		catch (Exception ex)
@@ -47,7 +56,7 @@ public class ControlInOutService : IControlInOutService
 			if (ControlInOut == null) return null;
 
 			var objreturn = _mapper.Map<ControlInOutDTO>(ControlInOut);
-			//objreturn.VehicleTypeName = _vehicleTypeService.GetById(objreturn.VehicleTypeId).Result.Description;
+			objreturn.VehicleType = await _vehicleTypeService.GetById(objreturn.VehicleTypeId);
 			objreturn.Price = ControlInOut.CalculatePrice();
 			return objreturn;
 		}
@@ -113,7 +122,11 @@ public class ControlInOutService : IControlInOutService
 			if (ControlInOuts == null) return null;
 
 			var objReturn = _mapper.Map<List<ControlInOutDTO>>(ControlInOuts);
-			//objReturn.ForEach(x => x.VehicleTypeName = _vehicleTypeService.GetById(x.VehicleTypeId).Result.Description);
+			foreach (var dto in objReturn)
+			{
+				dto.VehicleType = await _vehicleTypeService.GetById(dto.VehicleTypeId);
+				dto.AccordType = await _accordTypeService.GetById((ushort)dto.AccordTypeId);
+			}
 			return objReturn;
 		}
 		catch (Exception ex)
