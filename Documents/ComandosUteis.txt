@@ -1,6 +1,6 @@
 EntityFrameWorkCore
 	Migrations
-	Ir para a pasta cd C:\@BackUp\@Program\Projects\RS.Parking\Back\src\
+	Ir para a pasta "cd E:\Develop\Projects\RS.Parking\Back\src\"
 		dotnet ef migrations add Initial -v -p .\RS.Parking.Infrastructure\ -s .\RS.Parking.API\
 		dotnet ef database update -s .\RS.Parking.API\ [--connection your_connection_string]
 		dotnet ef migrations script -v -i -p .\RS.Parking.Infrastructure -s .\RS.Parking.API\ -o ..\..\Docker\DataBase\FirstMigration.sql
@@ -9,11 +9,11 @@ EntityFrameWorkCore
 		dotnet ef migrations remove -v -p .\RS.Parking.Infrastructure\ -s .\RS.Parking.API\
 
 Iniciar BackEnd
-	Abrir o terminar e ir para a pasta cd C:\@BackUp\@Program\Projects\RS.Parking\Back\src\RS.Parking.API\
+	Abrir o terminar e ir para a pasta "cd E:\Develop\Projects\RS.Parking\Back\src\RS.Parking.API\"
 	Executar o comando "dotnet run"
 
 Iniciar FrontEnd
-	Abrir o terminar e ir para a pasta cd C:\@BackUp\@Program\Projects\RS.Parking\Front\RS.Parking-AppAngular\
+	Abrir o terminar e ir para a pasta "cd E:\Develop\Projects\RS.Parking\Front\RS.Parking-AppAngular\"
 	Executar o comando "ng serve -o"
 
 
@@ -23,7 +23,7 @@ ng g c components/vehicletypes/vehicletypes-new --module app
 ########## DOCKER ##########
 docker system prune -af --volumes
 
-Ir para a pasta C:\@BackUp\@Program\Projects\RS.Parking\Docker
+Ir para a pasta cd E:\Develop\Projects\RS.Parking\Docker\
 docker compose -p rs_parking build --force-rm
 docker compose -p rs_parking up -d
 docker compose -p rs_parking down -v --rmi all
@@ -36,7 +36,7 @@ docker run --name mariadb -dp 3306:3306 mariadb
 
 
 # docker pull mariadb
-# docker run --name some-mariadb -p 3306:3306 --env MARIADB_ROOT_PASSWORD=MyDB@123 -d mariadb:latest
+# docker run --name DB_MariaDB --hostname DB_MariaDB -p 3306:3306 --env MARIADB_ROOT_PASSWORD=MyDB@123 -d mariadb:latest
 
 ### API
 cd .\Back\src\RS.Parking.API\

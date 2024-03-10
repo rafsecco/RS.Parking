@@ -11,6 +11,7 @@ import { VehicletypesService } from '@app/services/vehicletypes.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { Location } from '@angular/common';
 
 @Component({
 	selector: 'app-controlinout-edit',
@@ -59,7 +60,8 @@ export class ControlinoutEditComponent implements OnInit {
 		private activatedRouter: ActivatedRoute,
 		private modalService: BsModalService,
 		private spinner: NgxSpinnerService,
-		private toastr: ToastrService
+		private toastr: ToastrService,
+		private location: Location
 	) {}
 
 	ngOnInit(): void {
@@ -79,6 +81,10 @@ export class ControlinoutEditComponent implements OnInit {
 			dateTimeIn: ['' , [Validators.required]],
 			dateTimeOut: ['' , [Validators.required]]
 		});
+	}
+
+	backClicked() {
+		this.location.back();
 	}
 
 	public resetForm(): void {

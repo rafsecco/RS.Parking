@@ -1,4 +1,4 @@
-﻿using RS.Parking.Application.DTOs;
+using RS.Parking.Application.DTOs;
 
 namespace RS.Parking.Application.Contracts;
 

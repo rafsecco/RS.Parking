@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using RS.Parking.Domain.Models;
 
@@ -38,10 +38,9 @@ internal class VehicleTypeMappings : IEntityTypeConfiguration<VehicleType>
 
 		#region Populate
 		VehicleType[] objVehicleType = {
-			new VehicleType {Id=1, Active=true, DateCreated=DateTime.Now, Cost=5m, Description="Car 1" },
-			new VehicleType {Id=2, Active=true, DateCreated=DateTime.Now, Cost=5.5m, Description="Car 2" },
+			new VehicleType {Id=1, Active=true, DateCreated=DateTime.Now, Cost=4m, Description="Car 1 (small)" },
+			new VehicleType {Id=2, Active=true, DateCreated=DateTime.Now, Cost=5.5m, Description="Car 2 (big)" },
 			new VehicleType {Id=3, Active=true, DateCreated=DateTime.Now, Cost=3m, Description="Moto 1" },
-			new VehicleType {Id=4, Active=true, DateCreated=DateTime.Now, Cost=3.5m, Description="Moto 2" }
 		};
 		builder.HasData(objVehicleType);
 		#endregion

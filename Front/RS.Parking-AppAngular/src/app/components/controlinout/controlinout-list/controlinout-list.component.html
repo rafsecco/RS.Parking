@@ -4,7 +4,7 @@
 			<th class="d-none d-md-table-cell">#</th>
 			<th>License Plate</th>
 			<th>Vehicle Type</th>
-			<!-- <th>Accord Type</th> -->
+			<th>Accord Type</th>
 			<th class="d-none d-md-table-cell">DateTime In</th>
 			<!-- <th class="d-none d-md-table-cell">DateTime Out</th> -->
 			<th class="text-right">Actions</th>
@@ -14,8 +14,8 @@
 		<tr *ngFor="let controlInOut of controlInOutList">
 			<td class="d-none d-md-table-cell">{{controlInOut.id}}</td>
 			<td>{{controlInOut.licensePlate}}</td>
-			<td>{{controlInOut.vehicleTypeId}} - {{controlInOut.vehicleTypeName}}</td>
-			<!-- <td>{{getDiscountTypesNameById(controlInOut.accordTypeId)}}</td> -->
+			<td>{{controlInOut.vehicleTypeId}} - {{controlInOut.vehicleType.description}}</td>
+			<td>{{controlInOut.accordTypeId}} - {{controlInOut.accordType.description}}</td>
 			<td class="d-none d-md-table-cell">{{controlInOut.dateTimeIn | DateTimeFormat}}</td>
 			<!-- <td class="d-none d-md-table-cell">{{controlInOut.dateTimeOut | DateTimeFormat}}</td> -->
 			<td class="text-right">
@@ -43,8 +43,8 @@
 	</div>
 	<div class="modal-body">
 		<p>Id: {{controlInOut.id}}</p>
-		<p>VehicleType: {{controlInOut.vehicleTypeId}} - {{controlInOut.vehicleTypeName}}</p>
-		<p>AccordType: {{getDiscountTypesNameById(controlInOut.accordTypeId)}}</p>
+		<p>VehicleType: {{controlInOut.vehicleTypeId}} - {{controlInOut.vehicleType.description}}</p>
+		<p>AccordType: {{controlInOut.accordTypeId}} - {{controlInOut.accordType.description}}</p>
 		<p>License Plate: {{controlInOut.licensePlate}}</p>
 		<p>Date In: {{controlInOut.dateTimeIn | DateTimeFormat}}</p>
 		<p>Date Out: {{controlInOut.dateTimeOut | DateTimeFormat}}</p>

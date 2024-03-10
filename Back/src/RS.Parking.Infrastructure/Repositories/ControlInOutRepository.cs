@@ -1,7 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using RS.Parking.Domain.Contracts;
 using RS.Parking.Domain.Models;
-using System.Collections.Generic;
 
 namespace RS.Parking.Infrastructure.Repositories;
 
@@ -17,10 +16,11 @@ public class ControlInOutRepository : IControlInOutRepository
 
 	public async Task<List<ControlInOut>> GetAll()
 	{
-		return await _context.ControlInOut
+		var retorno = await _context.ControlInOut
 			.Where(x => x.DateTimeOut == null)
 			.OrderBy(x => x.DateTimeIn)
 			.ToListAsync();
+		return retorno;
 	}
 
 	public async Task<ControlInOut> GetById(ulong id)
@@ -56,6 +56,6 @@ public class ControlInOutRepository : IControlInOutRepository
 		_context?.Dispose();
 	}
 
-	
+
 
 }

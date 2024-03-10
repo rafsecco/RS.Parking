@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using RS.Parking.Domain.Models;
 
@@ -27,7 +27,7 @@ internal class AccordTypeMappings : IEntityTypeConfiguration<AccordType>
 
 		builder.Property(p => p.DiscountTypeId)
 			.IsRequired()
-			.HasColumnName("ie_accord")	;
+			.HasColumnName("ie_accord");
 
 		builder.Property(p => p.Percentage)
 			.IsRequired()
@@ -42,9 +42,9 @@ internal class AccordTypeMappings : IEntityTypeConfiguration<AccordType>
 		#region Populate
 		AccordType[] objAccordType = {
 			new AccordType { Id=1, Active=true, DateCreated=DateTime.Now, DiscountTypeId=0, Percentage=0m, Description="No Discount" },
-			new AccordType { Id=2, Active=true, DateCreated=DateTime.Now, DiscountTypeId=0, Percentage=0m, Description="PharmaTech" },
-			new AccordType { Id=3, Active=true, DateCreated=DateTime.Now, DiscountTypeId=1, Percentage=50.0m, Description="Subway" },
-			new AccordType { Id=4, Active=true, DateCreated=DateTime.Now, DiscountTypeId=2, Percentage=100m, Description="McDonald's" }
+			new AccordType { Id=2, Active=true, DateCreated=DateTime.Now, DiscountTypeId=1, Percentage=50.0m, Description="Subway" },
+			new AccordType { Id=3, Active=true, DateCreated=DateTime.Now, DiscountTypeId=2, Percentage=100m, Description="McDonald's" },
+			new AccordType { Id=4, Active=true, DateCreated=DateTime.Now, DiscountTypeId=2, Percentage=50m, Description="PharmaTech" }
 		};
 		builder.HasData(objAccordType);
 		#endregion

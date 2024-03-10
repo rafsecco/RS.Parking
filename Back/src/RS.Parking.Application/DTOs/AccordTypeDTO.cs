@@ -1,10 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace RS.Parking.Application.DTOs;
 
 public class AccordTypeDTO
 {
-	public ulong Id { get; set; }
+	public ushort Id { get; set; }
 
 	public bool Active { get; set; }
 
