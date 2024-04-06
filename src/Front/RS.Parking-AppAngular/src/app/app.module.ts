@@ -9,7 +9,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
-import { NgxCurrencyModule, CurrencyMaskInputMode } from 'ngx-currency';
+// import { NgxCurrencyModule, CurrencyMaskInputMode } from 'ngx-currency';
+import { provideEnvironmentNgxCurrency, NgxCurrencyInputMode, NgxCurrencyDirective } from 'ngx-currency';
 import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { defineLocale } from 'ngx-bootstrap/chronos';
@@ -39,21 +40,6 @@ import { ReportsListComponent } from './components/reports/reports-list/reports-
 
 registerLocaleData(ptBr, 'pt-BR');
 defineLocale('pt-br', ptBrLocale);
-
-export const customCurrencyMaskConfig = {
-	prefix: '',
-	thousands: '.',
-	decimal: ',',
-	align: 'left',
-	allowNegative: true,
-	allowZero: true,
-	precision: 2,
-	suffix: '',
-	nullable: true,
-	min: null,
-	max: null,
-	inputMode: CurrencyMaskInputMode.FINANCIAL,
-};
 
 @NgModule({
 	declarations: [
@@ -85,7 +71,8 @@ export const customCurrencyMaskConfig = {
 		ModalModule.forRoot(),
 		BsDatepickerModule.forRoot(),
 		NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
-		NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
+		// NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
+		[NgxCurrencyDirective],
 		ToastrModule.forRoot({
 			timeOut: 2000,
 			positionClass: 'toast-bottom-right',
@@ -97,7 +84,21 @@ export const customCurrencyMaskConfig = {
 		{ provide: LOCALE_ID, useValue: "pt-BR"},
 		VehicletypesService,
 		AccordTypesService,
-		ControlInOutService
+		ControlInOutService,
+		provideEnvironmentNgxCurrency({
+			align: "left",
+			allowNegative: true,
+			allowZero: true,
+			decimal: ",",
+			precision: 2,
+			prefix: "R$ ",
+			suffix: "",
+			thousands: ".",
+			nullable: true,
+			min: null,
+			max: null,
+			inputMode: NgxCurrencyInputMode.Financial,
+		})
 	],
 	bootstrap: [AppComponent],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],

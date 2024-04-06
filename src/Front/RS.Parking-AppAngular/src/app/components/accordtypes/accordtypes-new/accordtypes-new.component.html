@@ -31,7 +31,7 @@
 						<input type="text" class="form-control" formControlName="percentage" placeholder="Insert Percentage"
 							[ngClass]="cssValidator(f.percentage)"
 							min="0" max="100"
-							currencyMask [options]="{ suffix: ' %' }"
+							currencyMask [options]="{ suffix: ' %', prefix: '', min: 0, max: 100 }"
 						/>
 						<div class="invalid-feedback" *ngIf="f.percentage.errors?.required">Percentage is required!</div>
 						<div class="invalid-feedback" *ngIf="f.percentage.errors?.minlength">Percentage must have the minimum value of 0.01</div>

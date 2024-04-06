@@ -18,9 +18,7 @@
 				<div class="form-row">
 					<div class="form-group col-md-4 py-3">
 						<label>Cost</label>
-						<input type="text" class="form-control" formControlName="cost" placeholder="Insert cost" [ngClass]="cssValidator(f.cost)"
-							currencyMask [options]="{prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left'}"
-						/>
+						<input type="text" class="form-control" formControlName="cost" placeholder="Insert cost" [ngClass]="cssValidator(f.cost)" currencyMask />
 						<div class="invalid-feedback" *ngIf="f.description.errors?.required">Cost is required!</div>
 						<div class="invalid-feedback" *ngIf="f.description.errors?.minlength">Cost must have the minimum value of 0.01</div>
 						<div class="invalid-feedback" *ngIf="f.description.errors?.maxlength">Cost must have the maximum value of 9999999999999</div>
