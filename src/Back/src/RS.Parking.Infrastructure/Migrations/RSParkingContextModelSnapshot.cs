@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RS.Parking.Infrastructure;
 
@@ -18,8 +19,10 @@ namespace RS.Parking.Infrastructure.Migrations
             modelBuilder
                 .HasDefaultSchema("RS.Parking")
                 .UseCollation("utf8_general_ci")
-                .HasAnnotation("ProductVersion", "6.0.7")
+                .HasAnnotation("ProductVersion", "8.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
             modelBuilder.Entity("RS.Parking.Domain.Models.AccordType", b =>
                 {
@@ -27,6 +30,8 @@ namespace RS.Parking.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TINYINT UNSIGNED")
                         .HasColumnName("id_accord");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<byte>("Id"));
 
                     b.Property<bool>("Active")
                         .HasColumnType("tinyint(1)")
@@ -62,7 +67,7 @@ namespace RS.Parking.Infrastructure.Migrations
                         {
                             Id = (byte)1,
                             Active = true,
-                            DateCreated = new DateTime(2024, 3, 9, 18, 1, 32, 264, DateTimeKind.Local).AddTicks(7562),
+                            DateCreated = new DateTime(2024, 4, 6, 17, 17, 33, 953, DateTimeKind.Local).AddTicks(3151),
                             Description = "No Discount",
                             DiscountTypeId = (ushort)0,
                             Percentage = 0m
@@ -71,7 +76,7 @@ namespace RS.Parking.Infrastructure.Migrations
                         {
                             Id = (byte)2,
                             Active = true,
-                            DateCreated = new DateTime(2024, 3, 9, 18, 1, 32, 264, DateTimeKind.Local).AddTicks(7566),
+                            DateCreated = new DateTime(2024, 4, 6, 17, 17, 33, 953, DateTimeKind.Local).AddTicks(3154),
                             Description = "Subway",
                             DiscountTypeId = (ushort)1,
                             Percentage = 50.0m
@@ -80,7 +85,7 @@ namespace RS.Parking.Infrastructure.Migrations
                         {
                             Id = (byte)3,
                             Active = true,
-                            DateCreated = new DateTime(2024, 3, 9, 18, 1, 32, 264, DateTimeKind.Local).AddTicks(7569),
+                            DateCreated = new DateTime(2024, 4, 6, 17, 17, 33, 953, DateTimeKind.Local).AddTicks(3157),
                             Description = "McDonald's",
                             DiscountTypeId = (ushort)2,
                             Percentage = 100m
@@ -89,7 +94,7 @@ namespace RS.Parking.Infrastructure.Migrations
                         {
                             Id = (byte)4,
                             Active = true,
-                            DateCreated = new DateTime(2024, 3, 9, 18, 1, 32, 264, DateTimeKind.Local).AddTicks(7571),
+                            DateCreated = new DateTime(2024, 4, 6, 17, 17, 33, 953, DateTimeKind.Local).AddTicks(3161),
                             Description = "PharmaTech",
                             DiscountTypeId = (ushort)2,
                             Percentage = 50m
@@ -102,6 +107,8 @@ namespace RS.Parking.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("BIGINT UNSIGNED")
                         .HasColumnName("id_controlInOut");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<ulong>("Id"));
 
                     b.Property<byte>("AccordTypeId")
                         .HasColumnType("TINYINT UNSIGNED")
@@ -138,8 +145,8 @@ namespace RS.Parking.Infrastructure.Migrations
                         {
                             Id = 1ul,
                             AccordTypeId = (byte)1,
-                            DateTimeIn = new DateTime(2024, 3, 8, 8, 0, 0, 0, DateTimeKind.Local),
-                            DateTimeOut = new DateTime(2024, 3, 8, 10, 0, 0, 0, DateTimeKind.Local),
+                            DateTimeIn = new DateTime(2024, 4, 5, 8, 0, 0, 0, DateTimeKind.Local),
+                            DateTimeOut = new DateTime(2024, 4, 5, 10, 0, 0, 0, DateTimeKind.Local),
                             LicensePlate = "BRL-123",
                             VehicleTypeId = (byte)1
                         },
@@ -147,8 +154,8 @@ namespace RS.Parking.Infrastructure.Migrations
                         {
                             Id = 2ul,
                             AccordTypeId = (byte)2,
-                            DateTimeIn = new DateTime(2024, 3, 8, 10, 0, 0, 0, DateTimeKind.Local),
-                            DateTimeOut = new DateTime(2024, 3, 8, 12, 30, 0, 0, DateTimeKind.Local),
+                            DateTimeIn = new DateTime(2024, 4, 5, 10, 0, 0, 0, DateTimeKind.Local),
+                            DateTimeOut = new DateTime(2024, 4, 5, 12, 30, 0, 0, DateTimeKind.Local),
                             LicensePlate = "BRL-456",
                             VehicleTypeId = (byte)1
                         },
@@ -156,8 +163,8 @@ namespace RS.Parking.Infrastructure.Migrations
                         {
                             Id = 3ul,
                             AccordTypeId = (byte)3,
-                            DateTimeIn = new DateTime(2024, 3, 8, 12, 30, 0, 0, DateTimeKind.Local),
-                            DateTimeOut = new DateTime(2024, 3, 8, 14, 30, 0, 0, DateTimeKind.Local),
+                            DateTimeIn = new DateTime(2024, 4, 5, 12, 30, 0, 0, DateTimeKind.Local),
+                            DateTimeOut = new DateTime(2024, 4, 5, 14, 30, 0, 0, DateTimeKind.Local),
                             LicensePlate = "BRL-789",
                             VehicleTypeId = (byte)1
                         },
@@ -165,8 +172,8 @@ namespace RS.Parking.Infrastructure.Migrations
                         {
                             Id = 4ul,
                             AccordTypeId = (byte)4,
-                            DateTimeIn = new DateTime(2024, 3, 8, 16, 30, 0, 0, DateTimeKind.Local),
-                            DateTimeOut = new DateTime(2024, 3, 8, 18, 30, 0, 0, DateTimeKind.Local),
+                            DateTimeIn = new DateTime(2024, 4, 5, 16, 30, 0, 0, DateTimeKind.Local),
+                            DateTimeOut = new DateTime(2024, 4, 5, 18, 30, 0, 0, DateTimeKind.Local),
                             LicensePlate = "BRL-147",
                             VehicleTypeId = (byte)1
                         },
@@ -174,8 +181,8 @@ namespace RS.Parking.Infrastructure.Migrations
                         {
                             Id = 5ul,
                             AccordTypeId = (byte)1,
-                            DateTimeIn = new DateTime(2024, 3, 7, 8, 0, 0, 0, DateTimeKind.Local),
-                            DateTimeOut = new DateTime(2024, 3, 7, 10, 0, 0, 0, DateTimeKind.Local),
+                            DateTimeIn = new DateTime(2024, 4, 4, 8, 0, 0, 0, DateTimeKind.Local),
+                            DateTimeOut = new DateTime(2024, 4, 4, 10, 0, 0, 0, DateTimeKind.Local),
                             LicensePlate = "BRL-123",
                             VehicleTypeId = (byte)2
                         },
@@ -183,8 +190,8 @@ namespace RS.Parking.Infrastructure.Migrations
                         {
                             Id = 6ul,
                             AccordTypeId = (byte)2,
-                            DateTimeIn = new DateTime(2024, 3, 7, 10, 0, 0, 0, DateTimeKind.Local),
-                            DateTimeOut = new DateTime(2024, 3, 7, 12, 30, 0, 0, DateTimeKind.Local),
+                            DateTimeIn = new DateTime(2024, 4, 4, 10, 0, 0, 0, DateTimeKind.Local),
+                            DateTimeOut = new DateTime(2024, 4, 4, 12, 30, 0, 0, DateTimeKind.Local),
                             LicensePlate = "BRL-456",
                             VehicleTypeId = (byte)2
                         },
@@ -192,8 +199,8 @@ namespace RS.Parking.Infrastructure.Migrations
                         {
                             Id = 7ul,
                             AccordTypeId = (byte)3,
-                            DateTimeIn = new DateTime(2024, 3, 7, 12, 30, 0, 0, DateTimeKind.Local),
-                            DateTimeOut = new DateTime(2024, 3, 7, 14, 30, 0, 0, DateTimeKind.Local),
+                            DateTimeIn = new DateTime(2024, 4, 4, 12, 30, 0, 0, DateTimeKind.Local),
+                            DateTimeOut = new DateTime(2024, 4, 4, 14, 30, 0, 0, DateTimeKind.Local),
                             LicensePlate = "BRL-789",
                             VehicleTypeId = (byte)2
                         },
@@ -201,8 +208,8 @@ namespace RS.Parking.Infrastructure.Migrations
                         {
                             Id = 8ul,
                             AccordTypeId = (byte)4,
-                            DateTimeIn = new DateTime(2024, 3, 7, 16, 30, 0, 0, DateTimeKind.Local),
-                            DateTimeOut = new DateTime(2024, 3, 7, 18, 30, 0, 0, DateTimeKind.Local),
+                            DateTimeIn = new DateTime(2024, 4, 4, 16, 30, 0, 0, DateTimeKind.Local),
+                            DateTimeOut = new DateTime(2024, 4, 4, 18, 30, 0, 0, DateTimeKind.Local),
                             LicensePlate = "BRL-147",
                             VehicleTypeId = (byte)2
                         },
@@ -210,8 +217,8 @@ namespace RS.Parking.Infrastructure.Migrations
                         {
                             Id = 9ul,
                             AccordTypeId = (byte)1,
-                            DateTimeIn = new DateTime(2024, 3, 6, 8, 0, 0, 0, DateTimeKind.Local),
-                            DateTimeOut = new DateTime(2024, 3, 6, 10, 0, 0, 0, DateTimeKind.Local),
+                            DateTimeIn = new DateTime(2024, 4, 3, 8, 0, 0, 0, DateTimeKind.Local),
+                            DateTimeOut = new DateTime(2024, 4, 3, 10, 0, 0, 0, DateTimeKind.Local),
                             LicensePlate = "BRL-123",
                             VehicleTypeId = (byte)3
                         },
@@ -219,8 +226,8 @@ namespace RS.Parking.Infrastructure.Migrations
                         {
                             Id = 10ul,
                             AccordTypeId = (byte)2,
-                            DateTimeIn = new DateTime(2024, 3, 6, 10, 0, 0, 0, DateTimeKind.Local),
-                            DateTimeOut = new DateTime(2024, 3, 6, 12, 30, 0, 0, DateTimeKind.Local),
+                            DateTimeIn = new DateTime(2024, 4, 3, 10, 0, 0, 0, DateTimeKind.Local),
+                            DateTimeOut = new DateTime(2024, 4, 3, 12, 30, 0, 0, DateTimeKind.Local),
                             LicensePlate = "BRL-456",
                             VehicleTypeId = (byte)3
                         },
@@ -228,8 +235,8 @@ namespace RS.Parking.Infrastructure.Migrations
                         {
                             Id = 11ul,
                             AccordTypeId = (byte)3,
-                            DateTimeIn = new DateTime(2024, 3, 6, 12, 30, 0, 0, DateTimeKind.Local),
-                            DateTimeOut = new DateTime(2024, 3, 6, 14, 30, 0, 0, DateTimeKind.Local),
+                            DateTimeIn = new DateTime(2024, 4, 3, 12, 30, 0, 0, DateTimeKind.Local),
+                            DateTimeOut = new DateTime(2024, 4, 3, 14, 30, 0, 0, DateTimeKind.Local),
                             LicensePlate = "BRL-789",
                             VehicleTypeId = (byte)3
                         },
@@ -237,8 +244,8 @@ namespace RS.Parking.Infrastructure.Migrations
                         {
                             Id = 12ul,
                             AccordTypeId = (byte)4,
-                            DateTimeIn = new DateTime(2024, 3, 6, 16, 30, 0, 0, DateTimeKind.Local),
-                            DateTimeOut = new DateTime(2024, 3, 6, 18, 30, 0, 0, DateTimeKind.Local),
+                            DateTimeIn = new DateTime(2024, 4, 3, 16, 30, 0, 0, DateTimeKind.Local),
+                            DateTimeOut = new DateTime(2024, 4, 3, 18, 30, 0, 0, DateTimeKind.Local),
                             LicensePlate = "BRL-147",
                             VehicleTypeId = (byte)3
                         },
@@ -246,7 +253,7 @@ namespace RS.Parking.Infrastructure.Migrations
                         {
                             Id = 13ul,
                             AccordTypeId = (byte)1,
-                            DateTimeIn = new DateTime(2024, 3, 9, 8, 0, 0, 0, DateTimeKind.Local),
+                            DateTimeIn = new DateTime(2024, 4, 6, 8, 0, 0, 0, DateTimeKind.Local),
                             LicensePlate = "BRL-123",
                             VehicleTypeId = (byte)3
                         },
@@ -254,7 +261,7 @@ namespace RS.Parking.Infrastructure.Migrations
                         {
                             Id = 14ul,
                             AccordTypeId = (byte)2,
-                            DateTimeIn = new DateTime(2024, 3, 9, 10, 0, 0, 0, DateTimeKind.Local),
+                            DateTimeIn = new DateTime(2024, 4, 6, 10, 0, 0, 0, DateTimeKind.Local),
                             LicensePlate = "BRL-456",
                             VehicleTypeId = (byte)3
                         },
@@ -262,7 +269,7 @@ namespace RS.Parking.Infrastructure.Migrations
                         {
                             Id = 15ul,
                             AccordTypeId = (byte)3,
-                            DateTimeIn = new DateTime(2024, 3, 9, 12, 30, 0, 0, DateTimeKind.Local),
+                            DateTimeIn = new DateTime(2024, 4, 6, 12, 30, 0, 0, DateTimeKind.Local),
                             LicensePlate = "BRL-789",
                             VehicleTypeId = (byte)3
                         },
@@ -270,7 +277,7 @@ namespace RS.Parking.Infrastructure.Migrations
                         {
                             Id = 16ul,
                             AccordTypeId = (byte)4,
-                            DateTimeIn = new DateTime(2024, 3, 9, 16, 30, 0, 0, DateTimeKind.Local),
+                            DateTimeIn = new DateTime(2024, 4, 6, 16, 30, 0, 0, DateTimeKind.Local),
                             LicensePlate = "BRL-147",
                             VehicleTypeId = (byte)3
                         });
@@ -282,6 +289,8 @@ namespace RS.Parking.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TINYINT UNSIGNED")
                         .HasColumnName("id_vehicle");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<byte>("Id"));
 
                     b.Property<bool>("Active")
                         .HasColumnType("tinyint(1)")
@@ -315,7 +324,7 @@ namespace RS.Parking.Infrastructure.Migrations
                             Id = (byte)1,
                             Active = true,
                             Cost = 4m,
-                            DateCreated = new DateTime(2024, 3, 9, 18, 1, 32, 265, DateTimeKind.Local).AddTicks(2993),
+                            DateCreated = new DateTime(2024, 4, 6, 17, 17, 33, 953, DateTimeKind.Local).AddTicks(9898),
                             Description = "Car 1 (small)"
                         },
                         new
@@ -323,7 +332,7 @@ namespace RS.Parking.Infrastructure.Migrations
                             Id = (byte)2,
                             Active = true,
                             Cost = 5.5m,
-                            DateCreated = new DateTime(2024, 3, 9, 18, 1, 32, 265, DateTimeKind.Local).AddTicks(2996),
+                            DateCreated = new DateTime(2024, 4, 6, 17, 17, 33, 953, DateTimeKind.Local).AddTicks(9901),
                             Description = "Car 2 (big)"
                         },
                         new
@@ -331,7 +340,7 @@ namespace RS.Parking.Infrastructure.Migrations
                             Id = (byte)3,
                             Active = true,
                             Cost = 3m,
-                            DateCreated = new DateTime(2024, 3, 9, 18, 1, 32, 265, DateTimeKind.Local).AddTicks(2998),
+                            DateCreated = new DateTime(2024, 4, 6, 17, 17, 33, 953, DateTimeKind.Local).AddTicks(9903),
                             Description = "Moto 1"
                         });
                 });

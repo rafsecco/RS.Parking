@@ -5,15 +5,21 @@ RUN ["sed", "-i", "s/exec \"$@\"/echo \"not running $@\"/", "/usr/local/bin/dock
 
 # needed for intialization
 ENV MYSQL_ROOT_PASSWORD=MyDB@123
-COPY scripts/01_setup.sql /docker-entrypoint-initdb.d/
-COPY scripts/02_create.sql /docker-entrypoint-initdb.d/
+COPY scripts/*.sql /docker-entrypoint-initdb.d/
 
 # Need to change the datadir to something else that /var/lib/mysql because the parent docker file defines it as a volume.
 # https://docs.docker.com/engine/reference/builder/#volume :
 #       Changing the volume from within the Dockerfile: If any build steps change the data within the volume after
 #       it has been declared, those changes will be discarded.
-RUN ["/usr/local/bin/docker-entrypoint.sh", "mysqld", "--datadir", "/initialized-db", "--aria-log-dir-path", "/initialized-db"]
+# RUN ["/usr/local/bin/docker-entrypoint.sh", "mysqld", "--datadir", "/initialized-db", "--aria-log-dir-path", "/initialized-db"]
 
 FROM mariadb:latest
 COPY --from=builder /initialized-db /var/lib/mysql
 EXPOSE 3306
+
+
+# docker pull mariadb
+# docker run -d --name rs_parking_db -p 3306:3306 --env MARIADB_ROOT_PASSWORD=MyDB@123 mariadb:latest
+
+
+# docker build --tag mariadb_rsparking .<dockerfile>	| Cria uma imagem a partir de um dockerfile
