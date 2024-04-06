@@ -4,10 +4,14 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace RS.Parking.Infrastructure.Migrations
 {
+    /// <inheritdoc />
     public partial class Initial : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
@@ -75,10 +79,10 @@ namespace RS.Parking.Infrastructure.Migrations
                 columns: new[] { "id_accord", "bln_active", "dt_dateCreated", "ds_accord", "ie_accord", "nr_percentage" },
                 values: new object[,]
                 {
-                    { (byte)1, true, new DateTime(2024, 3, 9, 18, 1, 32, 264, DateTimeKind.Local).AddTicks(7562), "No Discount", (ushort)0, 0m },
-                    { (byte)2, true, new DateTime(2024, 3, 9, 18, 1, 32, 264, DateTimeKind.Local).AddTicks(7566), "Subway", (ushort)1, 50.0m },
-                    { (byte)3, true, new DateTime(2024, 3, 9, 18, 1, 32, 264, DateTimeKind.Local).AddTicks(7569), "McDonald's", (ushort)2, 100m },
-                    { (byte)4, true, new DateTime(2024, 3, 9, 18, 1, 32, 264, DateTimeKind.Local).AddTicks(7571), "PharmaTech", (ushort)2, 50m }
+                    { (byte)1, true, new DateTime(2024, 4, 6, 17, 17, 33, 953, DateTimeKind.Local).AddTicks(3151), "No Discount", (ushort)0, 0m },
+                    { (byte)2, true, new DateTime(2024, 4, 6, 17, 17, 33, 953, DateTimeKind.Local).AddTicks(3154), "Subway", (ushort)1, 50.0m },
+                    { (byte)3, true, new DateTime(2024, 4, 6, 17, 17, 33, 953, DateTimeKind.Local).AddTicks(3157), "McDonald's", (ushort)2, 100m },
+                    { (byte)4, true, new DateTime(2024, 4, 6, 17, 17, 33, 953, DateTimeKind.Local).AddTicks(3161), "PharmaTech", (ushort)2, 50m }
                 });
 
             migrationBuilder.InsertData(
@@ -87,22 +91,22 @@ namespace RS.Parking.Infrastructure.Migrations
                 columns: new[] { "id_controlInOut", "cd_accord", "dt_in", "dt_out", "ds_licensePlate", "cd_vehicle" },
                 values: new object[,]
                 {
-                    { 1ul, (byte)1, new DateTime(2024, 3, 8, 8, 0, 0, 0, DateTimeKind.Local), new DateTime(2024, 3, 8, 10, 0, 0, 0, DateTimeKind.Local), "BRL-123", (byte)1 },
-                    { 2ul, (byte)2, new DateTime(2024, 3, 8, 10, 0, 0, 0, DateTimeKind.Local), new DateTime(2024, 3, 8, 12, 30, 0, 0, DateTimeKind.Local), "BRL-456", (byte)1 },
-                    { 3ul, (byte)3, new DateTime(2024, 3, 8, 12, 30, 0, 0, DateTimeKind.Local), new DateTime(2024, 3, 8, 14, 30, 0, 0, DateTimeKind.Local), "BRL-789", (byte)1 },
-                    { 4ul, (byte)4, new DateTime(2024, 3, 8, 16, 30, 0, 0, DateTimeKind.Local), new DateTime(2024, 3, 8, 18, 30, 0, 0, DateTimeKind.Local), "BRL-147", (byte)1 },
-                    { 5ul, (byte)1, new DateTime(2024, 3, 7, 8, 0, 0, 0, DateTimeKind.Local), new DateTime(2024, 3, 7, 10, 0, 0, 0, DateTimeKind.Local), "BRL-123", (byte)2 },
-                    { 6ul, (byte)2, new DateTime(2024, 3, 7, 10, 0, 0, 0, DateTimeKind.Local), new DateTime(2024, 3, 7, 12, 30, 0, 0, DateTimeKind.Local), "BRL-456", (byte)2 },
-                    { 7ul, (byte)3, new DateTime(2024, 3, 7, 12, 30, 0, 0, DateTimeKind.Local), new DateTime(2024, 3, 7, 14, 30, 0, 0, DateTimeKind.Local), "BRL-789", (byte)2 },
-                    { 8ul, (byte)4, new DateTime(2024, 3, 7, 16, 30, 0, 0, DateTimeKind.Local), new DateTime(2024, 3, 7, 18, 30, 0, 0, DateTimeKind.Local), "BRL-147", (byte)2 },
-                    { 9ul, (byte)1, new DateTime(2024, 3, 6, 8, 0, 0, 0, DateTimeKind.Local), new DateTime(2024, 3, 6, 10, 0, 0, 0, DateTimeKind.Local), "BRL-123", (byte)3 },
-                    { 10ul, (byte)2, new DateTime(2024, 3, 6, 10, 0, 0, 0, DateTimeKind.Local), new DateTime(2024, 3, 6, 12, 30, 0, 0, DateTimeKind.Local), "BRL-456", (byte)3 },
-                    { 11ul, (byte)3, new DateTime(2024, 3, 6, 12, 30, 0, 0, DateTimeKind.Local), new DateTime(2024, 3, 6, 14, 30, 0, 0, DateTimeKind.Local), "BRL-789", (byte)3 },
-                    { 12ul, (byte)4, new DateTime(2024, 3, 6, 16, 30, 0, 0, DateTimeKind.Local), new DateTime(2024, 3, 6, 18, 30, 0, 0, DateTimeKind.Local), "BRL-147", (byte)3 },
-                    { 13ul, (byte)1, new DateTime(2024, 3, 9, 8, 0, 0, 0, DateTimeKind.Local), null, "BRL-123", (byte)3 },
-                    { 14ul, (byte)2, new DateTime(2024, 3, 9, 10, 0, 0, 0, DateTimeKind.Local), null, "BRL-456", (byte)3 },
-                    { 15ul, (byte)3, new DateTime(2024, 3, 9, 12, 30, 0, 0, DateTimeKind.Local), null, "BRL-789", (byte)3 },
-                    { 16ul, (byte)4, new DateTime(2024, 3, 9, 16, 30, 0, 0, DateTimeKind.Local), null, "BRL-147", (byte)3 }
+                    { 1ul, (byte)1, new DateTime(2024, 4, 5, 8, 0, 0, 0, DateTimeKind.Local), new DateTime(2024, 4, 5, 10, 0, 0, 0, DateTimeKind.Local), "BRL-123", (byte)1 },
+                    { 2ul, (byte)2, new DateTime(2024, 4, 5, 10, 0, 0, 0, DateTimeKind.Local), new DateTime(2024, 4, 5, 12, 30, 0, 0, DateTimeKind.Local), "BRL-456", (byte)1 },
+                    { 3ul, (byte)3, new DateTime(2024, 4, 5, 12, 30, 0, 0, DateTimeKind.Local), new DateTime(2024, 4, 5, 14, 30, 0, 0, DateTimeKind.Local), "BRL-789", (byte)1 },
+                    { 4ul, (byte)4, new DateTime(2024, 4, 5, 16, 30, 0, 0, DateTimeKind.Local), new DateTime(2024, 4, 5, 18, 30, 0, 0, DateTimeKind.Local), "BRL-147", (byte)1 },
+                    { 5ul, (byte)1, new DateTime(2024, 4, 4, 8, 0, 0, 0, DateTimeKind.Local), new DateTime(2024, 4, 4, 10, 0, 0, 0, DateTimeKind.Local), "BRL-123", (byte)2 },
+                    { 6ul, (byte)2, new DateTime(2024, 4, 4, 10, 0, 0, 0, DateTimeKind.Local), new DateTime(2024, 4, 4, 12, 30, 0, 0, DateTimeKind.Local), "BRL-456", (byte)2 },
+                    { 7ul, (byte)3, new DateTime(2024, 4, 4, 12, 30, 0, 0, DateTimeKind.Local), new DateTime(2024, 4, 4, 14, 30, 0, 0, DateTimeKind.Local), "BRL-789", (byte)2 },
+                    { 8ul, (byte)4, new DateTime(2024, 4, 4, 16, 30, 0, 0, DateTimeKind.Local), new DateTime(2024, 4, 4, 18, 30, 0, 0, DateTimeKind.Local), "BRL-147", (byte)2 },
+                    { 9ul, (byte)1, new DateTime(2024, 4, 3, 8, 0, 0, 0, DateTimeKind.Local), new DateTime(2024, 4, 3, 10, 0, 0, 0, DateTimeKind.Local), "BRL-123", (byte)3 },
+                    { 10ul, (byte)2, new DateTime(2024, 4, 3, 10, 0, 0, 0, DateTimeKind.Local), new DateTime(2024, 4, 3, 12, 30, 0, 0, DateTimeKind.Local), "BRL-456", (byte)3 },
+                    { 11ul, (byte)3, new DateTime(2024, 4, 3, 12, 30, 0, 0, DateTimeKind.Local), new DateTime(2024, 4, 3, 14, 30, 0, 0, DateTimeKind.Local), "BRL-789", (byte)3 },
+                    { 12ul, (byte)4, new DateTime(2024, 4, 3, 16, 30, 0, 0, DateTimeKind.Local), new DateTime(2024, 4, 3, 18, 30, 0, 0, DateTimeKind.Local), "BRL-147", (byte)3 },
+                    { 13ul, (byte)1, new DateTime(2024, 4, 6, 8, 0, 0, 0, DateTimeKind.Local), null, "BRL-123", (byte)3 },
+                    { 14ul, (byte)2, new DateTime(2024, 4, 6, 10, 0, 0, 0, DateTimeKind.Local), null, "BRL-456", (byte)3 },
+                    { 15ul, (byte)3, new DateTime(2024, 4, 6, 12, 30, 0, 0, DateTimeKind.Local), null, "BRL-789", (byte)3 },
+                    { 16ul, (byte)4, new DateTime(2024, 4, 6, 16, 30, 0, 0, DateTimeKind.Local), null, "BRL-147", (byte)3 }
                 });
 
             migrationBuilder.InsertData(
@@ -111,9 +115,9 @@ namespace RS.Parking.Infrastructure.Migrations
                 columns: new[] { "id_vehicle", "bln_active", "vl_cost", "dt_dateCreated", "ds_vehicle" },
                 values: new object[,]
                 {
-                    { (byte)1, true, 4m, new DateTime(2024, 3, 9, 18, 1, 32, 265, DateTimeKind.Local).AddTicks(2993), "Car 1 (small)" },
-                    { (byte)2, true, 5.5m, new DateTime(2024, 3, 9, 18, 1, 32, 265, DateTimeKind.Local).AddTicks(2996), "Car 2 (big)" },
-                    { (byte)3, true, 3m, new DateTime(2024, 3, 9, 18, 1, 32, 265, DateTimeKind.Local).AddTicks(2998), "Moto 1" }
+                    { (byte)1, true, 4m, new DateTime(2024, 4, 6, 17, 17, 33, 953, DateTimeKind.Local).AddTicks(9898), "Car 1 (small)" },
+                    { (byte)2, true, 5.5m, new DateTime(2024, 4, 6, 17, 17, 33, 953, DateTimeKind.Local).AddTicks(9901), "Car 2 (big)" },
+                    { (byte)3, true, 3m, new DateTime(2024, 4, 6, 17, 17, 33, 953, DateTimeKind.Local).AddTicks(9903), "Moto 1" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -123,6 +127,7 @@ namespace RS.Parking.Infrastructure.Migrations
                 column: "dt_out");
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
