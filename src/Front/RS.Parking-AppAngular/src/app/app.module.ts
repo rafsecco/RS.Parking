@@ -6,12 +6,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
-// import { NgxCurrencyModule, CurrencyMaskInputMode } from 'ngx-currency';
 import { provideEnvironmentNgxCurrency, NgxCurrencyInputMode, NgxCurrencyDirective } from 'ngx-currency';
 import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { ptBrLocale } from 'ngx-bootstrap/locale';
@@ -71,8 +70,7 @@ defineLocale('pt-br', ptBrLocale);
 		ModalModule.forRoot(),
 		BsDatepickerModule.forRoot(),
 		NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
-		// NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
-		[NgxCurrencyDirective],
+		NgxCurrencyDirective,
 		ToastrModule.forRoot({
 			timeOut: 2000,
 			positionClass: 'toast-bottom-right',
