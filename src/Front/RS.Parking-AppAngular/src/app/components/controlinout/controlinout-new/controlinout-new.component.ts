@@ -45,10 +45,6 @@ export class ControlinoutNewComponent implements OnInit {
 		this.validation();
 	}
 
-	backClicked() {
-		this.location.back();
-	}
-
 	public cssValidator(formControl: FormControl): any {
 		return {'is-invalid': formControl.errors && formControl.touched};
 	}

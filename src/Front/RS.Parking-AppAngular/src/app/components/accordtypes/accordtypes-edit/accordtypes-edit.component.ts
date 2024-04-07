@@ -14,13 +14,13 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AccordTypesEditComponent implements OnInit {
 
-	accordFormGroup: FormGroup;
+	form: FormGroup;
 	accordTypeId: number;
 	public discountTypeEnum: DiscountTypeEnum[] = [];
 	public accordType = {} as AccordType;
 
 	get f(): any {
-		return this.accordFormGroup.controls;
+		return this.form.controls;
 	}
 
 	constructor(
@@ -45,22 +45,24 @@ export class AccordTypesEditComponent implements OnInit {
 	}
 
 	public validation(): void {
-		this.accordFormGroup = this.fb.group({
+		this.form = this.fb.group({
 			active: [true, [Validators.required]],
 			percentage: ['0', [Validators.required, Validators.min(0.00), Validators.max(9999999999999) ]],
 			discountTypeId: ['0', [Validators.required, Validators.min(0), Validators.max(2) ]],
-			description: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(100)]]
+			description: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(100)]],
+			id: ['',''],
+			dateCreated: ['','']
 		});
 	}
 
 	public resetForm(): void {
-		this.accordFormGroup.reset();
+		this.form.reset();
 		this.loadAccordType();
 		this.myInputFocus.nativeElement.focus();
 	}
 
-	public cssValidator(accordFormGroupControl: FormControl): any {
-		return {'is-invalid': accordFormGroupControl.errors && accordFormGroupControl.touched};
+	public cssValidator(formControl: FormControl): any {
+		return {'is-invalid': formControl.errors && formControl.touched};
 	}
 
 	public LoadDiscountTypeEnum(): void {
@@ -79,7 +81,7 @@ export class AccordTypesEditComponent implements OnInit {
 			this.accordTypesService.getAccordTypeById(this.accordTypeId).subscribe({
 				next: (_accordType: AccordType) => {
 					this.accordType = { ... _accordType };
-					this.accordFormGroup.patchValue(this.accordType);
+					this.form.patchValue(this.accordType);
 				},
 				error: (error: any) => { this.toastr.error(`Error loading AccordType.\n${error}`, 'Error!'); },
 				complete: () => this.spinner.hide()
@@ -89,8 +91,8 @@ export class AccordTypesEditComponent implements OnInit {
 
 	public updateAccordType(): void {
 		this.spinner.show();
-		if (this.accordFormGroup.valid) {
-			this.accordType = Object.assign({}, this.accordType, this.accordFormGroup.value);
+		if (this.form.valid) {
+			this.accordType = Object.assign({}, this.accordType, this.form.value);
 			this.accordTypesService.updateAccordType(this.accordType).subscribe({
 				next: success => this.processSuccess(success),
 				error: failure => this.processFailure(failure),

@@ -36,8 +36,8 @@
 		<tr *ngFor="let controlInOut of controlInOutList">
 			<td class="d-none d-md-table-cell">{{controlInOut.id}}</td>
 			<td>{{controlInOut.licensePlate}}</td>
-			<td>{{controlInOut.vehicleTypeId}} - {{controlInOut.vehicleTypeName}}</td>
-			<td>{{controlInOut.accordTypeId}}</td>
+			<td>{{controlInOut.vehicleType.id}} - {{controlInOut.vehicleType.description}}</td>
+			<td>{{controlInOut.accordType.id}}</td>
 			<td class="d-none d-md-table-cell">{{controlInOut.dateTimeIn | DateTimeFormat}}</td>
 			<td class="d-none d-md-table-cell">{{controlInOut.dateTimeOut | DateTimeFormat}}</td>
 			<!-- <td class="d-none d-md-table-cell">{{controlInOut.dateTimeIn | date:'dd/MM/yyyy hh:mm:ss'}}</td> -->

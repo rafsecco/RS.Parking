@@ -10,7 +10,6 @@
 					<div class="form-group col-md-4 py-3">
 						<label for="licensePlate">License Plate: </label>
 						<input type="text" id="licensePlate" name="licensePlate" class="form-control" formControlName="licensePlate" placeholder="Insert licensePlate" [ngClass]="cssValidator(f.licensePlate)" #angularFocus autofocus>
-						<!-- <div *ngIf="f['email'].errors['email']">Email is invalid</div> -->
 						<div class="invalid-feedback" *ngIf="f.licensePlate.errors?.required">Description is required!</div>
 						<div class="invalid-feedback" *ngIf="f.licensePlate.errors?.minlength">Description must be at least 8 characters</div>
 						<div class="invalid-feedback" *ngIf="f.licensePlate.errors?.maxlength">Description must be a maximum of 8 characters</div>
@@ -29,8 +28,7 @@
 
 			<div class="card-footer savecancel rounded shadow-sm">
 				<div class="d-flex">
-					<!-- <button class="btn btn-outline-light mx-3" (click)="resetForm()">Cancel</button> -->
-					<button class="btn btn-outline-light mx-3" (click)="backClicked()">Back</button>
+					<button class="btn btn-light mx-3" (click)="resetForm()">Cancel</button>
 					<button class="btn btn-success mx-3" [disabled]="!form.valid" (click)="saveControlInOut()">Save</button>
 				</div>
 			</div>

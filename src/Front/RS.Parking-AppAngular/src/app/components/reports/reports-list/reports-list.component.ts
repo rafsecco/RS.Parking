@@ -110,8 +110,8 @@ export class ReportsListComponent implements OnInit {
 
 		if (controlInOut.dateTimeOut === null) { return 'N/A'; }
 
-		let accordType:AccordType = this.accordTypes.find(x => x.id == controlInOut.accordTypeId);
-		let vehicleType:VehicleType = this.vehicleTypes.find(x => x.id == controlInOut.vehicleTypeId);
+		let accordType:AccordType = this.accordTypes.find(x => x.id == controlInOut.accordType.id);
+		let vehicleType:VehicleType = this.vehicleTypes.find(x => x.id == controlInOut.vehicleType.id);
 
 		// let dateIn = new Date(this.controlInOut.dateTimeIn);
 		// let dateOut = new Date(this.controlInOut.dateTimeOut);
