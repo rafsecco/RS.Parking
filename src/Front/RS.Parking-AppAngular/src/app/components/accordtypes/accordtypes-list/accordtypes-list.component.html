@@ -15,8 +15,7 @@
 			<td class="d-none d-md-table-cell">{{accordType.id}}</td>
 			<td>{{accordType.description}}</td>
 			<td>{{getDiscountTypesById(accordType.discountTypeId)}}</td>
-			<!-- <td>{{accordType.percentage | number:'1.0-2'}}% - {{accordType.percentage | percent}}</td> -->
-			<td>{{accordType.percentage | number:'1.0-2'}}%</td>
+			<td>{{accordType.percentage | percent}}</td>
 			<td class="d-none d-md-table-cell">
 				<input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" [checked]="accordType.active" disabled />
 			</td>
@@ -37,7 +36,7 @@
 	</tfoot>
 </table>
 
-<!-- {{accordTypes | json}} -->
+{{accordTypes | json}}
 
 <!-- Modal -->
 
@@ -60,7 +59,7 @@
 		<p>Date Created: {{accordType.dateCreated | DateTimeFormat}}</p>
 		<p>Description: {{accordType.description}}</p>
 		<p>Accord: {{getDiscountTypesById(accordType.discountTypeId)}}</p>
-		<p>Percentage: {{accordType.percentage | number:'1.0-2'}}%</p>
+		<p>Percentage: {{accordType.percentage | percent}}</p>
 		<p>Active? {{accordType.active ? 'activated' : 'disabled'}}</p>
 	</div>
 	<div class="modal-footer">

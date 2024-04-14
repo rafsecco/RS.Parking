@@ -1,4 +1,3 @@
-import { CurrencyPipe } from '@angular/common';
 import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,7 +10,6 @@ import { VehicletypesService } from '@app/services/vehicletypes.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { Location } from '@angular/common';
 
 @Component({
 	selector: 'app-controlinout-edit',
@@ -60,8 +58,7 @@ export class ControlinoutEditComponent implements OnInit {
 		private activatedRouter: ActivatedRoute,
 		private modalService: BsModalService,
 		private spinner: NgxSpinnerService,
-		private toastr: ToastrService,
-		private location: Location
+		private toastr: ToastrService
 	) {}
 
 	ngOnInit(): void {
@@ -81,16 +78,6 @@ export class ControlinoutEditComponent implements OnInit {
 			dateTimeIn: ['' , [Validators.required]],
 			dateTimeOut: ['' , [Validators.required]]
 		});
-	}
-
-	backClicked() {
-		this.location.back();
-	}
-
-	public resetForm(): void {
-		this.form.reset();
-		this.LoadControlInOut();
-		this.myInputFocus.nativeElement.focus();
 	}
 
 	public LoadControlInOut(): void {

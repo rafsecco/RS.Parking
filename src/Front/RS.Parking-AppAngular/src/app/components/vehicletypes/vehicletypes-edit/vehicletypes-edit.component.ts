@@ -50,12 +50,6 @@ export class VehicletypesEditComponent implements OnInit {
 		});
 	}
 
-	public resetForm(): void {
-		this.form.reset({ active: true });
-		this.loadVehicleType();
-		this.myInputFocus.nativeElement.focus();
-	}
-
 	public cssValidator(formControl: FormControl): any {
 		return {'is-invalid': formControl.errors && formControl.touched};
 	}

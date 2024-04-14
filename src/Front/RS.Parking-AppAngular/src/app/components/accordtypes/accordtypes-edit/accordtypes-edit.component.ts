@@ -55,12 +55,6 @@ export class AccordTypesEditComponent implements OnInit {
 		});
 	}
 
-	public resetForm(): void {
-		this.form.reset();
-		this.loadAccordType();
-		this.myInputFocus.nativeElement.focus();
-	}
-
 	public cssValidator(formControl: FormControl): any {
 		return {'is-invalid': formControl.errors && formControl.touched};
 	}
