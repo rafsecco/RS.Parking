@@ -14,7 +14,8 @@
 		</div>
 
 		<div class="d-flex col-md-4 py-3">
-			<button class="btn btn-success mx-3" [disabled]="!form.valid" (click)="searchReport()">Search</button>
+			<!-- <button class="btn btn-success mx-3" [disabled]="!form.valid" (click)="searchReport()">Search</button> -->
+			<button class="btn btn-success mx-3" (click)="searchReport()">Search</button>
 		</div>
 	</div>
 </form>
@@ -41,7 +42,7 @@
 			<td class="d-none d-md-table-cell">{{controlInOut.dateTimeIn | DateTimeFormat}}</td>
 			<td class="d-none d-md-table-cell">{{controlInOut.dateTimeOut | DateTimeFormat}}</td>
 			<!-- <td class="d-none d-md-table-cell">{{controlInOut.dateTimeIn | date:'dd/MM/yyyy hh:mm:ss'}}</td> -->
-			<td>N/A {{getPrice(controlInOut.id)}}</td>
+			<td>{{getPrice(controlInOut.id)}}</td>
 		</tr>
 	</tbody>
 	<tfoot *ngIf="!controlInOutList.length">
@@ -52,3 +53,6 @@
 		</tr>
 	</tfoot>
 </table>
+
+<p>Form value: {{ form.status | json }}</p>
+{{controlInOutList | json}}

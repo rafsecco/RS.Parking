@@ -39,14 +39,16 @@ internal class AccordTypeMappings : IEntityTypeConfiguration<AccordType>
 			.HasColumnName("ds_accord")
 			.HasMaxLength(100);
 
+		//builder.Ignore(i => i.ControlInOut);
+
 		#region Populate
-		AccordType[] objAccordType = {
-			new AccordType { Id=1, Active=true, DateCreated=DateTime.Now, DiscountTypeId=0, Percentage=0m, Description="No Discount" },
-			new AccordType { Id=2, Active=true, DateCreated=DateTime.Now, DiscountTypeId=1, Percentage=50.0m, Description="Subway" },
-			new AccordType { Id=3, Active=true, DateCreated=DateTime.Now, DiscountTypeId=2, Percentage=100m, Description="McDonald's" },
-			new AccordType { Id=4, Active=true, DateCreated=DateTime.Now, DiscountTypeId=2, Percentage=50m, Description="PharmaTech" }
-		};
-		builder.HasData(objAccordType);
+		//AccordType[] objAccordType = {
+		//	new AccordType { Id=1, Active=true, DiscountTypeId=0, Percentage=0, Description="No Discount" },
+		//	new AccordType { Id=2, Active=true, DiscountTypeId=1, Percentage=0.5, Description="Subway" },
+		//	new AccordType { Id=3, Active=true, DiscountTypeId=2, Percentage=1, Description="McDonald's" },
+		//	new AccordType { Id=4, Active=true, DiscountTypeId=2, Percentage=0.5, Description="PharmaTech" }
+		//};
+		//builder.HasData(objAccordType);
 		#endregion
 	}
 }

@@ -60,7 +60,7 @@
 		<p>Date Created: {{accordType.dateCreated | DateTimeFormat}}</p>
 		<p>Description: {{accordType.description}}</p>
 		<p>Accord: {{getDiscountTypesById(accordType.discountTypeId)}}</p>
-		<p>Percentage: {{accordType.percentage | percent}}</p>
+		<p>Percentage: {{accordType.percentage | number:'1.0-2'}}%</p>
 		<p>Active? {{accordType.active ? 'activated' : 'disabled'}}</p>
 	</div>
 	<div class="modal-footer">
