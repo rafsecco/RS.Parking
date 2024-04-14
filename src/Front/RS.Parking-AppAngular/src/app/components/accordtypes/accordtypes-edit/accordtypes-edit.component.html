@@ -52,7 +52,7 @@
 
 			<div class="card-footer savecancel rounded shadow-sm">
 				<div class="d-flex">
-					<button class="btn btn-light mx-3" (click)="resetForm()">Cancel</button>
+					<button class="btn btn-light mx-3" onclick="javascript:history.back()">Back</button>
 					<button class="btn btn-success mx-3" [disabled]="!form.valid" (click)="updateAccordType()">Save</button>
 				</div>
 			</div>
