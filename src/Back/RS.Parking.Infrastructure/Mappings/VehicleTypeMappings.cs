@@ -36,13 +36,15 @@ internal class VehicleTypeMappings : IEntityTypeConfiguration<VehicleType>
 			.HasColumnName("ds_vehicle")
 			.HasMaxLength(100);
 
+		//builder.Ignore(i => i.ControlInOut);
+
 		#region Populate
-		VehicleType[] objVehicleType = {
-			new VehicleType {Id=1, Active=true, DateCreated=DateTime.Now, Cost=4m, Description="Car 1 (small)" },
-			new VehicleType {Id=2, Active=true, DateCreated=DateTime.Now, Cost=5.5m, Description="Car 2 (big)" },
-			new VehicleType {Id=3, Active=true, DateCreated=DateTime.Now, Cost=3m, Description="Moto 1" },
-		};
-		builder.HasData(objVehicleType);
+		//VehicleType[] objVehicleType = {
+		//	new VehicleType {Id=1, Active=true, Cost=4m, Description="Car 1 (small)" },
+		//	new VehicleType {Id=2, Active=true, Cost=5.5m, Description="Car 2 (big)" },
+		//	new VehicleType {Id=3, Active=true, Cost=3m, Description="Moto 1" },
+		//};
+		//builder.HasData(objVehicleType);
 		#endregion
 	}
 }

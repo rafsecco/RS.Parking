@@ -1,4 +1,4 @@
-﻿namespace RS.Parking.Domain.Models;
+namespace RS.Parking.Domain.Models;
 
 public class AccordType
 {
@@ -12,7 +12,7 @@ public class AccordType
 
 	public ushort DiscountTypeId { get; set; } = 0;
 	
-	public decimal Percentage { get; set; }
+	public double Percentage { get; set; }
 
 	public string Description { get; set; }
 	#endregion

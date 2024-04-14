@@ -41,7 +41,7 @@ export class VehicletypesNewComponent implements OnInit {
 	public validation(): void {
 		this.form = this.fb.group({
 			active: [true, [Validators.required]],
-			cost: ['0', [Validators.required, Validators.min(0.01), Validators.max(9999999999999) ]],
+			cost: ['0', [Validators.required, Validators.min(0.01), Validators.max(9999999999999.99) ]],
 			description: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(100)]]
 		});
 	}
@@ -79,7 +79,6 @@ export class VehicletypesNewComponent implements OnInit {
 
 	processFailure(fail: any) {
 		this.toastr.error('Error saving VehicleType', 'Error');
-		this.spinner.hide();
 	}
 
 }

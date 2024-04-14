@@ -9,11 +9,11 @@ EntityFrameWorkCore
 		dotnet ef migrations remove -v -p .\RS.Parking.Infrastructure\ -s .\RS.Parking.API\
 
 Iniciar BackEnd
-	Abrir o terminal e ir para a pasta "cd E:\Develop\Projects\RS.Parking\Back\src\RS.Parking.API\"
+	Abrir o terminal e ir para a pasta "cd E:\Develop\Projects\RS.Parking\src\Back\RS.Parking.API\"
 	Executar o comando "dotnet run"
 
 Iniciar FrontEnd
-	Abrir o terminal e ir para a pasta "cd E:\Develop\Projects\RS.Parking\Front\RS.Parking-AppAngular\"
+	Abrir o terminal e ir para a pasta "cd E:\Develop\Projects\RS.Parking\src\Front\RS.Parking-AppAngular\"
 	Executar o comando "ng serve -o"
 
 

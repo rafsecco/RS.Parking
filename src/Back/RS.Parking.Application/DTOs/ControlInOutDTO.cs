@@ -8,7 +8,7 @@ public class ControlInOutDTO
 
 	public ushort VehicleTypeId { get; set; }
 
-	public ushort? AccordTypeId { get; set; }
+	public ushort AccordTypeId { get; set; } = 0;
 
 	[Required]
 	public string LicensePlate { get; set; }

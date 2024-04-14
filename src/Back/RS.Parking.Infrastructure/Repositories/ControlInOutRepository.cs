@@ -11,13 +11,14 @@ public class ControlInOutRepository : IControlInOutRepository
 	public ControlInOutRepository(RSParkingContext context)
 	{
 		_context = context;
-		//_context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
 	}
 
 	public async Task<List<ControlInOut>> GetAll()
 	{
 		var retorno = await _context.ControlInOut
 			.Where(x => x.DateTimeOut == null)
+			.Include(v => v.VehicleType)
+			.Include(a => a.AccordType)
 			.OrderBy(x => x.DateTimeIn)
 			.ToListAsync();
 		return retorno;
@@ -27,6 +28,8 @@ public class ControlInOutRepository : IControlInOutRepository
 	{
 		return await _context.ControlInOut
 			.AsNoTracking()
+			.Include(v => v.VehicleType)
+			.Include(a => a.AccordType)
 			.FirstOrDefaultAsync(x => x.Id == id);
 	}
 
@@ -47,6 +50,8 @@ public class ControlInOutRepository : IControlInOutRepository
 		return await _context.ControlInOut
 			.AsNoTracking()
 			.Where(x => x.DateTimeIn >= pDate && (x.DateTimeOut == null || x.DateTimeOut >= pDate))
+			.Include(v => v.VehicleType)
+			.Include(a => a.AccordType)
 			.OrderBy(x => x.DateTimeIn)
 			.ToListAsync();
 	}

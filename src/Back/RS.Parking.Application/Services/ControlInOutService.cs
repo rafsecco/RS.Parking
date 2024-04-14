@@ -23,6 +23,7 @@ public class ControlInOutService : IControlInOutService
 		_vehicleTypeService = vehicleTypeService;
 		_accordTypeService = accordTypeService;
 		_mapper = mapper;
+
 	}
 
 	public async Task<List<ControlInOutDTO>> GetAll()
@@ -34,11 +35,11 @@ public class ControlInOutService : IControlInOutService
 
 			var objReturn = _mapper.Map<List<ControlInOutDTO>>(ControlInOuts);
 
-			foreach (var dto in objReturn)
-			{
-				dto.VehicleType = await _vehicleTypeService.GetById(dto.VehicleTypeId);
-				dto.AccordType = await _accordTypeService.GetById((ushort)dto.AccordTypeId);
-			}
+			//foreach (var dto in objReturn)
+			//{
+			//	dto.VehicleType = await _vehicleTypeService.GetById(dto.VehicleTypeId);
+			//	dto.AccordType = await _accordTypeService.GetById(dto.AccordTypeId);
+			//}
 
 			return objReturn;
 		}
@@ -56,8 +57,8 @@ public class ControlInOutService : IControlInOutService
 			if (ControlInOut == null) return null;
 
 			var objreturn = _mapper.Map<ControlInOutDTO>(ControlInOut);
-			objreturn.VehicleType = await _vehicleTypeService.GetById(objreturn.VehicleTypeId);
-			objreturn.Price = ControlInOut.CalculatePrice();
+			//objreturn.VehicleType = await _vehicleTypeService.GetById(objreturn.VehicleTypeId);
+			//objreturn.Price = ControlInOut.CalculatePrice();
 			return objreturn;
 		}
 		catch (Exception ex)
@@ -118,15 +119,16 @@ public class ControlInOutService : IControlInOutService
 	{
 		try
 		{
-			var ControlInOuts = await _controlInOutRepo.GetByRange(pDate);
-			if (ControlInOuts == null) return null;
+			List<ControlInOut> controlInOuts = await _controlInOutRepo.GetByRange(pDate);
+			if (controlInOuts == null) return null;
 
-			var objReturn = _mapper.Map<List<ControlInOutDTO>>(ControlInOuts);
-			foreach (var dto in objReturn)
-			{
-				dto.VehicleType = await _vehicleTypeService.GetById(dto.VehicleTypeId);
-				dto.AccordType = await _accordTypeService.GetById((ushort)dto.AccordTypeId);
-			}
+			var objReturn = _mapper.Map<List<ControlInOutDTO>>(controlInOuts);
+			//foreach (var dto in objReturn)
+			//{
+			//	dto.VehicleType = await _vehicleTypeService.GetById(dto.VehicleTypeId);
+			//	dto.AccordType = await _accordTypeService.GetById(dto.AccordTypeId);
+			//	//dto.Price = controlInOuts.Find(x => x.Id == dto.Id).CalculatePrice();
+			//}
 			return objReturn;
 		}
 		catch (Exception ex)

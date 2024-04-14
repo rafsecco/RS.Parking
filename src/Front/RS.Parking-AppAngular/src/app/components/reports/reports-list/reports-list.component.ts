@@ -48,23 +48,24 @@ export class ReportsListComponent implements OnInit {
 	}
 
 	constructor(
+		private controlInOutService: ControlInOutService,
 		private fb: FormBuilder,
 		private localeService: BsLocaleService,
 		private spinner: NgxSpinnerService,
 		private toastr: ToastrService,
-		private datePipe: DatePipe,
-		private controlInOutService: ControlInOutService,
-		private vehicleTypesService: VehicletypesService,
-		private accordTypesService: AccordTypesService
+		private datePipe: DatePipe
+		// private vehicleTypesService: VehicletypesService,
+		// private accordTypesService: AccordTypesService
 		)
 		{
 			this.localeService.use('pt-br');
 		}
 
 	ngOnInit() {
-		this.Validation();
-		this.LoadAccordTypeList();
-		this.LoadVehicleTypeList();
+		this.searchReport();
+		//this.Validation();
+		// this.LoadAccordTypeList();
+		// this.LoadVehicleTypeList();
 	}
 
 	public Validation(): void {
@@ -73,35 +74,35 @@ export class ReportsListComponent implements OnInit {
 		});
 	}
 
-	public LoadAccordTypeList(): void {
-		this.spinner.show();
-		this.accordTypesService.getAllAccordTypes().subscribe({
-			next: (_accordTypes: AccordType[]) => this.accordTypes = _accordTypes,
-			error: (error: any) => { this.toastr.error('Error loading AccordType.', 'Error!'); },
-			complete: () => this.spinner.hide()
-		});
-	}
+	// public LoadAccordTypeList(): void {
+	// 	this.spinner.show();
+	// 	this.accordTypesService.getAllAccordTypes().subscribe({
+	// 		next: (_accordTypes: AccordType[]) => this.accordTypes = _accordTypes,
+	// 		error: (error: any) => { this.toastr.error('Error loading AccordType.', 'Error!'); },
+	// 		complete: () => this.spinner.hide()
+	// 	});
+	// }
 
-	public LoadVehicleTypeList(): void {
-		this.spinner.show();
-		this.vehicleTypesService.getAllVehicleTypes().subscribe({
-			next: (_vehicleTypes: VehicleType[]) => this.vehicleTypes = _vehicleTypes,
-			error: (error: any) => { this.toastr.error('Error loading VehicleType.', 'Error!'); },
-			complete: () => this.spinner.hide()
-		});
-	}
+	// public LoadVehicleTypeList(): void {
+	// 	this.spinner.show();
+	// 	this.vehicleTypesService.getAllVehicleTypes().subscribe({
+	// 		next: (_vehicleTypes: VehicleType[]) => this.vehicleTypes = _vehicleTypes,
+	// 		error: (error: any) => { this.toastr.error('Error loading VehicleType.', 'Error!'); },
+	// 		complete: () => this.spinner.hide()
+	// 	});
+	// }
 
 	public searchReport(): void {
-		let date = new Date(2022, 10, 25);
-		//console.log(this.datePipe.transform(date, 'yyyy-MM-dd'));
-		this.spinner.show();
-		if (this.form.valid) {
+		let date = new Date('2024-04-03');
+		console.log(this.datePipe.transform(date, 'yyyy-MM-dd'));
+		//if (this.form.valid) {
+			this.spinner.show();
 			this.controlInOutService.getControlInOutByRange(this.datePipe.transform(date, 'yyyy-MM-dd')).subscribe({
 				next: (_controlInOutList: ControlInOut[]) => { this.controlInOutList = _controlInOutList; },
 				error: (error: any) => { this.toastr.error(`Error loading Control In Out.\n${error}`, 'Error!'); this.spinner.hide(); },
 				complete: () => { this.spinner.hide(); }
 			});
-		}
+		//}
 	}
 
 	public getPrice(id:number): string {
@@ -118,8 +119,8 @@ export class ReportsListComponent implements OnInit {
 		let dateIn = new Date(controlInOut.dateTimeIn);
 		let dateOut = new Date(controlInOut.dateTimeOut);
 
-		console.log(`DateIn: ${typeof dateIn}\nDateOut: ${typeof dateOut}`);
-		console.log(`DateIn: ${typeof controlInOut.dateTimeIn}\nDateOut: ${typeof controlInOut.dateTimeOut}`);
+		console.log(`DateIn(local): ${typeof dateIn}\nDateOut(Local): ${typeof dateOut}`);
+		console.log(`DateIn(Object): ${typeof controlInOut.dateTimeIn}\nDateOut(Object): ${typeof controlInOut.dateTimeOut}`);
 
 		//double tolerance = (double)Convert.ToInt32(ConfigurationManager.AppSettings.Get("Tolerance")) / 60;    // 0.0833333333333333;	//5 min defatul
 		const tolerance = 5 / 60; //5 min defatul

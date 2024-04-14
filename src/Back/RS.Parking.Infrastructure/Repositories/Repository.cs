@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using RS.Parking.Domain.Contracts;
 
 namespace RS.Parking.Infrastructure.Repositories;

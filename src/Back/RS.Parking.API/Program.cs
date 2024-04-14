@@ -14,6 +14,7 @@ var app = builder.Build();
 #region Configure
 app.UseApiConfiguration();
 app.UseSwaggerConfiguration();
+app.UseDbMigrationHelper();
 #endregion
 
 app.Run();
