@@ -54,7 +54,7 @@ export class AccordTypesNewComponent implements OnInit {
 	public validation(): void {
 		this.accordFormGroup = this.fb.group({
 			active: [true, [Validators.required]],
-			percentage: ['0', [Validators.required, Validators.min(0.01), Validators.max(100) ]],
+			percentage: [null, [Validators.required, Validators.min(0), Validators.max(100) ]],
 			accord: ['0', [Validators.required, Validators.min(0), , Validators.max(2) ]],
 			description: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(100)]]
 		});
@@ -73,6 +73,7 @@ export class AccordTypesNewComponent implements OnInit {
 		this.spinner.show();
 		if (this.accordFormGroup.valid) {
 			this.accordType = Object.assign({}, this.accordType, this.accordFormGroup.value);
+			this.accordType.percentage = this.accordType.percentage / 100;
 			this.accordTypesService.saveAccordType(this.accordType).subscribe({
 				next: success => this.processSuccess(success),
 				error: failure => this.processFailure(failure),
