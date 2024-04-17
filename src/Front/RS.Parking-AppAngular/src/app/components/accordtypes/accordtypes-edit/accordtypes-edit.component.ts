@@ -47,7 +47,7 @@ export class AccordTypesEditComponent implements OnInit {
 	public validation(): void {
 		this.form = this.fb.group({
 			active: [true, [Validators.required]],
-			percentage: ['0', [Validators.required, Validators.min(0.00), Validators.max(9999999999999) ]],
+			percentage: [null, [Validators.required, Validators.min(0), Validators.max(100) ]],
 			discountTypeId: ['0', [Validators.required, Validators.min(0), Validators.max(2) ]],
 			description: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(100)]],
 			id: ['',''],
@@ -75,6 +75,7 @@ export class AccordTypesEditComponent implements OnInit {
 			this.accordTypesService.getAccordTypeById(this.accordTypeId).subscribe({
 				next: (_accordType: AccordType) => {
 					this.accordType = { ... _accordType };
+					this.accordType.percentage = _accordType.percentage * 100;
 					this.form.patchValue(this.accordType);
 				},
 				error: (error: any) => { this.toastr.error(`Error loading AccordType.\n${error}`, 'Error!'); },
@@ -87,6 +88,7 @@ export class AccordTypesEditComponent implements OnInit {
 		this.spinner.show();
 		if (this.form.valid) {
 			this.accordType = Object.assign({}, this.accordType, this.form.value);
+			this.accordType.percentage = this.accordType.percentage / 100;
 			this.accordTypesService.updateAccordType(this.accordType).subscribe({
 				next: success => this.processSuccess(success),
 				error: failure => this.processFailure(failure),

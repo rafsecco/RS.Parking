@@ -33,8 +33,8 @@
 							currencyMask [options]="{ suffix: '%', prefix: '', min: 0, max: 100, precision: 0}"
 						/>
 						<div class="invalid-feedback" *ngIf="f.percentage.errors?.required">Percentage is required!</div>
-						<div class="invalid-feedback" *ngIf="f.percentage.errors?.minlength">Percentage must have the minimum value of 0.01</div>
-						<div class="invalid-feedback" *ngIf="f.percentage.errors?.maxlength">Percentage must have the maximum value of 100.00</div>
+						<div class="invalid-feedback" *ngIf="f.percentage.errors?.minlength">Percentage must have the minimum value of 0</div>
+						<div class="invalid-feedback" *ngIf="f.percentage.errors?.maxlength">Percentage must have the maximum value of 100</div>
 					</div>
 				</div>
 
