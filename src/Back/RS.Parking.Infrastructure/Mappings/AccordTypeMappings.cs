@@ -32,7 +32,7 @@ internal class AccordTypeMappings : IEntityTypeConfiguration<AccordType>
 		builder.Property(p => p.Percentage)
 			.IsRequired()
 			.HasColumnName("nr_percentage")
-			.HasPrecision(5, 2);
+			.HasPrecision(3, 2);
 
 		builder.Property(p => p.Description)
 			.IsRequired()

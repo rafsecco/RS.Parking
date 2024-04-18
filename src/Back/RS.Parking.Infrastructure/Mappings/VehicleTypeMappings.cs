@@ -27,7 +27,7 @@ internal class VehicleTypeMappings : IEntityTypeConfiguration<VehicleType>
 
 		builder.Property(p => p.Cost)
 			.IsRequired()
-			.IsConcurrencyToken()
+			//.IsConcurrencyToken()
 			.HasColumnName("vl_cost")
 			.HasPrecision(15, 2);
 

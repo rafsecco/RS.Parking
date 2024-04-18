@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using RS.Core.Helpers;
 using RS.Parking.Application.Contracts;
 using RS.Parking.Application.DTOs;
@@ -81,9 +81,9 @@ public class AccordTypeController : ControllerBase
 	{
 		try
 		{
-			var AccordType = await _accordTypeService.Update(id, model);
-			if (AccordType == null) return BadRequest("Error to update AccordType!");
-			return Ok(AccordType);
+			var accordType = await _accordTypeService.Update(id, model);
+			if (accordType == null) return BadRequest("Error to update AccordType!");
+			return Ok(accordType);
 		}
 		catch (Exception ex)
 		{
