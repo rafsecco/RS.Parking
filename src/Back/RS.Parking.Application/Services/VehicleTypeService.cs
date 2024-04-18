@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using RS.Parking.Application.Contracts;
 using RS.Parking.Application.DTOs;
 using RS.Parking.Domain.Models;
@@ -69,11 +69,11 @@ public class VehicleTypeService : IVehicleTypeService
 		}
 	}
 
-	public async Task<VehicleTypeDTO> Update(ushort vehicleTypeId, VehicleTypeDTO model)
+	public async Task<VehicleTypeDTO> Update(ushort id, VehicleTypeDTO model)
 	{
 		try
 		{
-			var vehicleType = await _vehicleTypeRepo.GetById(vehicleTypeId);
+			var vehicleType = await _vehicleTypeRepo.GetById(id);
 			if (vehicleType == null) return null;
 
 			model.Id = vehicleType.Id;

@@ -1,9 +1,9 @@
 EntityFrameWorkCore
 	Migrations
-	Ir para a pasta "cd E:\Develop\Projects\RS.Parking\Back\src\"
+	Ir para a pasta "cd E:\Develop\Projects\RS.Parking\src\Back\"
 		dotnet ef migrations add Initial -v -p .\RS.Parking.Infrastructure\ -s .\RS.Parking.API\
 		dotnet ef database update -s .\RS.Parking.API\ [--connection your_connection_string]
-		dotnet ef migrations script -v -i -p .\RS.Parking.Infrastructure -s .\RS.Parking.API\ -o ..\..\..\Docker\DataBase\scripts\01_FirstMigration.sql
+		dotnet ef migrations script -v -i -p .\RS.Parking.Infrastructure -s .\RS.Parking.API\ -o ..\..\Docker\DataBase\scripts\01_FirstMigration.sql
 
 		dotnet ef migrations list -p .\RS.Parking.Infrastructure\ -s .\RS.Parking.API\
 		dotnet ef migrations remove -v -p .\RS.Parking.Infrastructure\ -s .\RS.Parking.API\

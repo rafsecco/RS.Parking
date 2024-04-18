@@ -12,8 +12,8 @@ using RS.Parking.Infrastructure;
 namespace RS.Parking.Infrastructure.Migrations
 {
     [DbContext(typeof(RSParkingContext))]
-    [Migration("20240413214037_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240418111404_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -57,7 +57,7 @@ namespace RS.Parking.Infrastructure.Migrations
                         .HasColumnName("ie_accord");
 
                     b.Property<double>("Percentage")
-                        .HasPrecision(5, 2)
+                        .HasPrecision(3, 2)
                         .HasColumnType("double")
                         .HasColumnName("nr_percentage");
 
@@ -132,7 +132,6 @@ namespace RS.Parking.Infrastructure.Migrations
                         .HasColumnName("bln_active");
 
                     b.Property<decimal>("Cost")
-                        .IsConcurrencyToken()
                         .HasPrecision(15, 2)
                         .HasColumnType("decimal(15,2)")
                         .HasColumnName("vl_cost");

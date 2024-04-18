@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using RS.Parking.Application.Contracts;
 using RS.Parking.Application.DTOs;
 using RS.Parking.Domain.Models;
@@ -73,16 +73,16 @@ public class AccordTypeService : IAccordTypeService
 	{
 		try
 		{
-			var AccordType = await _accordTypeRepo.GetById(id);
-			if (AccordType == null) return null;
+			var accordType = await _accordTypeRepo.GetById(id);
+			if (accordType == null) return null;
 
-			model.Id = AccordType.Id;
-			_mapper.Map(model, AccordType);
-			var objResult = await _accordTypeRepo.Update(AccordType);
+			model.Id = accordType.Id;
+			_mapper.Map(model, accordType);
+			var objResult = await _accordTypeRepo.Update(accordType);
 
 			if (objResult > 0)
 			{
-				var objReturn = await _accordTypeRepo.GetById(AccordType.Id);
+				var objReturn = await _accordTypeRepo.GetById(accordType.Id);
 				return _mapper.Map<AccordTypeDTO>(objReturn);
 			}
 			return null;

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace RS.Parking.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -25,7 +25,7 @@ namespace RS.Parking.Infrastructure.Migrations
                     bln_active = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     dt_dateCreated = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValueSql: "NOW()"),
                     ie_accord = table.Column<ushort>(type: "smallint unsigned", nullable: false),
-                    nr_percentage = table.Column<double>(type: "double", precision: 5, scale: 2, nullable: false),
+                    nr_percentage = table.Column<double>(type: "double", precision: 3, scale: 2, nullable: false),
                     ds_accord = table.Column<string>(type: "VARCHAR(100)", maxLength: 100, nullable: false, collation: "utf8_general_ci")
                 },
                 constraints: table =>
