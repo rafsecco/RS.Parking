@@ -15,14 +15,8 @@ import { ToastrService } from 'ngx-toastr';
 export class AccordTypesNewComponent implements OnInit {
 
 	accordFormGroup: FormGroup;
-	accordType = {} as AccordType;
+	public accordType = {} as AccordType;
 	public discountTypeEnum: DiscountTypeEnum[] = [];
-
-
-
-	get f(): any {
-		return this.accordFormGroup.controls;
-	}
 
 	constructor(
 		private fb: FormBuilder,
@@ -42,6 +36,10 @@ export class AccordTypesNewComponent implements OnInit {
 		this.myInputFocus.nativeElement.focus();
 	}
 
+	get f(): any {
+		return this.accordFormGroup.controls;
+	}
+
 	public LoadDiscountTypeEnum(): void {
 		this.spinner.show();
 		this.accordTypesService.getDiscountTypeEnum().subscribe({
@@ -56,12 +54,15 @@ export class AccordTypesNewComponent implements OnInit {
 			active: [true, [Validators.required]],
 			percentage: [null, [Validators.required, Validators.min(0), Validators.max(100) ]],
 			accord: ['0', [Validators.required, Validators.min(0), , Validators.max(2) ]],
-			description: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(100)]]
+			description: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(100)]],
+			discountTypeId: [0, [Validators.required, Validators.min(0), Validators.max(2) ]],
 		});
 	}
 
 	public resetForm(): void {
 		this.accordFormGroup.reset({ active: true });
+		this.LoadDiscountTypeEnum();
+		this.validation();
 		this.myInputFocus.nativeElement.focus();
 	}
 
