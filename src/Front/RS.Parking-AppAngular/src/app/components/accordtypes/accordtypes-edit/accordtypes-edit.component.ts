@@ -19,10 +19,6 @@ export class AccordTypesEditComponent implements OnInit {
 	public discountTypeEnum: DiscountTypeEnum[] = [];
 	public accordType = {} as AccordType;
 
-	get f(): any {
-		return this.form.controls;
-	}
-
 	constructor(
 		private fb: FormBuilder,
 		private accordTypesService: AccordTypesService,
@@ -44,11 +40,15 @@ export class AccordTypesEditComponent implements OnInit {
 		this.myInputFocus.nativeElement.focus();
 	}
 
+	get f(): any {
+		return this.form.controls;
+	}
+
 	public validation(): void {
 		this.form = this.fb.group({
 			active: [true, [Validators.required]],
 			percentage: [null, [Validators.required, Validators.min(0), Validators.max(100) ]],
-			discountTypeId: ['0', [Validators.required, Validators.min(0), Validators.max(2) ]],
+			discountTypeId: [0, [Validators.required, Validators.min(0), Validators.max(2) ]],
 			description: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(100)]],
 			id: ['',''],
 			dateCreated: ['','']
@@ -63,7 +63,7 @@ export class AccordTypesEditComponent implements OnInit {
 		this.spinner.show();
 		this.accordTypesService.getDiscountTypeEnum().subscribe({
 			next: (_discountTypes: DiscountTypeEnum[]) => this.discountTypeEnum = _discountTypes,
-			error: (error: any) => { this.toastr.error('Error loading DiscountTypeEnum.', 'Error!'); },
+			error: (error: any) => { this.toastr.error(`Error loading DiscountTypeEnum.\nError: ${error}`, 'Error!'); },
 			complete: () => this.spinner.hide()
 		});
 	}
@@ -78,7 +78,7 @@ export class AccordTypesEditComponent implements OnInit {
 					this.accordType.percentage = _accordType.percentage * 100;
 					this.form.patchValue(this.accordType);
 				},
-				error: (error: any) => { this.toastr.error(`Error loading AccordType.\n${error}`, 'Error!'); },
+				error: (error: any) => { this.toastr.error(`Error loading AccordType.\nError: ${error}`, 'Error!'); },
 				complete: () => this.spinner.hide()
 			});
 		}
