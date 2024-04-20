@@ -76,7 +76,7 @@ namespace RS.Parking.Infrastructure.Migrations
                     b.Property<byte>("AccordTypeId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TINYINT UNSIGNED")
-                        .HasDefaultValue((byte)0)
+                        .HasDefaultValue((byte)1)
                         .HasColumnName("cd_accord")
                         .HasColumnOrder(3);
 

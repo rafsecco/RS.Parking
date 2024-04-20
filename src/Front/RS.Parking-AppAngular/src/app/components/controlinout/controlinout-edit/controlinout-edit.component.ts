@@ -3,10 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { AccordType } from '@app/models/AccordType';
 import { ControlInOut } from '@app/models/ControlInOut';
-import { VehicleType } from '@app/models/VehicleType';
 import { AccordTypesService } from '@app/services/AccordTypes.service';
 import { ControlInOutService } from '@app/services/ControlInOut.service';
-import { VehicletypesService } from '@app/services/vehicletypes.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
@@ -21,7 +19,6 @@ export class ControlinoutEditComponent implements OnInit {
 	modalRef: BsModalRef;
 	form: FormGroup;
 	controlInOut = {} as ControlInOut;
-	vehicleType = {} as VehicleType;
 	accordTypesList: AccordType[] = [];
 	accordTypeId = 0;
 
@@ -40,18 +37,8 @@ export class ControlinoutEditComponent implements OnInit {
 	// 	currency: 'USD',
 	// });
 
-	get f(): any {
-		return this.form.controls;
-	}
-
-	@ViewChild("angularFocus") myInputFocus: ElementRef;
-	ngAfterViewInit() {
-		this.myInputFocus.nativeElement.focus();
-	}
-
 	constructor(
 		private fb: FormBuilder,
-		private vehicleTypesService: VehicletypesService,
 		private accordTypesService: AccordTypesService,
 		private controlInOutService: ControlInOutService,
 		private router: Router,
@@ -66,6 +53,15 @@ export class ControlinoutEditComponent implements OnInit {
 		this.Validation();
 	}
 
+	@ViewChild("angularFocus") myInputFocus: ElementRef;
+	ngAfterViewInit() {
+		this.myInputFocus.nativeElement.focus();
+	}
+
+	get f(): any {
+		return this.form.controls;
+	}
+
 	public cssValidator(formControl: FormControl): any {
 		return {'is-invalid': formControl.errors && formControl.touched};
 	}
@@ -73,41 +69,33 @@ export class ControlinoutEditComponent implements OnInit {
 	public Validation(): void {
 		this.form = this.fb.group({
 			licensePlate: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(7)]],
-			vehicleTypeId: [0 + '', [Validators.required]],
+			//vehicleTypeId: [0 + '', [Validators.required]],
 			accordTypeId: ['', [Validators.required, Validators.min(1)]],
 			dateTimeIn: ['' , [Validators.required]],
-			dateTimeOut: ['' , [Validators.required]]
+			dateTimeOut: ['' , [Validators.required]],
+			vehicleType: this.fb.group({
+				id: '',
+				active: '',
+				dateCreated: '',
+				cost:  '',
+				description:  ''
+			})
 		});
 	}
 
 	public LoadControlInOut(): void {
-		this.spinner.show();
 		let controlInOutId = +this.activatedRouter.snapshot.paramMap.get('id');
 		if (controlInOutId !== null && controlInOutId !== 0) {
 			this.spinner.show();
 			this.controlInOutService.getControlInOutById(controlInOutId).subscribe({
-				next: (controlInOut: ControlInOut) => {
-					this.controlInOut = {... controlInOut, dateTimeOut: new Date(Date.now()) };
-					this.LoadVehicleType();
+				next: (_controlInOut: ControlInOut) => {
+					this.controlInOut = {... _controlInOut, dateTimeOut: new Date(Date.now()) };
 					this.form.patchValue(this.controlInOut);
+					// Preencher os valores de vehicleType com os valores recebidos da API
+					this.form.get('vehicleType').patchValue(this.controlInOut.vehicleType);
 					this.LoadAccordTypeList();
 				},
 				error: (error: any) => { this.toastr.error(`Error loading Control In Out.\n${error}`, 'Error!'); },
-				complete: () => this.spinner.hide()
-			});
-		}
-	}
-
-	public LoadVehicleType(): void {
-		let vehicleTypeId = this.controlInOut.vehicleTypeId;
-		if (vehicleTypeId !== null && vehicleTypeId !== 0) {
-			this.spinner.show();
-			this.vehicleTypesService.getVehicleTypeById(vehicleTypeId).subscribe({
-				next: (vehicleType: VehicleType) => {
-					this.vehicleType = { ... vehicleType };
-					this.controlInOut.vehicleType = { ... vehicleType };
-				},
-				error: (error: any) => { this.toastr.error(`Error loading VehicleType.\n${error}`, 'Error!'); },
 				complete: () => this.spinner.hide()
 			});
 		}
@@ -131,90 +119,93 @@ export class ControlinoutEditComponent implements OnInit {
 		});
 	}
 
-	getVehicleDescription(): string {
-		return `${this.vehicleType.id} - ${this.vehicleType.description}`;
-	}
-
 	getChangeAccordTypeValue(val:string): void {
 		this.accordTypeId = Number(val);
 		this.getAccordTypeById(this.accordTypeId);
 	}
 
 	getAccordTypeDescription(): string {
-		let accordType = {} as AccordType;
-		accordType = this.accordTypesList.find(x => x.id == this.accordTypeId)
-		return `${accordType.id} - ${accordType.description}`;
+		return `${this.controlInOut.accordType.id} - ${this.controlInOut.accordType.description}`;
 	}
-
-	public getPrice(): string {
-
-		//double tolerance = (double)Convert.ToInt32(ConfigurationManager.AppSettings.Get("Tolerance")) / 60;    // 0.0833333333333333;	//5 min defatul
-		const tolerance = 5 / 60; //5 min defatul
-
-		let dateIn = new Date(this.controlInOut.dateTimeIn);
-		let dateOut = new Date(this.controlInOut.dateTimeOut);
-
-		// let dateIn = new Date("2022-11-19T06:00:00.000000");
-		// let dateOut = new Date("2022-11-19T07:00:00.000000");
-
-		//var diffDays = dateOut.getDate() - dateIn.getDate();
-		let totalHours = Math.abs(dateOut.getTime() - dateIn.getTime()) / 36e5; //36e5 is the scientific notation for 60*60*1000
-		let rest = totalHours - Math.floor(totalHours);
-		let totalHoursRounded = (rest > tolerance) ? Math.ceil(totalHours) : Math.floor(totalHours);
-
-		let returnValue:string;
-		let totalCost:number;
-
-		switch (this.controlInOut.accordType.discountTypeId) {
-			case 1:	// Total
-				totalHoursRounded /= this.controlInOut.accordType.percentage / 100;
-				returnValue = `${totalHoursRounded} Tickets`;
-				break;
-			case 2:	// First Hour
-				let firstHourCost = this.controlInOut.vehicleType.cost * (this.controlInOut.accordType.percentage / 100);
-				let totalHoursCost = totalHoursRounded * this.controlInOut.vehicleType.cost;
-				totalCost = totalHoursCost - firstHourCost;
-				returnValue = this.formatter.format(totalCost);
-				break;
-			default:	// No Discount
-				totalCost = totalHoursRounded * this.controlInOut.vehicleType.cost;
-				returnValue = this.formatter.format(totalCost);
-		}
-
-		return returnValue;
-	}
-
-
 
 	openModalView(event: any, template: TemplateRef<any>): void {
 		event.stopPropagation();
+		this.updateControlInOut();
 		this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
 	}
 
-	public checkOutConfirmed(): void {
-		this.spinner.show();
+	public updateControlInOut(): void {
 		if (this.form.valid) {
+			this.spinner.show();
 			this.controlInOut = Object.assign({}, this.controlInOut, this.form.value);
 			this.controlInOutService.updateControlInOut(this.controlInOut).subscribe({
-				next: success => this.processSuccess(success),
+				next: (_controlInOut: ControlInOut) => {
+					this.controlInOut = {... _controlInOut };
+					this.form.patchValue(this.controlInOut);
+					// Preencher os valores de vehicleType com os valores recebidos da API
+					this.form.get('vehicleType').patchValue(this.controlInOut.vehicleType);
+				},
+				//next: success => this.processSuccess(success),
 				error: failure => this.processFailure(failure),
-				complete: () => { this.spinner.hide(); this.modalRef.hide(); }
+				complete: () => this.spinner.hide()
 			});
 		}
-
 	}
 
-	processSuccess(response: any) {
-		let toast = this.toastr.success('Control In Out', 'Success!');
+	public confirmCheckOut(): void {
+		// print checkout
+		console.log("Print Payment voucher!");
+		let toast = this.toastr.success('Check Out', 'Thanks! Check back often!');
 		if (toast) {
 			toast.onHidden.subscribe(() => {
+				this.modalRef.hide();
 				this.router.navigate(['/controlinout/list']);
 			});
 		}
 	}
 
-	processFailure(fail: any) {
+	public cancelCheckOut(): void {
+		if (this.form.valid) {
+			this.controlInOut = Object.assign({}, this.controlInOut, this.form.value);
+			this.controlInOut.dateTimeOut = null;
+			this.controlInOutService.updateControlInOut(this.controlInOut).subscribe({
+				next: success => {
+					this.processSuccess(success);
+				},
+				error: failure => this.processFailure(failure),
+				complete: () => { this.spinner.hide(); }
+			});
+		}
+	}
+
+	private processSuccess(response: any) {
+		let toast = this.toastr.success('Control In Out', 'Success!');
+		if (toast) {
+			toast.onHidden.subscribe(() => {
+				this.modalRef.hide();
+				this.router.navigate(['/controlinout/list']);
+			});
+		}
+	}
+
+	private processFailure(fail: any) {
 		this.toastr.error(`Error saving Control In Out.\n${fail}`, 'Error');
+	}
+
+	public formatDate(): void {
+
+		const now = new Date(Date.now())
+		console.log(`new Date(Date.now()): ${now}`)
+
+		const date = new Date()
+		console.log(`new Date(): ${date}`)
+
+		const currentDate = new Date(); // Isso retorna a data e hora atual em relação ao UTC
+		const localDate = new Date(currentDate.getTime() - (currentDate.getTimezoneOffset() * 60000));
+		console.log(`localDate: ${localDate}`); // Isso imprimirá a data e hora atual no fuso horário local
+
+		console.log(`controlInOut.dateTimeOut: ${this.controlInOut.dateTimeOut}`);
+		console.log(`Form.dateTimeOut: ${this.form.get('dateTimeOut')}`);
 	}
 
 }

@@ -60,7 +60,7 @@ namespace RS.Parking.Infrastructure.Migrations
                     id_controlInOut = table.Column<ulong>(type: "BIGINT UNSIGNED", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     cd_vehicle = table.Column<byte>(type: "TINYINT UNSIGNED", nullable: false),
-                    cd_accord = table.Column<byte>(type: "TINYINT UNSIGNED", nullable: false, defaultValue: (byte)0),
+                    cd_accord = table.Column<byte>(type: "TINYINT UNSIGNED", nullable: false, defaultValue: (byte)1),
                     dt_in = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValueSql: "NOW()"),
                     dt_out = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     ds_licensePlate = table.Column<string>(type: "varchar(7)", maxLength: 7, nullable: false, collation: "utf8_general_ci")

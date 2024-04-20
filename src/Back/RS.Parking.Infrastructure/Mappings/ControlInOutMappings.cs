@@ -28,7 +28,7 @@ internal class ControlInOutMappings : IEntityTypeConfiguration<ControlInOut>
 		builder.Property(p => p.AccordTypeId)
 			.IsRequired()
 			.HasColumnOrder(3)
-			.HasDefaultValue(0)
+			.HasDefaultValue(1)
 			.HasColumnName("cd_accord")
 			.HasColumnType("TINYINT UNSIGNED");
 

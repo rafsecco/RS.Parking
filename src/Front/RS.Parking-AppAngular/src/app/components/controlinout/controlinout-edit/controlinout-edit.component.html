@@ -1,6 +1,3 @@
-<!-- <p>Form value: {{ form.value | json }}</p>
-<p>Form value: {{ form.status | json }}</p>
--->
 <div class="row">
 	<div class="card rounded shadow-sm">
 		<form [formGroup]="form">
@@ -9,17 +6,14 @@
 				<div class="form-row">
 					<div class="form-group col-md-4 py-3">
 						<label for="licensePlate">License Plate:</label>
-						<input type="text" class="form-control" readonly id="licensePlate" name="licensePlate" formControlName="licensePlate">
+						<input readonly type="text" class="form-control" id="licensePlate" name="licensePlate" formControlName="licensePlate" />
 					</div>
 				</div>
 
 				<div class="form-row">
 					<div class="form-group col-md-4 py-3">
 						<label class="control-label" for="vehicle">Vehicle:</label>
-						<input type="text" class="form-control" readonly id="vehicleTypeId" name="vehicleTypeId" formControlName="vehicleTypeId" value="{{getVehicleDescription()}}">
-						<!-- <select class="form-control" id="vehicle" formControlName="vehicleTypeId" readonly>
-							<option *ngFor="let vehicleType of vehicleTypeList" value="{{vehicleType.id}}">{{vehicleType.description}}</option>
-						</select> -->
+						<input readonly type="text" class="form-control" id="vehicleTypeId" *ngIf="controlInOut && controlInOut.vehicleType" [value]="this.controlInOut.vehicleType.id +' - '+ this.controlInOut.vehicleType.description" />
 					</div>
 				</div>
 
@@ -27,7 +21,6 @@
 					<div class="form-group col-md-4 py-3">
 						<label class="control-label" for="accordTypeId">Accord:</label>
 						<select class="form-control" id="accordTypeId" name="accordTypeId" formControlName="accordTypeId" value="{{this.controlInOut.accordTypeId}}" (change)="getChangeAccordTypeValue(angularFocus.value)" #angularFocus autofocus>
-						<!-- <select class="form-control" id="accord" formControlName="accordTypeId" #angularFocus autofocus> -->
 							<option *ngFor="let accordType of accordTypesList" value="{{accordType.id}}">{{accordType.description}}</option>
 						</select>
 					</div>
@@ -36,14 +29,14 @@
 				<div class="form-row">
 					<div class="form-group col-md-4 py-3">
 						<label for="dateTimeIn">Date Time In:</label>
-						<input type="text" class="form-control" id="dateTimeIn" name="dateTimeIn" formControlName="dateTimeIn" value="{{ controlInOut.dateTimeIn | DateTimeFormat }}" readonly />
+						<input readonly type="text" class="form-control" id="dateTimeIn" name="dateTimeIn" formControlName="dateTimeIn" value="{{ controlInOut.dateTimeIn | DateTimeFormat }}" />
 					</div>
 				</div>
 
 				<div class="form-row">
 					<div class="form-group col-md-4 py-3">
 						<label for="dateTimeOut">Date Time Out:</label>
-						<input type="text" class="form-control" id="dateTimeOut" name="dateTimeOut" formControlName="dateTimeOut" value="{{ controlInOut.dateTimeOut | DateTimeFormat }}" readonly />
+						<input readonly type="text" class="form-control" id="dateTimeOut" name="dateTimeOut" formControlName="dateTimeOut" value="{{ controlInOut.dateTimeOut | DateTimeFormat }}" />
 					</div>
 				</div>
 
@@ -64,18 +57,26 @@
 <ng-template #templateView>
 	<div class="modal-header">
 		<h4 class="modal-title">CheckOut</h4>
-		<button type="button" class="btn-close" aria-label="Close" (click)="modalRef.hide()"></button>
+		<button type="button" class="btn-close" aria-label="Close" (click)="cancelCheckOut()"></button>
 	</div>
 	<div class="modal-body">
 		<p>License Plate: {{controlInOut.licensePlate}}</p>
-		<p>VehicleType: {{getVehicleDescription()}}</p>
-		<p>AccordType: {{getAccordTypeDescription()}}</p>
+		<p>VehicleType: {{this.controlInOut.vehicleType.id}} - {{this.controlInOut.vehicleType.description}}</p>
 		<p>Date In: {{controlInOut.dateTimeIn | DateTimeFormat}}</p>
 		<p>Date Out: {{controlInOut.dateTimeOut | DateTimeFormat}}</p>
-		<p>Price: {{getPrice()}}</p>
+		<p>Price: {{controlInOut.price}}</p>
+		<p>AccordType: {{getAccordTypeDescription()}}</p>
 	</div>
 	<div class="modal-footer">
-		<button type="button" class="btn btn-success" (click)="checkOutConfirmed()">Confirm</button>
-		<button type="button" class="btn btn-light" (click)="modalRef.hide()">Close</button>
+		<!-- <button type="button" class="btn btn-success" (click)="confirmCheckOut()">Confirm</button> -->
+		<button type="button" class="btn btn-success" (click)="formatDate()">Confirm</button>
+		<button type="button" class="btn btn-light" (click)="cancelCheckOut()">Cancel</button>
 	</div>
 </ng-template>
+
+<hr />
+<p>Form value: {{ form.value | json }}</p>
+<p>Form Status: {{ form.status | json }}</p>
+<p>Obj value:</p>
+{{ controlInOut | json }}
+

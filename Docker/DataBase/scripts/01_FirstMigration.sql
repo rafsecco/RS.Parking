@@ -10,7 +10,7 @@ DROP PROCEDURE IF EXISTS MigrationsScript;
 DELIMITER //
 CREATE PROCEDURE MigrationsScript()
 BEGIN
-    IF NOT EXISTS(SELECT 1 FROM `__EFMigrationsHistory` WHERE `MigrationId` = '20240418111404_Initial') THEN
+    IF NOT EXISTS(SELECT 1 FROM `__EFMigrationsHistory` WHERE `MigrationId` = '20240420183126_Initial') THEN
 
     CREATE TABLE `tb_AccordType` (
         `id_accord` TINYINT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -32,7 +32,7 @@ DROP PROCEDURE IF EXISTS MigrationsScript;
 DELIMITER //
 CREATE PROCEDURE MigrationsScript()
 BEGIN
-    IF NOT EXISTS(SELECT 1 FROM `__EFMigrationsHistory` WHERE `MigrationId` = '20240418111404_Initial') THEN
+    IF NOT EXISTS(SELECT 1 FROM `__EFMigrationsHistory` WHERE `MigrationId` = '20240420183126_Initial') THEN
 
     CREATE TABLE `tb_VehicleType` (
         `id_vehicle` TINYINT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -53,12 +53,12 @@ DROP PROCEDURE IF EXISTS MigrationsScript;
 DELIMITER //
 CREATE PROCEDURE MigrationsScript()
 BEGIN
-    IF NOT EXISTS(SELECT 1 FROM `__EFMigrationsHistory` WHERE `MigrationId` = '20240418111404_Initial') THEN
+    IF NOT EXISTS(SELECT 1 FROM `__EFMigrationsHistory` WHERE `MigrationId` = '20240420183126_Initial') THEN
 
     CREATE TABLE `tb_ControlInOut` (
         `id_controlInOut` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
         `cd_vehicle` TINYINT UNSIGNED NOT NULL,
-        `cd_accord` TINYINT UNSIGNED NOT NULL DEFAULT 0,
+        `cd_accord` TINYINT UNSIGNED NOT NULL DEFAULT 1,
         `dt_in` datetime(6) NOT NULL DEFAULT NOW(),
         `dt_out` datetime(6) NULL,
         `ds_licensePlate` varchar(7) COLLATE utf8_general_ci NOT NULL,
@@ -77,7 +77,7 @@ DROP PROCEDURE IF EXISTS MigrationsScript;
 DELIMITER //
 CREATE PROCEDURE MigrationsScript()
 BEGIN
-    IF NOT EXISTS(SELECT 1 FROM `__EFMigrationsHistory` WHERE `MigrationId` = '20240418111404_Initial') THEN
+    IF NOT EXISTS(SELECT 1 FROM `__EFMigrationsHistory` WHERE `MigrationId` = '20240420183126_Initial') THEN
 
     CREATE INDEX `idx_tb_ControleInOut-dt_in_dt_out` ON `tb_ControlInOut` (`dt_in`, `dt_out`);
 
@@ -91,7 +91,7 @@ DROP PROCEDURE IF EXISTS MigrationsScript;
 DELIMITER //
 CREATE PROCEDURE MigrationsScript()
 BEGIN
-    IF NOT EXISTS(SELECT 1 FROM `__EFMigrationsHistory` WHERE `MigrationId` = '20240418111404_Initial') THEN
+    IF NOT EXISTS(SELECT 1 FROM `__EFMigrationsHistory` WHERE `MigrationId` = '20240420183126_Initial') THEN
 
     CREATE INDEX `IX_tb_ControlInOut_cd_accord` ON `tb_ControlInOut` (`cd_accord`);
 
@@ -105,7 +105,7 @@ DROP PROCEDURE IF EXISTS MigrationsScript;
 DELIMITER //
 CREATE PROCEDURE MigrationsScript()
 BEGIN
-    IF NOT EXISTS(SELECT 1 FROM `__EFMigrationsHistory` WHERE `MigrationId` = '20240418111404_Initial') THEN
+    IF NOT EXISTS(SELECT 1 FROM `__EFMigrationsHistory` WHERE `MigrationId` = '20240420183126_Initial') THEN
 
     CREATE INDEX `IX_tb_ControlInOut_cd_vehicle` ON `tb_ControlInOut` (`cd_vehicle`);
 
@@ -119,10 +119,10 @@ DROP PROCEDURE IF EXISTS MigrationsScript;
 DELIMITER //
 CREATE PROCEDURE MigrationsScript()
 BEGIN
-    IF NOT EXISTS(SELECT 1 FROM `__EFMigrationsHistory` WHERE `MigrationId` = '20240418111404_Initial') THEN
+    IF NOT EXISTS(SELECT 1 FROM `__EFMigrationsHistory` WHERE `MigrationId` = '20240420183126_Initial') THEN
 
     INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`)
-    VALUES ('20240418111404_Initial', '8.0.4');
+    VALUES ('20240420183126_Initial', '8.0.4');
 
     END IF;
 END //

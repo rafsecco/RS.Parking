@@ -12,7 +12,7 @@ public class ControlInOut
 	public ushort VehicleTypeId { get; set; } = 1;
 
 	[Required]
-	public ushort AccordTypeId { get; set; } = 0;
+	public ushort AccordTypeId { get; set; } = 1;
 
 	[Required]
 	public DateTime DateTimeIn { get; set; } = DateTime.Now;

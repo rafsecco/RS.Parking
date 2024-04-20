@@ -12,7 +12,7 @@ using RS.Parking.Infrastructure;
 namespace RS.Parking.Infrastructure.Migrations
 {
     [DbContext(typeof(RSParkingContext))]
-    [Migration("20240418111404_Initial")]
+    [Migration("20240420183126_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -79,7 +79,7 @@ namespace RS.Parking.Infrastructure.Migrations
                     b.Property<byte>("AccordTypeId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TINYINT UNSIGNED")
-                        .HasDefaultValue((byte)0)
+                        .HasDefaultValue((byte)1)
                         .HasColumnName("cd_accord")
                         .HasColumnOrder(3);
 
