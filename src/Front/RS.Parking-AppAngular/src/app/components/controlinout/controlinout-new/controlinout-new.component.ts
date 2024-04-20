@@ -74,6 +74,7 @@ export class ControlinoutNewComponent implements OnInit {
 		this.spinner.show();
 		if (this.form.valid) {
 			this.controlInOut = Object.assign({}, this.controlInOut, this.form.value);
+			console.log(this.controlInOut);
 			this.controlInOutService.saveControlInOut(this.controlInOut).subscribe({
 				next: success => this.processSuccess(success),
 				error: failure => this.processFailure(failure),
