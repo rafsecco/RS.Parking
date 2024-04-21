@@ -1,5 +1,6 @@
 using RS.Parking.Domain.Enumerables;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 
 namespace RS.Parking.Domain.Models;
 
@@ -34,6 +35,12 @@ public class ControlInOut
 	{
 		if (this.DateTimeOut == null) { return "Sem Data Saída"; }
 
+		// Define a cultura padrão para toda a aplicação
+		CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("pt-BR");
+		// Ou, se desejar definir a cultura para formatação de texto e exibição de recursos:
+		// CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo("pt-BR");
+
+
 		//double tolerance = (double)Convert.ToInt32(ConfigurationManager.AppSettings.Get("Tolerance")) / 60;    // 0.0833333333333333;	//5 min default
 		double tolerance = 5.0; // 5 min default
 		//decimal tolerance = 5 / 60; // 5 min default
@@ -64,16 +71,14 @@ public class ControlInOut
 				var totalHoursCost = this.VehicleType.Cost * (decimal)totalHoursRounded;
 
 				totalCost = totalHoursCost - firstHourCost;
-				//returnValue = String.Format("R$ {0} ", totalCost);
-				returnValue = $"{totalCost}";
+				returnValue = String.Format("{0:C} ", totalCost);
 				break;
 			#endregion
 
 			#region default	(Sem convenio)
 			default:
 				totalCost = this.VehicleType.Cost * (decimal)totalHoursRounded;
-				//returnValue = String.Format("R$ {0:C} ", totalCost);
-				returnValue = $"{totalCost}";
+				returnValue = String.Format("{0:C} ", totalCost);
 				break;
 			#endregion
 		}
