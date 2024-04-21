@@ -1,8 +1,8 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID } from '@angular/core';
-import ptBr from '@angular/common/locales/pt';
-import { registerLocaleData } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
+import { registerLocaleData, DatePipe } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import ptBr from '@angular/common/locales/pt';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -83,6 +83,7 @@ defineLocale('pt-br', ptBrLocale);
 		VehicletypesService,
 		AccordTypesService,
 		ControlInOutService,
+		DatePipe,
 		provideEnvironmentNgxCurrency({
 			align: "left",
 			allowNegative: true,
