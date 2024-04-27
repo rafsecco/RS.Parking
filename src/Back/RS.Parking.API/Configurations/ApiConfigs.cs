@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using RS.Parking.Infrastructure;
 using System.Text.Json.Serialization;
@@ -64,6 +64,7 @@ public static class ApiConfigs
 			.AllowAnyHeader()
 			.AllowAnyMethod()
 			.AllowAnyOrigin()
+			.WithExposedHeaders("content-disposition") // Para pegar o nome do arquivos no header
 		);
 
 		app.MapControllers();

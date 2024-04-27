@@ -38,6 +38,7 @@ export class ControlInOutListComponent implements OnInit {
 			error: (error: any) => { this.toastr.error(`Error loading Control In Out.\n${error}`, 'Error!'); },
 			complete: () => this.spinner.hide()
 		});
+		this.spinner.hide();
 	}
 
 	openModalView(template: TemplateRef<any>, controlInOutId: number): void {

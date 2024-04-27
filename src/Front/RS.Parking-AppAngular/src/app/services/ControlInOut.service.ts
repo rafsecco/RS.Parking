@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { ControlInOut } from '@app/models/ControlInOut';
@@ -22,6 +22,20 @@ export class ControlInOutService {
 	public getControlInOutByRange(date: string): Observable<ControlInOut[]> {
 		return this.http.get<ControlInOut[]>(`${this.baseURL}/${date}`);
 	}
+
+	public getCSVFileDownload(date: string): any {
+		const headers = new HttpHeaders().set('Accept', 'text/csv');
+
+		return this.http.get(`${this.baseURL}/DownloadCSV/${date}`, {
+			headers,
+			responseType: 'blob',
+			observe: 'response',
+		});
+	}
+
+	// public getFileDownload(): any {
+	// 	return this.http.get(`${this.baseURL}/download`, {observe: 'response', responseType:'blob'});
+	// }
 
 	public saveControlInOut(controlInOut: ControlInOut): Observable<ControlInOut> {
 		return this.http

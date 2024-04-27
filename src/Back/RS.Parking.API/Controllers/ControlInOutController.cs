@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using RS.Parking.Application.Contracts;
 using RS.Parking.Application.DTOs;
+using System.Reflection;
+using System.Text;
 
 namespace RS.Parking.API.Controllers;
 
@@ -15,12 +17,6 @@ public class ControlInOutController : Controller
 	//	_logger = logger;
 	//}
 
-	//[HttpGet(Name = "GetVehicle")]
-	//public IActionResult GetAll()
-	//{
-	//	return Ok();
-	//}
-
 	private readonly IControlInOutService _controlInOutService;
 
 	public ControlInOutController(IControlInOutService controlInOutervice)
@@ -28,6 +24,7 @@ public class ControlInOutController : Controller
 		_controlInOutService = controlInOutervice;
 	}
 
+	#region Get
 	[HttpGet]
 	public async Task<IActionResult> Get()
 	{
@@ -75,6 +72,35 @@ public class ControlInOutController : Controller
 		}
 	}
 
+	[HttpGet("DownloadCSV/{dateStart:datetime}")]
+	public async Task<IActionResult> DownloadCSV(DateTime dateStart)
+	{
+		try
+		{
+			List<ControlInOutDTO>? ControlInOut = await _controlInOutService.GetByRange(dateStart);
+			if (ControlInOut == null) return NoContent();
+
+			var fileName = $"Report_{dateStart.ToString("yyyy_MM_dd")}-{DateTime.Now.ToString("HH:mm:ss")}.csv";
+			var textCsv = ConvertToCsv(ControlInOut);
+			byte[] bytes = Encoding.UTF8.GetBytes(textCsv);
+			var file = File(bytes, "text/csv", fileName);
+			return file;
+		}
+		catch (Exception ex)
+		{
+			return this.StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+		}
+	}
+
+	// OK
+	//[HttpGet("downloadPngFile")]
+	//public IActionResult Download()
+	//{
+	//	var filepath = Path.Combine(@"path", "filename.png");
+	//	return File(System.IO.File.ReadAllBytes(filepath), "image/png", System.IO.Path.GetFileName(filepath));
+	//}
+	#endregion
+
 	[HttpPost]
 	public async Task<IActionResult> Post(ControlInOutDTO model)
 	{
@@ -104,5 +130,47 @@ public class ControlInOutController : Controller
 			return this.StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
 		}
 	}
+
+	#region Private Methods
+	private static string ConvertToCsv<T>(List<T> list, char separatorChar = ';', bool withHeader = true)
+	{
+		StringBuilder csvBuilder = new StringBuilder();
+
+		// Obtém as propriedades da classe T
+		PropertyInfo[] propriedades = typeof(T).GetProperties();
+
+		if (withHeader)
+		{
+			// Cria o cabeçalho dinamicamente com base nas propriedades
+			foreach (var propriedade in propriedades)
+			{
+				csvBuilder.Append(propriedade.Name);
+				csvBuilder.Append(separatorChar);
+			}
+
+			// Remove a vírgula extra no final do cabeçalho
+			csvBuilder.Length--;
+
+			// Pula para a próxima linha após o cabeçalho
+			csvBuilder.AppendLine();
+		}
+
+		// Adiciona os dados de cada objeto na lista
+		foreach (var item in list)
+		{
+			foreach (var propriedade in propriedades)
+			{
+				csvBuilder.Append(propriedade.GetValue(item));
+				csvBuilder.Append(separatorChar);
+			}
+			// Remove a vírgula extra no final da linha
+			csvBuilder.Length--;
+
+			csvBuilder.AppendLine(); // Pula para a próxima linha após os dados de cada objeto
+		}
+
+		return csvBuilder.ToString();
+	}
+	#endregion
 
 }
