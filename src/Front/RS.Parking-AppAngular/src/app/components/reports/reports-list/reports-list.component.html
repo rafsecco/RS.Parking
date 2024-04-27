@@ -19,7 +19,7 @@
 	</div>
 </form>
 
-<table class="table table-striped table-hover">
+<table class="table table-striped table-hover" id="table-data">
 	<thead class="table-dark">
 		<tr>
 			<th class="d-none d-md-table-cell">#</th>
@@ -44,12 +44,18 @@
 	</tbody>
 	<tfoot *ngIf="!controlInOutList.length">
 		<tr>
-			<td colspan="8" class="text-center">
+			<td colspan="7" class="text-center">
 				<h4>No record found!</h4>
 			</td>
 		</tr>
 	</tfoot>
 </table>
+
+<div class="d-flex text-center" *ngIf="controlInOutList.length">
+	<!-- <button class="btn btn-success mx-3" (click)="downloadFile()">Teste</button> -->
+	<button class="btn btn-success mx-3" (click)="downloadCSV()">CSV</button>
+	<button class="btn btn-success mx-3" (click)="downloadExcel()">Excel</button>
+</div>
 
 <!-- <p>Form value: {{ form.status | json }}</p> -->
 <!-- {{controlInOutList | json}} -->
