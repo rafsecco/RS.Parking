@@ -68,18 +68,19 @@ export class ControlinoutNewComponent implements OnInit {
 			error: (error: any) => { this.toastr.error(`Error loading VehicleTypes.\n${error}`, 'Error!'); },
 			complete: () => this.spinner.hide()
 		});
+		this.spinner.hide();
 	}
 
 	public saveControlInOut(): void {
-		this.spinner.show();
 		if (this.form.valid) {
+			this.spinner.show();
 			this.controlInOut = Object.assign({}, this.controlInOut, this.form.value);
-			console.log(this.controlInOut);
 			this.controlInOutService.saveControlInOut(this.controlInOut).subscribe({
 				next: success => this.processSuccess(success),
 				error: failure => this.processFailure(failure),
 				complete: () => this.spinner.hide()
 			});
+			this.spinner.show();
 		}
 	}
 

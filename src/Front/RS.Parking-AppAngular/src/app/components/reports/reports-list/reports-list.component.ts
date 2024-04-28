@@ -60,8 +60,6 @@ export class ReportsListComponent implements OnInit {
 		// OK
 		// let dateNow=new Date();
 		// let latest_date =this.datePipe.transform(dateNow, 'yyyy-MM-dd');
-		// console.log(dateNow);
-		// console.log(latest_date);
 
 		if (this.form.valid) {
 			this.spinner.show();
@@ -137,10 +135,7 @@ export class ReportsListComponent implements OnInit {
 	// downloadFile()
 	// {
 	// 	this.controlInOutService.getFileDownload().subscribe((response: any) => {
-	// 		console.log(response.headers);
-	// 		console.log(response.headers.get('content-disposition'));
 	// 		let fileName = response.headers.get('content-disposition')?.split(';')[1].split('=')[1];
-	// 		console.log(fileName);
 	// 		let blob:Blob = response.body as Blob;
 	// 		let a = document.createElement('a');
 	// 		a.download = fileName;
