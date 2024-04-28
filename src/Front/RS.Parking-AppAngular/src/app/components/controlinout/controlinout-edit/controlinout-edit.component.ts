@@ -153,8 +153,7 @@ export class ControlinoutEditComponent implements OnInit {
 	}
 
 	public confirmCheckOut(): void {
-		// print checkout
-		console.log("Print Payment voucher!");
+		// TODO	Print Payment voucher!
 		let toast = this.toastr.success('Check Out', 'Thanks! Check back often!');
 		if (toast) {
 			toast.onHidden.subscribe(() => {

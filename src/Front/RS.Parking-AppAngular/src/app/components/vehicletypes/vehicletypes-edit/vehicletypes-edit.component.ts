@@ -68,18 +68,21 @@ export class VehicletypesEditComponent implements OnInit {
 				},
 				complete: () => this.spinner.hide()
 			});
+			this.spinner.hide();
 		}
 	}
 
 	public updateVehicleType(): void {
-		this.spinner.show();
+
 		if (this.form.valid) {
+			this.spinner.show();
 			this.vehicleType = Object.assign({}, this.vehicleType, this.form.value);
 			this.vehicleTypesService.updateVehicleType(this.vehicleType).subscribe({
 				next: success => this.processSuccess(success),
 				error: failure => this.processFailure(failure),
 				complete: () => this.spinner.hide()
 			});
+			this.spinner.hide();
 		}
 	}
 
