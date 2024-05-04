@@ -7,3 +7,13 @@ No conceito de MVP (Minimum Viable Product)
 - [ ] Multiplas camadas
 - [ ] Refatorar
 - [ ] Segurança
+
+## Para rodar o projeto em docker
+
+Abrir a pasta "Docker" e executar o comando abaixo
+
+```
+docker compose -p rs-parking build
+docker compose -p rs-parking up -d
+docker compose -p rs-parking down
+```

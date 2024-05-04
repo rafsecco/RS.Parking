@@ -56,9 +56,6 @@ public static class ApiConfigs
 		//{
 		//	app.UseHsts();
 		//}
-		//app.UseHttpsRedirection();
-
-		app.UseAuthorization();
 
 		app.UseCors(x => x
 			.AllowAnyHeader()
@@ -66,6 +63,8 @@ public static class ApiConfigs
 			.AllowAnyOrigin()
 			.WithExposedHeaders("content-disposition") // Para pegar o nome do arquivos no header
 		);
+
+		app.UseAuthorization();
 
 		app.MapControllers();
 		//app.UseEndpoints(endpoints =>

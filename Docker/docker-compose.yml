@@ -1,56 +1,74 @@
-version: '3.9'
 services:
+  db-parking:
+    image: rs-parking-db-image:initial
+    container_name: RS_Parking_DB
+    hostname: rsparking-db
+    restart: always
+    build:
+      context: ./DataBase
+      # dockerfile: ./Dockerfile
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: MyDB@123
+    # volumes:
+    #   - "./DataBase/scripts/setup.sql:/docker-entrypoint-initdb.d/1.sql"
+    #   - "./DataBase/scripts/data.sql:/docker-entrypoint-initdb.d/2.sql"
 
-    mariadb:
-        image: rs_parking_db:initial
-        container_name: RS_Parking_MariaDb
-        build:
-            context: ./DataBase
-            dockerfile: ./Dockerfile
-        restart: always
-        ports:
-            - 3306:3306
-        environment:
-            MYSQL_ROOT_PASSWORD: MyDB@123
-    
-    adminer:
-        image: adminer
-        restart: always
-        ports:
-            - 8080:8080
+  # adminer:
+  #   image: adminer
+  #   ports:
+  #     - 8080:8080
 
-    # api-parking:
-    #     image: rs_parking_api:latest
-    #     container_name: RS_Parking_API
-    #     build:
-    #         context: ../
-    #         dockerfile: ./Back/src/RS.Parking.API/Dockerfile
-    #     restart: always
-    #     ports:
-    #         - 5000:80
-    #         #- 5000:5000
-    #         #- 5001:5001
-    #     environment:
-    #         - ASPNETCORE_ENVIRONMENT=Production
-    #         #- ASPNETCORE_URLS=http://+5000
-    #         #- ASPNETCORE_HTTPS_PORT=5000
-    #         #- ASPNETCORE_URLS=https://+:5001;http://+5000
-    #     depends_on:
-    #         - mariadb
+  api-parking:
+    image: rs-parking-api-image:latest
+    container_name: RS_Parking_API
+    hostname: rsparking-api
+    restart: always
+    build:
+      context: ../src/Back
+      # dockerfile: ./Dockerfile
+    ports:
+      - 5000:5000
+      # - 5001:5001
+    environment:
+      # - ASPNETCORE_ENVIRONMENT=Production
+      # - ASPNETCORE_URLS=http://+5000
+      # - ASPNETCORE_HTTPS_PORT=5001
+      # - ASPNETCORE_URLS=https://+:5001;http://+5000
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+5000
+    depends_on:
+      - db-parking
 
+  web-parking-angular:
+    image: rs-parking-angular-image:latest
+    container_name: RS_Parking_Nginx_Angular
+    hostname: rsparking-angular-nginx
+    restart: always
+    build:
+      context: ../src/front/RS.Parking-AppAngular/
+      # dockerfile: ./Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - db-parking
+      - api-parking
 
-    # maria-db:
-    #     image: mariadb:latest
-    #     #command: --default-authentication-plugin=mysql_native_password
-    #     container_name: RS_Parking_MariaDb
-    #     restart: always
-    #     build:
-    #         context: ./DataBase
-    #         dockerfile: ./Dockerfile
-    #     ports:
-    #         - 3306:3306
-    #     environment:
-    #         MYSQL_ROOT_PASSWORD: MyDB@123
-    #     volumes:
-    #         - "./DataBase/scripts/setup.sql:/docker-entrypoint-initdb.d/1.sql"
-    #         #- "./DataBase/scripts/data.sql:/docker-entrypoint-initdb.d/2.sql"
+  # generate-pfx:
+  #   image: emberstack/openssl
+  #   container_name: generate-pfx
+  #   volumes:
+  #     - ./certs:/https:rw
+  #   command: >
+  #     sh -c "[ -e "./https/devstore.academy-localhost.pfx" ] && echo File Already exist || (
+  #       rm -f /https/devstore.academy-localhost.pfx &&
+  #       openssl genrsa -out devstore.rsa 2048 &&
+  #       openssl req -sha256 -new -key devstore.rsa -out devstore.csr -subj '/CN=localhost' &&
+  #       openssl x509 -req -sha256 -days 365 -in devstore.csr -signkey devstore.rsa -out devstore.crt &&
+  #       openssl pkcs12 -export -out /https/devstore.academy-localhost.pfx -inkey devstore.rsa -in devstore.crt -password pass:9HoGMnb7Lu8NFdHBz4Vq2rtKivzMhmMXhtvuB4TZcLMmbWfFmDQCjJeLURAJ4GYe &&
+  #       rm devstore.rsa devstore.csr devstore.crt)"
+
+# docker compose -p rs-parking build --force-rm
+# docker compose -p rs-parking up -d
+# docker compose -p rs-parking down -v --rmi all

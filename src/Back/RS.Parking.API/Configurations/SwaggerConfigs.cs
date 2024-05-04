@@ -1,4 +1,4 @@
-﻿using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi.Models;
 
 namespace RS.Parking.API.Configurations;
 
@@ -18,7 +18,8 @@ public static class SwaggerConfigs
 	public static WebApplication UseSwaggerConfiguration(this WebApplication app)
 	{
 		// Configure the HTTP request pipeline.
-		if (app.Environment.IsDevelopment())
+		//if (env.IsDevelopment() || env.IsEnvironment("Docker"))
+		if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment("Docker"))
 		{
 			app.UseSwagger();
 			app.UseSwaggerUI(c => 
