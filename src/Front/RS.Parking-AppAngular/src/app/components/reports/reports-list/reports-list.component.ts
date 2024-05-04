@@ -92,6 +92,7 @@ export class ReportsListComponent implements OnInit {
 	}
 
 	downloadCSV() {
+		this.spinner.show();
 		const dateSearchValue = this.form.get('dateSearch').value;
 		let dateSearchValueTransform =this.datePipe.transform(dateSearchValue, 'yyyy-MM-dd');
 
@@ -119,28 +120,15 @@ export class ReportsListComponent implements OnInit {
 				document.body.removeChild(link);
 				window.URL.revokeObjectURL(url);
 			});
+		this.spinner.hide();
 	}
 
 	// Função para extrair o nome do arquivo do cabeçalho content-disposition
 	getFilenameFromContentDisposition(headers: HttpHeaders) {
 		const contentDispositionHeader = headers.get('content-disposition');
 		const filename = contentDispositionHeader
-			.split(';')[1]
-			.trim()
-			.split('=')[1]
-			.trim();
+			.split(';')[1].trim()
+			.split('=')[1].trim();
 		return filename;
 	}
-
-	// downloadFile()
-	// {
-	// 	this.controlInOutService.getFileDownload().subscribe((response: any) => {
-	// 		let fileName = response.headers.get('content-disposition')?.split(';')[1].split('=')[1];
-	// 		let blob:Blob = response.body as Blob;
-	// 		let a = document.createElement('a');
-	// 		a.download = fileName;
-	// 		a.href = window.URL.createObjectURL(blob);
-	// 		a.click();
-	// 	})
-	// }
 }

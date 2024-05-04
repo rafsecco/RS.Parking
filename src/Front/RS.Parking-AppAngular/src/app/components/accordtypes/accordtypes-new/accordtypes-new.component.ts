@@ -47,6 +47,7 @@ export class AccordTypesNewComponent implements OnInit {
 			error: (error: any) => { this.toastr.error('Error loading DiscountTypeEnum.', 'Error!'); },
 			complete: () => this.spinner.hide()
 		});
+		this.spinner.hide();
 	}
 
 	public validation(): void {
@@ -81,6 +82,7 @@ export class AccordTypesNewComponent implements OnInit {
 				complete: () => this.spinner.hide()
 			});
 		}
+		this.spinner.hide();
 	}
 
 	processSuccess(response: any) {

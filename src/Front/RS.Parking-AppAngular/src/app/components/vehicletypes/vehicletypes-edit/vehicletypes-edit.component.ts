@@ -73,7 +73,6 @@ export class VehicletypesEditComponent implements OnInit {
 	}
 
 	public updateVehicleType(): void {
-
 		if (this.form.valid) {
 			this.spinner.show();
 			this.vehicleType = Object.assign({}, this.vehicleType, this.form.value);

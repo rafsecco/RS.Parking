@@ -45,6 +45,7 @@ export class AccordTypesListComponent implements OnInit {
 			error: (error: any) => { this.toastr.error('Error loading AccordType.', 'Error!'); },
 			complete: () => this.spinner.hide()
 		});
+		this.spinner.hide();
 	}
 
 	public LoadDiscountTypeEnum(): void {
@@ -54,6 +55,7 @@ export class AccordTypesListComponent implements OnInit {
 			error: (error: any) => { this.toastr.error('Error loading DiscountTypeEnum.', 'Error!'); },
 			complete: () => this.spinner.hide()
 		});
+		this.spinner.hide();
 	}
 
 	openModalView(template: TemplateRef<any>, accordTypeId: number): void {
@@ -64,6 +66,7 @@ export class AccordTypesListComponent implements OnInit {
 			error: (error: any) => { this.toastr.error('Error loading AccordType.', 'Error!'); },
 			complete: () => this.spinner.hide()
 		});
+		this.spinner.hide();
 		this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
 	}
 
@@ -85,6 +88,7 @@ export class AccordTypesListComponent implements OnInit {
 			error: (failure: any) => this.processDeleteFailure(failure),
 			complete: () => this.spinner.hide()
 		});
+		this.spinner.hide();
 	}
 
 	declineDeleteAccordType(): void {

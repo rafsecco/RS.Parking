@@ -38,6 +38,7 @@ export class VehicletypesListComponent implements OnInit {
 			error: (error: any) => { this.toastr.error('Error loading VehicleType.', 'Error!'); },
 			complete: () => this.spinner.hide()
 		});
+		this.spinner.hide();
 	}
 
 	openModalView(template: TemplateRef<any>, vehicleTypeId: number): void {
@@ -69,6 +70,7 @@ export class VehicletypesListComponent implements OnInit {
 			error: (failure: any) => this.processDeleteFailure(failure),
 			complete: () => this.spinner.hide()
 		});
+		this.spinner.hide();
 	}
 
 	declineDeleteVehicleType(): void {
