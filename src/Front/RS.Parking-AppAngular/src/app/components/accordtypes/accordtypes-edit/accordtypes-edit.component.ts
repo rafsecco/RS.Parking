@@ -66,6 +66,7 @@ export class AccordTypesEditComponent implements OnInit {
 			error: (error: any) => { this.toastr.error(`Error loading DiscountTypeEnum.\nError: ${error}`, 'Error!'); },
 			complete: () => this.spinner.hide()
 		});
+		this.spinner.hide();
 	}
 
 	public loadAccordType(): void {
@@ -81,6 +82,7 @@ export class AccordTypesEditComponent implements OnInit {
 				error: (error: any) => { this.toastr.error(`Error loading AccordType.\nError: ${error}`, 'Error!'); },
 				complete: () => this.spinner.hide()
 			});
+			this.spinner.hide();
 		}
 	}
 
@@ -95,6 +97,7 @@ export class AccordTypesEditComponent implements OnInit {
 				complete: () => this.spinner.hide()
 			});
 		}
+		this.spinner.hide();
 	}
 
 	processSuccess(response: any) {

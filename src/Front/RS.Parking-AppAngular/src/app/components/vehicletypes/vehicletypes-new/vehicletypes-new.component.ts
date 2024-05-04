@@ -65,6 +65,7 @@ export class VehicletypesNewComponent implements OnInit {
 				complete: () => this.spinner.hide()
 			});
 		}
+		this.spinner.hide();
 	}
 
 	processSuccess(response: any) {
