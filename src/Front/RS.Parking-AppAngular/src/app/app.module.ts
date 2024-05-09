@@ -37,8 +37,8 @@ import { ControlinoutNewComponent } from './components/controlinout/controlinout
 import { ReportsComponent } from './components/reports/reports.component';
 import { ReportsListComponent } from './components/reports/reports-list/reports-list.component';
 
-registerLocaleData(ptBr, 'pt-BR');
-defineLocale('pt-br', ptBrLocale);
+// registerLocaleData(ptBr, 'pt-BR');
+// defineLocale('pt-br', ptBrLocale);
 
 @NgModule({
 	declarations: [
@@ -79,7 +79,7 @@ defineLocale('pt-br', ptBrLocale);
 		})
 	],
 	providers: [
-		{ provide: LOCALE_ID, useValue: "pt-BR"},
+		//{ provide: LOCALE_ID, useValue: "pt-BR"},
 		VehicletypesService,
 		AccordTypesService,
 		ControlInOutService,
@@ -88,11 +88,11 @@ defineLocale('pt-br', ptBrLocale);
 			align: "left",
 			allowNegative: true,
 			allowZero: true,
-			decimal: ",",
+			decimal: ".",
 			precision: 2,
-			prefix: "R$ ",
+			prefix: "$ ",
 			suffix: "",
-			thousands: ".",
+			thousands: ",",
 			nullable: true,
 			min: null,
 			max: null,

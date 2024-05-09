@@ -10,7 +10,7 @@ public class VehicleType
 
 	public bool Active { get; set; }
 
-	public DateTime DateCreated { get; set; } = DateTime.Now;
+	public DateTime DateCreated { get; set; } = DateTime.UtcNow;
 
 	public decimal Cost { get; set; }    //decimal myMoney = 300.5m;
 

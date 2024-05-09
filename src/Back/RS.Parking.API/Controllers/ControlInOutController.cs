@@ -121,6 +121,9 @@ public class ControlInOutController : Controller
 	{
 		try
 		{
+			var objOrigin = await _controlInOutService.GetById(id);
+			model.DateTimeIn = objOrigin.DateTimeIn;
+
 			var ControlInOut = await _controlInOutService.Update(id, model);
 			if (ControlInOut == null) return BadRequest("Error to update ControlInOut!");
 			return Ok(ControlInOut);
