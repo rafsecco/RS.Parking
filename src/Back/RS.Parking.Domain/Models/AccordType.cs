@@ -8,7 +8,7 @@ public class AccordType
 
 	public bool Active { get; set; }
 	
-	public DateTime DateCreated { get; set; } = DateTime.Now;
+	public DateTime DateCreated { get; set; } = DateTime.UtcNow;
 
 	public ushort DiscountTypeId { get; set; } = 0;
 	

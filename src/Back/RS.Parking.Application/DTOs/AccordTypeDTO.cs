@@ -8,7 +8,7 @@ public class AccordTypeDTO
 
 	public bool Active { get; set; }
 
-	public DateTime DateCreated { get; set; } = DateTime.Now;
+	public DateTime DateCreated { get; set; } = DateTime.UtcNow;
 
 	[Required]
 	public string Description { get; set; }

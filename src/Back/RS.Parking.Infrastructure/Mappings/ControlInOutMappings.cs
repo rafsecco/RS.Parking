@@ -36,7 +36,7 @@ internal class ControlInOutMappings : IEntityTypeConfiguration<ControlInOut>
 			.IsRequired()
 			.HasColumnOrder(4)
 			.HasColumnName("dt_in")
-			.HasDefaultValueSql("NOW()");
+			.HasDefaultValueSql("UTC_TIMESTAMP()");
 
 		builder.Property(p => p.DateTimeOut)
 			.IsRequired(false)

@@ -23,7 +23,7 @@ internal class VehicleTypeMappings : IEntityTypeConfiguration<VehicleType>
 		builder.Property(p => p.DateCreated)
 			.IsRequired()
 			.HasColumnName("dt_dateCreated")
-			.HasDefaultValueSql("NOW()");
+			.HasDefaultValueSql("UTC_TIMESTAMP()");
 
 		builder.Property(p => p.Cost)
 			.IsRequired()

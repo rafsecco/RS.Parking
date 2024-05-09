@@ -22,15 +22,15 @@ export class ControlinoutEditComponent implements OnInit {
 	accordTypesList: AccordType[] = [];
 	accordTypeId = 0;
 
-	formatter = new Intl.NumberFormat('pt-BR', {
-		style: 'currency',
-		currency: 'BRL',
+	// formatter = new Intl.NumberFormat('pt-BR', {
+	// 	style: 'currency',
+	// 	currency: 'BRL',
 
-		// These options are needed to round to whole numbers if that's what you want.
-		//minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
-		//maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
-		//console.log(formatter.format(2500)); /* $2,500.00 */
-	});
+	// 	// These options are needed to round to whole numbers if that's what you want.
+	// 	//minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+	// 	//maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+	// 	//console.log(formatter.format(2500)); /* $2,500.00 */
+	// });
 
 	// formatter = new Intl.NumberFormat('en-US', {
 	// 	style: 'currency',
@@ -72,7 +72,7 @@ export class ControlinoutEditComponent implements OnInit {
 			//vehicleTypeId: [0 + '', [Validators.required]],
 			accordTypeId: ['', [Validators.required, Validators.min(1)]],
 			dateTimeIn: ['' , [Validators.required]],
-			dateTimeOut: ['' , [Validators.required]],
+			dateTimeOut: [new Date(Date.now()) , [Validators.required]],
 			vehicleType: this.fb.group({
 				id: '',
 				active: '',
@@ -98,6 +98,7 @@ export class ControlinoutEditComponent implements OnInit {
 				error: (error: any) => { this.toastr.error(`Error loading Control In Out.\n${error}`, 'Error!'); },
 				complete: () => this.spinner.hide()
 			});
+			this.spinner.hide();
 		}
 	}
 
@@ -117,6 +118,7 @@ export class ControlinoutEditComponent implements OnInit {
 			error: (error: any) => { this.toastr.error(`Error loading AccordType.\n${error}`, 'Error!'); },
 			complete: () => this.spinner.hide()
 		});
+		this.spinner.hide();
 	}
 
 	getChangeAccordTypeValue(val:string): void {
@@ -149,6 +151,7 @@ export class ControlinoutEditComponent implements OnInit {
 				error: failure => this.processFailure(failure),
 				complete: () => this.spinner.hide()
 			});
+			this.spinner.hide();
 		}
 	}
 
@@ -165,15 +168,15 @@ export class ControlinoutEditComponent implements OnInit {
 
 	public cancelCheckOut(): void {
 		if (this.form.valid) {
+			this.spinner.show();
 			this.controlInOut = Object.assign({}, this.controlInOut, this.form.value);
 			this.controlInOut.dateTimeOut = null;
 			this.controlInOutService.updateControlInOut(this.controlInOut).subscribe({
-				next: success => {
-					this.processSuccess(success);
-				},
+				next: success => this.processSuccess(success),
 				error: failure => this.processFailure(failure),
-				complete: () => { this.spinner.hide(); }
+				complete: () => this.spinner.hide()
 			});
+			this.spinner.hide();
 		}
 	}
 
@@ -193,18 +196,15 @@ export class ControlinoutEditComponent implements OnInit {
 
 	public formatDate(): void {
 
-		const now = new Date(Date.now())
-		console.log(`new Date(Date.now()): ${now}`)
-
-		const date = new Date()
-		console.log(`new Date(): ${date}`)
-
+		const now = new Date(Date.now());
+		const date = new Date();
 		const currentDate = new Date(); // Isso retorna a data e hora atual em relação ao UTC
 		const localDate = new Date(currentDate.getTime() - (currentDate.getTimezoneOffset() * 60000));
-		console.log(`localDate: ${localDate}`); // Isso imprimirá a data e hora atual no fuso horário local
 
-		console.log(`controlInOut.dateTimeOut: ${this.controlInOut.dateTimeOut}`);
-		console.log(`Form.dateTimeOut: ${this.form.get('dateTimeOut')}`);
+		// console.log(`new Date(Date.now()): ${now}`);
+		// console.log(`new Date(): ${date}`);
+		// console.log(`currentDate: ${currentDate}`);
+		// console.log(`localDate: ${localDate}`); // Isso imprimirá a data e hora atual no fuso horário local
 	}
 
 }

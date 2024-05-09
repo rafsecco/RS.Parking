@@ -10,7 +10,7 @@ public class VehicleTypeDTO
 	public bool Active { get; set; }
 
 	[Required]
-	public DateTime DateCreated { get; set; } = DateTime.Now;
+	public DateTime DateCreated { get; set; } = DateTime.UtcNow;
 	
 	[Required]
 	//[RegularExpression(@"^\d+(\.\d{1,2})?$")]

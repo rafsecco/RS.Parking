@@ -13,7 +13,7 @@ public class ControlInOutDTO
 	[Required]
 	public string LicensePlate { get; set; }
 
-	public DateTime DateTimeIn { get; set; } = DateTime.Now;
+	public DateTime DateTimeIn { get; set; } = DateTime.UtcNow;
 
 	public DateTime? DateTimeOut { get; set; }
 

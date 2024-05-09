@@ -27,7 +27,7 @@ export class ReportsListComponent implements OnInit {
 		private localeService: BsLocaleService,
 		private datePipe: DatePipe
 	) {
-		this.localeService.use('pt-br');
+		//this.localeService.use('pt-br');
 	}
 
 	ngOnInit() {

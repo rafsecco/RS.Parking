@@ -16,7 +16,7 @@ public class ControlInOut
 	public ushort AccordTypeId { get; set; } = 1;
 
 	[Required]
-	public DateTime DateTimeIn { get; set; } = DateTime.Now;
+	public DateTime DateTimeIn { get; set; } = DateTime.UtcNow;
 
 	public DateTime? DateTimeOut { get; set; }
 
@@ -36,7 +36,7 @@ public class ControlInOut
 		if (this.DateTimeOut == null) { return "Sem Data Saída"; }
 
 		// Define a cultura padrão para toda a aplicação
-		CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("pt-BR");
+		// CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("pt-BR");
 		// Ou, se desejar definir a cultura para formatação de texto e exibição de recursos:
 		// CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo("pt-BR");
 
@@ -61,7 +61,7 @@ public class ControlInOut
 			#region Enum.IE_AgreementType.Total	(Santander: Cobrado a cada 30 min 1 selo)
 			case (ushort)EnumAccordType.Total:
 				totalHoursRounded /= AccordType.Percentage;
-				returnValue = String.Format("{0} Selos", totalHoursRounded);
+				returnValue = String.Format("{0} stamp(s)", totalHoursRounded);
 				break;
 			#endregion
 
