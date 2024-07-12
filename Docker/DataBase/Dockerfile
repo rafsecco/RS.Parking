@@ -6,7 +6,9 @@ FROM mariadb:latest
 # needed for intialization
 ENV MYSQL_ROOT_PASSWORD=MyDB@123
 ENV MARIADB_DATABASE=RS.Parking
+
 COPY scripts/*.sql /docker-entrypoint-initdb.d/
+
 EXPOSE 3306
 
 # FROM mariadb:latest as final
