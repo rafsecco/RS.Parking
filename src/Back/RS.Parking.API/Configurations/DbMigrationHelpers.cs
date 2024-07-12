@@ -1,4 +1,3 @@
-using Microsoft.EntityFrameworkCore;
 using RS.Parking.Domain.Models;
 using RS.Parking.Infrastructure;
 
@@ -162,9 +161,40 @@ public static class DbMigrationHelpers
 					DateTimeOut=DateTime.Now.Date.AddDays(-3).AddHours(18).AddMinutes(30),
 					LicensePlate="BRL-147"
 				},
-
 				new ControlInOut {
 					Id=13,
+					VehicleTypeId=1,
+					AccordTypeId=1,
+					DateTimeIn=DateTime.Now.Date.AddHours(6).AddMinutes(0),
+					DateTimeOut=null,
+					LicensePlate="BRL-111",
+				 },
+				 new ControlInOut {
+					Id=14,
+					VehicleTypeId=1,
+					AccordTypeId=1,
+					DateTimeIn=DateTime.Now.Date.AddHours(6).AddMinutes(30),
+					DateTimeOut=null,
+					LicensePlate="BRL-112",
+				},
+				new ControlInOut {
+					Id=15,
+					VehicleTypeId=1,
+					AccordTypeId=1,
+					DateTimeIn=DateTime.Now.Date.AddHours(7).AddMinutes(0),
+					DateTimeOut=null,
+					LicensePlate="BRL-121",
+				 },
+				 new ControlInOut {
+					Id=16,
+					VehicleTypeId=1,
+					AccordTypeId=1,
+					DateTimeIn=DateTime.Now.Date.AddHours(7).AddMinutes(30),
+					DateTimeOut=null,
+					LicensePlate="BRL-122",
+				},
+				new ControlInOut {
+					Id=17,
 					VehicleTypeId=1,
 					AccordTypeId=1,
 					DateTimeIn=DateTime.Now.Date.AddHours(8).AddMinutes(0),
@@ -172,7 +202,7 @@ public static class DbMigrationHelpers
 					LicensePlate="BRL-123",
 				 },
 		 		new ControlInOut {
-					Id=14,
+					Id=18,
 					VehicleTypeId=2,
 					AccordTypeId=2,
 					DateTimeIn=DateTime.Now.Date.AddHours(10).AddMinutes(0),
@@ -180,7 +210,7 @@ public static class DbMigrationHelpers
 					LicensePlate="BRL-456"
 				},
 				new ControlInOut {
-					Id=15,
+					Id=19,
 					VehicleTypeId=3,
 					AccordTypeId=3,
 					DateTimeIn=DateTime.Now.Date.AddHours(12).AddMinutes(30),
@@ -188,7 +218,7 @@ public static class DbMigrationHelpers
 					LicensePlate="BRL-789"
 				},
 				new ControlInOut {
-					Id=16,
+					Id=20,
 					VehicleTypeId=1,
 					AccordTypeId=4,
 					DateTimeIn=DateTime.Now.Date.AddHours(16).AddMinutes(30),
@@ -196,7 +226,7 @@ public static class DbMigrationHelpers
 					LicensePlate="BRL-147"
 				},
 				new ControlInOut {
-					Id=17,
+					Id=21,
 					VehicleTypeId=2,
 					AccordTypeId=1,
 					DateTimeIn=DateTime.Now.Date.AddHours(18).AddMinutes(0),
@@ -204,7 +234,7 @@ public static class DbMigrationHelpers
 					LicensePlate="BRL-753"
 				},
 				new ControlInOut {
-					Id=18,
+					Id=22,
 					VehicleTypeId=2,
 					AccordTypeId=3,
 					DateTimeIn=DateTime.Now.Date.AddHours(19).AddMinutes(30),
@@ -212,7 +242,7 @@ public static class DbMigrationHelpers
 					LicensePlate="BRL-321"
 				},
 				new ControlInOut {
-					Id=19,
+					Id=23,
 					VehicleTypeId=2,
 					AccordTypeId=4,
 					DateTimeIn=DateTime.Now.Date.AddHours(20).AddMinutes(0),
@@ -220,7 +250,7 @@ public static class DbMigrationHelpers
 					LicensePlate="BRL-654"
 				},
 				new ControlInOut {
-					Id=20,
+					Id=24,
 					VehicleTypeId=3,
 					AccordTypeId=1,
 					DateTimeIn=DateTime.Now.Date.AddHours(21).AddMinutes(30),
@@ -228,7 +258,7 @@ public static class DbMigrationHelpers
 					LicensePlate="BRL-987"
 				},
 				new ControlInOut {
-					Id=21,
+					Id=25,
 					VehicleTypeId=3,
 					AccordTypeId=2,
 					DateTimeIn=DateTime.Now.Date.AddHours(22).AddMinutes(0),
@@ -236,7 +266,7 @@ public static class DbMigrationHelpers
 					LicensePlate="BRL-951"
 				},
 				new ControlInOut {
-					Id=22,
+					Id=26,
 					VehicleTypeId=3,
 					AccordTypeId=4,
 					DateTimeIn=DateTime.Now.Date.AddHours(23).AddMinutes(30),

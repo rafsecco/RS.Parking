@@ -11,10 +11,12 @@ EntityFrameWorkCore
 Iniciar BackEnd
 	Abrir o terminal e ir para a pasta "cd E:\Develop\Projects\RS.Parking\src\Back\RS.Parking.API\"
 	Executar o comando "dotnet run"
+	Abrir o swagger "https://localhost:5001/swagger/index.html"
 
 Iniciar FrontEnd
 	Abrir o terminal e ir para a pasta "cd E:\Develop\Projects\RS.Parking\src\Front\RS.Parking-AppAngular\"
-	Executar o comando "ng serve -o"
+	Executar o comando "ng serve"
+	Abrir o site: http://localhost:4200/
 
 
 ng g c [NomeComponente] --module app
@@ -31,12 +33,9 @@ docker compose -p rs_parking down -v --rmi all
 ### Apenas o Database
 cd Docker\Database
 
-docker build -t mariadb .
-docker run --name mariadb -dp 3306:3306 mariadb
-
-
-# docker pull mariadb
-# docker run --name DB_MariaDB --hostname DB_MariaDB -p 3306:3306 --env MARIADB_ROOT_PASSWORD=MyDB@123 -d mariadb:latest
+docker pull mariadb
+docker build --tag rs-parking-db-image:initial .
+docker run -d --name rs_parking_db -p 3306:3306 --env MARIADB_ROOT_PASSWORD=MyDB@123 --env TZ=America/Sao_Paulo rs-parking-db-image:initial
 
 ### API
 cd .\Back\src\RS.Parking.API\
