@@ -124,11 +124,23 @@ export class ReportsListComponent implements OnInit {
 	}
 
 	// Função para extrair o nome do arquivo do cabeçalho content-disposition
-	getFilenameFromContentDisposition(headers: HttpHeaders) {
+	getFilenameFromContentDisposition(headers: HttpHeaders): string {
 		const contentDispositionHeader = headers.get('content-disposition');
-		const filename = contentDispositionHeader
-			.split(';')[1].trim()
-			.split('=')[1].trim();
-		return filename;
+
+		if (!contentDispositionHeader) {
+			return 'default_filename.csv'; // Nome padrão se o cabeçalho não estiver presente
+		}
+
+		// Encontrar a parte do cabeçalho que contém o nome do arquivo
+		const filenamePart = contentDispositionHeader.split(';').find(part => part.trim().startsWith('filename='));
+
+		if (filenamePart) {
+			// Extrair o valor do filename e remover aspas
+			const filename = filenamePart.split('=')[1].trim().replace(/^"(.*)"$/, '$1');
+			return filename;
+		}
+
+		return 'default_filename.csv'; // Nome padrão se não conseguir extrair o filename
 	}
+
 }

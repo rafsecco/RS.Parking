@@ -31,7 +31,7 @@ docker compose -p rs_parking up -d
 docker compose -p rs_parking down -v --rmi all
 
 ### Apenas o Database
-cd Docker\Database
+cd E:\Develop\Projects\RS.Parking\Docker\DataBase\
 
 docker pull mariadb
 docker build --tag rs-parking-db-image:initial .
