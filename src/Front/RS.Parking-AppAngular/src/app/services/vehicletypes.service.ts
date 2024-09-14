@@ -7,7 +7,7 @@ import { VehicleType } from '../models/VehicleType';
 
 @Injectable()
 export class VehicletypesService {
-	baseURL = 'https://localhost:5001/VehicleType';
+	baseURL = 'http://localhost:5000/VehicleType';
 
 	constructor(private http: HttpClient) {}
 

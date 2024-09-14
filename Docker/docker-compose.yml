@@ -26,7 +26,7 @@ services:
     restart: always
     build:
       context: ../src/Back
-      # dockerfile: ./Dockerfile
+      dockerfile: ./Dockerfile
     image: rs-parking-api-image:latest
     ports:
       - 5000:5000
@@ -35,9 +35,9 @@ services:
       # - ASPNETCORE_ENVIRONMENT=Production
       # - ASPNETCORE_URLS=http://+5000
       # - ASPNETCORE_HTTPS_PORT=5001
-      # - ASPNETCORE_URLS=https://+:5001;http://+5000
+      # - ASPNETCORE_URLS=http://+:5000;https://+:5001
       - ASPNETCORE_ENVIRONMENT=Docker
-      - ASPNETCORE_URLS=http://+5000
+      - ASPNETCORE_URLS=http://+:5000
     depends_on:
       - db-parking
 
@@ -46,8 +46,8 @@ services:
     hostname: rsparking-angular-nginx
     restart: always
     build:
-      context: ../src/front/RS.Parking-AppAngular/
-      # dockerfile: ./Dockerfile
+      context: ../src/Front/RS.Parking-AppAngular/
+      dockerfile: ./Dockerfile
     image: rs-parking-angular-image:latest
     ports:
       - "8080:80"

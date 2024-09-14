@@ -44,7 +44,7 @@ public static class ApiConfigs
 
 	public static WebApplication UseApiConfiguration(this WebApplication app)
 	{
-		app.UseHttpsRedirection();
+		//app.UseHttpsRedirection();
 		//app.UseCors("Development");
 		//app.UseRouting();
 

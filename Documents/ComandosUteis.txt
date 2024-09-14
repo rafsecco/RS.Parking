@@ -11,6 +11,7 @@ EntityFrameWorkCore
 Iniciar BackEnd
 	Abrir o terminal e ir para a pasta "cd E:\Develop\Projects\RS.Parking\src\Back\RS.Parking.API\"
 	Executar o comando "dotnet run"
+	Abrir o swagger "http://localhost:5000/swagger/index.html"
 	Abrir o swagger "https://localhost:5001/swagger/index.html"
 
 Iniciar FrontEnd
@@ -25,7 +26,7 @@ ng g c components/vehicletypes/vehicletypes-new --module app
 ########## DOCKER ##########
 docker system prune -af --volumes
 
-Ir para a pasta cd E:\Develop\Projects\RS.Parking\Docker\
+Ir para a pasta "cd E:\Develop\Projects\RS.Parking\Docker\"
 docker compose -p rs_parking build --force-rm
 docker compose -p rs_parking up -d
 docker compose -p rs_parking down -v --rmi all
