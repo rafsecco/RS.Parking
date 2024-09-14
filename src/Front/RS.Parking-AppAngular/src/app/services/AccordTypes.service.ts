@@ -8,7 +8,7 @@ import { DiscountTypeEnum } from '@app/models/DiscountTypes.enum';
 
 @Injectable()
 export class AccordTypesService {
-	baseURL = 'https://localhost:5001/AccordType';
+	baseURL = 'http://localhost:5000/AccordType';
 
 	constructor(private http: HttpClient) { }
 

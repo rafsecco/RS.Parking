@@ -7,7 +7,7 @@ import { Observable, take } from 'rxjs';
 @Injectable()
 export class ControlInOutService {
 
-	baseURL = 'https://localhost:5001/ControlInOut';
+	baseURL = 'http://localhost:5000/ControlInOut';
 
 	constructor(private http: HttpClient) {}
 
